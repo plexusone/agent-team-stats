@@ -1,0 +1,47 @@
+{
+  "name": "stats-agent-team",
+  "version": "1.0.0",
+  "description": "Multi-agent team for researching, extracting, and verifying statistics from web sources with full source attribution",
+  "author": "plexusone",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/plexusone/agent-team-stats",
+  "agents": "agents",
+  "agentFormat": "markdown",
+  "context": "# Statistics Agent Team\n\nThis plugin provides a coordinated team of agents for statistics research:\n\n- **stats-orchestrator** - Coordinates the research workflow\n- **stats-research** - Discovers reputable sources via web search\n- **stats-synthesis** - Extracts statistics from web pages using LLM\n- **stats-verification** - Validates statistics exist in claimed sources\n\n## Workflow\n\n1. User provides a topic\n2. Research agent finds reputable sources\n3. Synthesis agent extracts statistics with excerpts\n4. Verification agent confirms accuracy\n5. Returns verified statistics with full attribution",
+  "deployments": {
+    "p1": [
+      {
+        "target": "local-claude",
+        "description": "Claude Code sub-agents for local development",
+        "generator": "aiassistkit/agents/claude",
+        "output": ".claude/agents/"
+      },
+      {
+        "target": "local-kiro",
+        "description": "Kiro CLI sub-agents for local development",
+        "generator": "aiassistkit/agents/kiro",
+        "output": "plugins/kiro/agents/"
+      },
+      {
+        "target": "aws-agentcore",
+        "description": "AWS Bedrock AgentCore via CDK/Pulumi",
+        "generator": "agentkit-aws-cdk",
+        "output": "cdk/"
+      }
+    ],
+    "p2": [
+      {
+        "target": "kubernetes",
+        "description": "Kubernetes/Minikube/Docker for Azure, GCP, on-prem",
+        "generator": "helm",
+        "output": "helm/"
+      },
+      {
+        "target": "agentkit-local",
+        "description": "MCP server for Gemini/Codex CLI (lacks native sub-agents)",
+        "generator": "agentkit/platforms/local",
+        "output": "plugins/agentkit/"
+      }
+    ]
+  }
+}

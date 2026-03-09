@@ -8,7 +8,7 @@ require (
 	github.com/danielgtaylor/huma/v2 v2.37.2
 	github.com/go-chi/chi/v5 v5.2.5
 	github.com/go-playground/validator/v10 v10.30.1
-	github.com/grokify/mogo v0.73.3
+	github.com/grokify/mogo v0.73.4
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/modelcontextprotocol/go-sdk v1.4.0
 	github.com/plexusone/agentkit v0.5.0

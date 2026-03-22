@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/grokify/mogo v0.73.5
 	github.com/jessevdk/go-flags v1.6.1
-	github.com/modelcontextprotocol/go-sdk v1.4.0
+	github.com/modelcontextprotocol/go-sdk v1.4.1
 	github.com/plexusone/agentkit v0.5.0
 	github.com/plexusone/omnillm v0.13.0
 	github.com/plexusone/omniobserve v0.8.0
@@ -81,7 +81,7 @@ require (
 	github.com/plexusone/vaultguard v0.3.0 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
-	github.com/segmentio/encoding v0.5.3 // indirect
+	github.com/segmentio/encoding v0.5.4 // indirect
 	github.com/shirou/gopsutil/v4 v4.26.2 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect

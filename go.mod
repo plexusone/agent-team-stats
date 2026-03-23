@@ -12,7 +12,7 @@ require (
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/modelcontextprotocol/go-sdk v1.4.1
 	github.com/plexusone/agentkit v0.5.0
-	github.com/plexusone/omnillm v0.13.0
+	github.com/plexusone/omnillm v0.14.0
 	github.com/plexusone/omniobserve v0.8.0
 	github.com/plexusone/omniserp v0.8.0
 	github.com/plexusone/opik-go v0.6.0

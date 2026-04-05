@@ -1,11 +1,5 @@
 # Statistics Agent Team
 
-[![Build Status][build-status-svg]][build-status-url]
-[![Lint Status][lint-status-svg]][lint-status-url]
-[![Go Report Card][goreport-svg]][goreport-url]
-[![Docs][docs-godoc-svg]][docs-godoc-url]
-[![License][license-svg]][license-url]
-
 A multi-agent system for finding and verifying statistics from reputable web sources using Go, built with [Google ADK (Agent Development Kit)](https://github.com/google/adk-go) and [Eino](https://github.com/cloudwego/eino).
 
 ## Overview
@@ -119,14 +113,3 @@ Contributions welcome! Please:
 - LLM observability via [OmniObserve](https://github.com/agentplexus/omniobserve)
 - A2A protocol for agent interoperability
 - Inspired by multi-agent collaboration frameworks
-
-[build-status-svg]: https://github.com/agentplexus/stats-agent-team/actions/workflows/ci.yaml/badge.svg?branch=main
-[build-status-url]: https://github.com/agentplexus/stats-agent-team/actions/workflows/ci.yaml
-[lint-status-svg]: https://github.com/agentplexus/stats-agent-team/actions/workflows/lint.yaml/badge.svg?branch=main
-[lint-status-url]: https://github.com/agentplexus/stats-agent-team/actions/workflows/lint.yaml
-[goreport-svg]: https://goreportcard.com/badge/github.com/agentplexus/stats-agent-team
-[goreport-url]: https://goreportcard.com/report/github.com/agentplexus/stats-agent-team
-[docs-godoc-svg]: https://pkg.go.dev/badge/github.com/agentplexus/stats-agent-team
-[docs-godoc-url]: https://pkg.go.dev/github.com/agentplexus/stats-agent-team
-[license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
-[license-url]: https://github.com/agentplexus/stats-agent-team/blob/master/LICENSE

@@ -265,7 +265,7 @@ func callDirectLLMSearch(topic string, minStats int, verify bool) (*models.Orche
 
 	// Call direct agent
 	url := fmt.Sprintf("%s/search", directURL)
-	httpReq, err := http.NewRequestWithContext(context.Background(), "POST", url, bytes.NewReader(reqData))
+	httpReq, err := http.NewRequestWithContext(context.Background(), http.MethodPost, url, bytes.NewReader(reqData)) //nolint:gosec // G704: URL from env config, not user input
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)
 	}

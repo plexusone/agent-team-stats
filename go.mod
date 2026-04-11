@@ -10,7 +10,7 @@ require (
 	github.com/go-playground/validator/v10 v10.30.2
 	github.com/grokify/mogo v0.74.1
 	github.com/jessevdk/go-flags v1.6.1
-	github.com/modelcontextprotocol/go-sdk v1.4.1
+	github.com/modelcontextprotocol/go-sdk v1.5.0
 	github.com/plexusone/agentkit v0.5.0
 	github.com/plexusone/omnillm v0.14.0
 	github.com/plexusone/omniobserve v0.8.0

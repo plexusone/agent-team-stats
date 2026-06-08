@@ -8,7 +8,7 @@ require (
 	github.com/danielgtaylor/huma/v2 v2.38.0
 	github.com/go-chi/chi/v5 v5.3.0
 	github.com/go-playground/validator/v10 v10.30.3
-	github.com/grokify/mogo v0.74.5
+	github.com/grokify/mogo v0.74.6
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/modelcontextprotocol/go-sdk v1.6.1
 	github.com/plexusone/agentkit v0.6.0
@@ -139,7 +139,7 @@ require (
 	go.uber.org/zap v1.28.0 // indirect
 	golang.org/x/arch v0.27.0 // indirect
 	golang.org/x/crypto v0.52.0 // indirect
-	golang.org/x/exp v0.0.0-20260529124908-c761662dc8c9 // indirect
+	golang.org/x/exp v0.0.0-20260603202125-055de637280b // indirect
 	golang.org/x/mod v0.36.0 // indirect
 	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect

@@ -19,7 +19,7 @@ require (
 	github.com/plexusone/phoenix-go v0.2.0
 	github.com/plexusone/structured-evaluation v0.7.0
 	google.golang.org/adk v1.4.0
-	google.golang.org/genai v1.59.0
+	google.golang.org/genai v1.60.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 

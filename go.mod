@@ -11,12 +11,12 @@ require (
 	github.com/grokify/mogo v0.74.6
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/modelcontextprotocol/go-sdk v1.6.1
-	github.com/plexusone/agentkit v0.6.0
+	github.com/plexusone/agentkit v0.6.1
 	github.com/plexusone/omnillm v0.16.1
 	github.com/plexusone/omniobserve v0.11.0
 	github.com/plexusone/omniserp v0.9.0
 	github.com/plexusone/opik-go v0.8.0
-	github.com/plexusone/phoenix-go v0.2.0
+	github.com/plexusone/phoenix-go v0.2.1
 	github.com/plexusone/structured-evaluation v0.8.0
 	google.golang.org/adk v1.4.0
 	google.golang.org/genai v1.61.0
@@ -49,7 +49,7 @@ require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.2.0 // indirect
 	github.com/bytedance/gopkg v0.1.4 // indirect
-	github.com/bytedance/sonic v1.15.1 // indirect
+	github.com/bytedance/sonic v1.15.2 // indirect
 	github.com/bytedance/sonic/loader v0.5.1 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -98,7 +98,7 @@ require (
 	github.com/ogen-go/ogen v1.22.0 // indirect
 	github.com/openai/openai-go v1.12.0 // indirect
 	github.com/pb33f/ordered-map/v2 v2.3.1 // indirect
-	github.com/pelletier/go-toml/v2 v2.3.1 // indirect
+	github.com/pelletier/go-toml/v2 v2.4.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/plexusone/omni-anthropic v0.2.2 // indirect
 	github.com/plexusone/omni-aws v0.8.2 // indirect
@@ -108,7 +108,7 @@ require (
 	github.com/plexusone/omnillm-core v0.17.0 // indirect
 	github.com/plexusone/omnivault v0.5.0 // indirect
 	github.com/plexusone/posture v0.3.0 // indirect
-	github.com/plexusone/vaultguard v0.3.0 // indirect
+	github.com/plexusone/vaultguard v0.3.1 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/segmentio/encoding v0.5.4 // indirect
@@ -142,7 +142,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.6 // indirect
-	golang.org/x/arch v0.27.0 // indirect
+	golang.org/x/arch v0.28.0 // indirect
 	golang.org/x/crypto v0.53.0 // indirect
 	golang.org/x/exp v0.0.0-20260611194520-c48552f49976 // indirect
 	golang.org/x/mod v0.37.0 // indirect

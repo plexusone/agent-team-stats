@@ -160,5 +160,3 @@ require (
 	rsc.io/omap v1.2.0 // indirect
 	rsc.io/ordered v1.1.1 // indirect
 )
-
-replace github.com/invopop/jsonschema => github.com/invopop/jsonschema v0.13.0

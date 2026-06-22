@@ -15,7 +15,7 @@ require (
 	github.com/plexusone/omnillm v0.16.1
 	github.com/plexusone/omniobserve v0.11.0
 	github.com/plexusone/omniserp v0.9.0
-	github.com/plexusone/opik-go v0.6.0
+	github.com/plexusone/opik-go v0.8.0
 	github.com/plexusone/phoenix-go v0.2.0
 	github.com/plexusone/structured-evaluation v0.8.0
 	google.golang.org/adk v1.4.0
@@ -95,7 +95,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/nikolalohinski/gonja v1.5.3 // indirect
-	github.com/ogen-go/ogen v1.20.3 // indirect
+	github.com/ogen-go/ogen v1.22.0 // indirect
 	github.com/openai/openai-go v1.12.0 // indirect
 	github.com/pb33f/ordered-map/v2 v2.3.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.3.1 // indirect

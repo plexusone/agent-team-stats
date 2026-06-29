@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/a2aproject/a2a-go v0.3.15
-	github.com/cloudwego/eino v0.9.10
+	github.com/cloudwego/eino v0.9.11
 	github.com/danielgtaylor/huma/v2 v2.38.0
 	github.com/go-chi/chi/v5 v5.3.0
 	github.com/go-playground/validator/v10 v10.30.3

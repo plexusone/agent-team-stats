@@ -14,9 +14,13 @@ debug.test
 main
 main.zip
 
-# Temp/binary directories from agent runs
-orchestration-eino
-research
-synthesis
-verification
-stats-agent-team
+# Temp/binary directories from agent runs (root level only)
+/orchestration-eino
+/research
+/synthesis
+/verification
+/stats-agent-team
+/stats-coordinator
+
+# Ideation notes
+IDEATION_CHAT*.md

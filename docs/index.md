@@ -1,6 +1,6 @@
 # Statistics Agent Team
 
-A multi-agent system for finding and verifying statistics from reputable web sources using Go, built with [Google ADK (Agent Development Kit)](https://github.com/google/adk-go) and [Eino](https://github.com/cloudwego/eino).
+A multi-agent system for finding and verifying statistics from reputable web sources using Go, built with [omniagent-worker](https://github.com/plexusone/omniagent-worker), [Google ADK](https://github.com/google/adk-go), and [Eino](https://github.com/cloudwego/eino).
 
 ## Overview
 
@@ -69,20 +69,23 @@ The system returns verified statistics in JSON format:
 ## Technology Stack
 
 - **Language**: Go 1.21+
+- **Worker Framework**:
+    - [omniagent-worker](https://github.com/plexusone/omniagent-worker) - Go-first multi-agent worker framework
 - **Agent Frameworks**:
     - [Google ADK (Agent Development Kit)](https://github.com/google/adk-go) - LLM-based agents + A2A protocol
     - [Eino](https://github.com/cloudwego/eino) - Deterministic graph orchestration
 - **LLM Integration**:
-    - [OmniLLM](https://github.com/agentplexus/omnillm) - Multi-provider LLM abstraction
+    - [OmniLLM](https://github.com/plexusone/omnillm) - Multi-provider LLM abstraction
     - Supports: Gemini, Claude, OpenAI, xAI Grok, Ollama
 - **Observability**:
-    - [OmniObserve](https://github.com/agentplexus/omniobserve) - Unified LLM observability
+    - [OmniObserve](https://github.com/plexusone/omniobserve) - Unified LLM observability
+    - AgentOps tracing via OpenTelemetry
     - Supports: Comet Opik, Langfuse, Arize Phoenix
 - **Protocols**:
     - HTTP - Custom security, flexibility (ports 800x)
     - A2A - Agent-to-Agent interoperability (ports 900x)
 - **Search**:
-    - [OmniSerp](https://github.com/agentplexus/omniserp) - Unified serp API abstraction
+    - [OmniSerp](https://github.com/plexusone/omniserp) - Unified serp API abstraction
     - Supports: Serper.dev, SerpAPI
 
 ## How It Works
@@ -107,9 +110,9 @@ Contributions welcome! Please:
 
 ## Acknowledgments
 
-- Built with [Google ADK (Agent Development Kit)](https://github.com/google/adk-go)
-- Uses [Eino](https://github.com/cloudwego/eino) for deterministic orchestration
-- Multi-LLM support via [OmniLLM](https://github.com/agentplexus/omnillm)
-- LLM observability via [OmniObserve](https://github.com/agentplexus/omniobserve)
+- Worker framework: [omniagent-worker](https://github.com/plexusone/omniagent-worker)
+- Agent frameworks: [Google ADK](https://github.com/google/adk-go), [Eino](https://github.com/cloudwego/eino)
+- Multi-LLM support: [OmniLLM](https://github.com/plexusone/omnillm)
+- LLM observability: [OmniObserve](https://github.com/plexusone/omniobserve)
 - A2A protocol for agent interoperability
 - Inspired by multi-agent collaboration frameworks

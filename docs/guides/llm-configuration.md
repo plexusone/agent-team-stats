@@ -88,10 +88,10 @@ The `pkg/llm/factory.go` file provides a centralized `ModelFactory` that:
 
 ### Integration Points
 
-All agents use the model factory:
-- **Research Agent** (`agents/research/main.go`)
-- **Verification Agent** (`agents/verification/main.go`)
-- **Orchestration Agent** (`agents/orchestration/main.go`)
+All workers use the model factory via OmniLLM:
+
+- **Synthesis Worker** (`workers/synthesis/worker.go`) - LLM-heavy extraction
+- **Verification Worker** (`workers/verification/worker.go`) - LLM-light validation
 
 Example usage:
 ```go

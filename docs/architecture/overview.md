@@ -1,6 +1,6 @@
 # Architecture Overview
 
-The system implements a **4-agent architecture** with clear separation of concerns.
+The system implements a **worker-based architecture** using [omniagent-worker](https://github.com/plexusone/omniagent-worker) with clear separation of concerns.
 
 ## High-Level Architecture
 
@@ -12,18 +12,17 @@ The system implements a **4-agent architecture** with clear separation of concer
                     │
                     ▼
 ┌─────────────────────────────────────────────────────────┐
-│            ORCHESTRATION AGENT                          │
-│              (Port 8000 - Both ADK/Eino)                │
-│  • Coordinates 4-agent workflow                         │
+│               COORDINATOR                               │
+│         (omniagent-worker.Coordinator)                  │
+│  • Coordinates worker workflow                          │
 │  • Manages retry logic                                  │
-│  • Ensures quality standards                            │
+│  • AgentOps tracing via OpenTelemetry                   │
 └─────┬─────────────┬────────────────┬────────────────────┘
       │             │                │
       ▼             ▼                ▼
 ┌────────────┐ ┌──────────┐ ┌─────────────────┐
 │  RESEARCH  │ │SYNTHESIS │ │  VERIFICATION   │
-│   AGENT    │ │  AGENT   │ │     AGENT       │
-│ Port 8001  │ │Port 8004 │ │   Port 8002     │
+│   WORKER   │ │  WORKER  │ │     WORKER      │
 │            │ │          │ │                 │
 │ • Search   │─│• Fetch   │─│• Re-fetch URLs  │
 │   Serper   │ │  URLs    │ │• Validate text  │
@@ -35,54 +34,46 @@ The system implements a **4-agent architecture** with clear separation of concer
   URLs only     Statistics     Verified Stats
 ```
 
-## Agent Responsibilities
+## Worker Architecture (omniagent-worker)
 
-### 1. Research Agent (`agents/research/`) - Web Search Only
+The system uses [omniagent-worker](https://github.com/plexusone/omniagent-worker) for worker lifecycle, coordination, and observability.
+
+### 1. Research Worker (`workers/research/`) - Web Search Only
 
 - **No LLM required** - Pure search functionality
+- Implements `omniagent-worker.Worker` interface
 - Web search via Serper/SerpAPI integration
 - Returns URLs with metadata (title, snippet, domain)
 - Prioritizes reputable sources (`.gov`, `.edu`, research orgs)
 - Output: List of `SearchResult` objects
-- Port: **8001**
 
-### 2. Synthesis Agent (`agents/synthesis/`) - Google ADK
+### 2. Synthesis Worker (`workers/synthesis/`) - LLM Extraction
 
-- **LLM-heavy** extraction agent
-- Built with Google ADK and LLM (Gemini/Claude/OpenAI/Ollama)
+- **LLM-heavy** extraction worker
+- Implements `omniagent-worker.Worker` interface
 - Fetches webpage content from URLs
 - Extracts numerical statistics using LLM analysis
 - Finds verbatim excerpts containing statistics
 - Creates `CandidateStatistic` objects with proper metadata
-- Port: **8004**
 
-### 3. Verification Agent (`agents/verification/`) - Google ADK
+### 3. Verification Worker (`workers/verification/`) - LLM Validation
 
-- **LLM-light** validation agent
+- **LLM-light** validation worker
+- Implements `omniagent-worker.Worker` interface
 - Re-fetches source URLs to verify content
 - Checks excerpts exist verbatim in source
 - Validates numerical values match exactly
 - Flags hallucinations and discrepancies
 - Returns verification results with pass/fail reasons
-- Port: **8002**
 
-### 4a. Orchestration Agent - Google ADK (`agents/orchestration/`)
+### 4. Coordinator (`coordinator/`) - Workflow Orchestration
 
-- Built with Google ADK for LLM-driven workflow decisions
+- Built with `omniagent-worker.Coordinator`
+- **Deterministic graph-based workflow** (no LLM for orchestration)
 - Coordinates: Research → Synthesis → Verification
 - Implements adaptive retry logic
-- Dynamic quality control
-- Port: **8000**
-
-### 4b. Orchestration Agent - Eino (`agents/orchestration-eino/`) - RECOMMENDED
-
-- **Deterministic graph-based workflow** (no LLM for orchestration)
-- Type-safe orchestration with Eino framework
-- Predictable, reproducible behavior
-- Faster and lower cost
+- AgentOps tracing via OpenTelemetry
 - Workflow: ValidateInput → Research → Synthesis → Verification → QualityCheck → Format
-- Port: **8000** (same port as ADK, but they don't run simultaneously)
-- **Recommended for production use**
 
 ## Reputable Sources
 

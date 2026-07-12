@@ -91,19 +91,20 @@ Enable A2A with: `A2A_ENABLED=true`
 ## Project Structure
 
 ```
-stats-agent-team/
-├── agents/
-│   ├── direct/             # Direct search agent (Huma + OpenAPI, port 8005)
-│   │   └── main.go
-│   ├── orchestration/      # Orchestration agent (Google ADK, port 8000)
-│   │   └── main.go
-│   ├── orchestration-eino/ # Orchestration agent (Eino, port 8000)
-│   │   └── main.go
-│   ├── research/           # Research agent (port 8001)
-│   │   └── main.go
-│   ├── synthesis/          # Synthesis agent (Google ADK, port 8004)
-│   │   └── main.go
-│   └── verification/       # Verification agent (Google ADK, port 8002)
+agent-team-stats/
+├── workers/                # omniagent-worker based workers
+│   ├── research/           # Research worker (web search)
+│   │   └── worker.go
+│   ├── synthesis/          # Synthesis worker (LLM extraction)
+│   │   └── worker.go
+│   └── verification/       # Verification worker (LLM validation)
+│       └── worker.go
+├── coordinator/            # Workflow coordinator
+│   └── coordinator.go      # omniagent-worker.Coordinator implementation
+├── omniskill/              # OmniAgent skill integration
+│   └── stats.go            # Skill interface for omniagent
+├── cmd/
+│   └── coordinator/        # Coordinator CLI entrypoint
 │       └── main.go
 ├── pkg/
 │   ├── config/            # Configuration management

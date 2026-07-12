@@ -10,31 +10,27 @@
       
       
       
-        <link rel="canonical" href="https://plexusone.github.io/agent-team-stats/releases/v0.8.0/">
+        <link rel="canonical" href="https://plexusone.github.io/agent-team-stats/specs/omniagent-worker-migration/PLAN/">
       
       
-        <link rel="prev" href="../../reference/roadmap/">
-      
-      
-        <link rel="next" href="../v0.7.0/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>v0.8.0 - Stats Agent Team</title>
+        <title>agent-team-stats Migration: Implementation Plan - Stats Agent Team</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -55,7 +51,7 @@
     
       <link rel="stylesheet" href="https://plexusone.dev/css/plexusone-mkdocs.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#release-notes-v080" class="md-skip">
+        <a href="#agent-team-stats-migration-implementation-plan" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +97,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Stats Agent Team" class="md-header__button md-logo" aria-label="Stats Agent Team" data-md-component="logo">
+    <a href="../../.." title="Stats Agent Team" class="md-header__button md-logo" aria-label="Stats Agent Team" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -121,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              v0.8.0
+              agent-team-stats Migration: Implementation Plan
             
           </span>
         </div>
@@ -240,7 +236,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Stats Agent Team" class="md-nav__button md-logo" aria-label="Stats Agent Team" data-md-component="logo">
+    <a href="../../.." title="Stats Agent Team" class="md-nav__button md-logo" aria-label="Stats Agent Team" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -270,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -351,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/installation/" class="md-nav__link">
+      <a href="../../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -379,7 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/quickstart/" class="md-nav__link">
+      <a href="../../../getting-started/quickstart/" class="md-nav__link">
         
   
   
@@ -407,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/configuration/" class="md-nav__link">
+      <a href="../../../getting-started/configuration/" class="md-nav__link">
         
   
   
@@ -496,7 +492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/overview/" class="md-nav__link">
+      <a href="../../../architecture/overview/" class="md-nav__link">
         
   
   
@@ -524,7 +520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/4-agent-architecture/" class="md-nav__link">
+      <a href="../../../architecture/4-agent-architecture/" class="md-nav__link">
         
   
   
@@ -552,7 +548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/eino-orchestration/" class="md-nav__link">
+      <a href="../../../architecture/eino-orchestration/" class="md-nav__link">
         
   
   
@@ -641,7 +637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/docker/" class="md-nav__link">
+      <a href="../../../guides/docker/" class="md-nav__link">
         
   
   
@@ -669,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/kubernetes/" class="md-nav__link">
+      <a href="../../../guides/kubernetes/" class="md-nav__link">
         
   
   
@@ -697,7 +693,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/aws-agentcore/" class="md-nav__link">
+      <a href="../../../guides/aws-agentcore/" class="md-nav__link">
         
   
   
@@ -725,7 +721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/mcp-server/" class="md-nav__link">
+      <a href="../../../guides/mcp-server/" class="md-nav__link">
         
   
   
@@ -753,7 +749,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/claims-report/" class="md-nav__link">
+      <a href="../../../guides/claims-report/" class="md-nav__link">
         
   
   
@@ -781,7 +777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/llm-configuration/" class="md-nav__link">
+      <a href="../../../guides/llm-configuration/" class="md-nav__link">
         
   
   
@@ -809,7 +805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/multi-llm-support/" class="md-nav__link">
+      <a href="../../../guides/multi-llm-support/" class="md-nav__link">
         
   
   
@@ -837,7 +833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/llm-integration/" class="md-nav__link">
+      <a href="../../../guides/llm-integration/" class="md-nav__link">
         
   
   
@@ -865,7 +861,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/search-integration/" class="md-nav__link">
+      <a href="../../../guides/search-integration/" class="md-nav__link">
         
   
   
@@ -954,7 +950,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../operations/security/" class="md-nav__link">
+      <a href="../../../operations/security/" class="md-nav__link">
         
   
   
@@ -982,7 +978,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../operations/scaling/" class="md-nav__link">
+      <a href="../../../operations/scaling/" class="md-nav__link">
         
   
   
@@ -1010,7 +1006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../operations/chart-testing/" class="md-nav__link">
+      <a href="../../../operations/chart-testing/" class="md-nav__link">
         
   
   
@@ -1099,7 +1095,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../development/lint-fixes/" class="md-nav__link">
+      <a href="../../../development/lint-fixes/" class="md-nav__link">
         
   
   
@@ -1188,7 +1184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/roadmap/" class="md-nav__link">
+      <a href="../../../reference/roadmap/" class="md-nav__link">
         
   
   
@@ -1220,8 +1216,6 @@
       
   
   
-    
-  
   
   
     
@@ -1234,11 +1228,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
@@ -1259,7 +1255,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1274,37 +1270,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    v0.8.0
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.8.0/" class="md-nav__link">
         
   
   
@@ -1320,226 +1289,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#highlights" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Highlights
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#new-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New Features
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="New Features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#claimsreport-conversion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ClaimsReport Conversion
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#http-format-parameter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        HTTP Format Parameter
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#source-classification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Source Classification
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bug-fixes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bug Fixes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Documentation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dependencies
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Dependencies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#new-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New Dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updated-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updated Dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#infrastructure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Infrastructure
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Infrastructure">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#github-actions-updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitHub Actions Updates
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-guide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migration Guide
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Migration Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#from-v07x" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        From v0.7.x
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Contributors
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1552,7 +1301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.7.0/" class="md-nav__link">
+      <a href="../../../releases/v0.7.0/" class="md-nav__link">
         
   
   
@@ -1580,7 +1329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.6.0/" class="md-nav__link">
+      <a href="../../../releases/v0.6.0/" class="md-nav__link">
         
   
   
@@ -1608,7 +1357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.5.0/" class="md-nav__link">
+      <a href="../../../releases/v0.5.0/" class="md-nav__link">
         
   
   
@@ -1636,7 +1385,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.4.0/" class="md-nav__link">
+      <a href="../../../releases/v0.4.0/" class="md-nav__link">
         
   
   
@@ -1664,7 +1413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.3.0/" class="md-nav__link">
+      <a href="../../../releases/v0.3.0/" class="md-nav__link">
         
   
   
@@ -1692,7 +1441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.2.0/" class="md-nav__link">
+      <a href="../../../releases/v0.2.0/" class="md-nav__link">
         
   
   
@@ -1720,7 +1469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.1.0/" class="md-nav__link">
+      <a href="../../../releases/v0.1.0/" class="md-nav__link">
         
   
   
@@ -1775,10 +1524,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#highlights" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Highlights
+        Overview
       
     </span>
   </a>
@@ -1786,22 +1535,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#new-features" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        New Features
+        Prerequisites
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="New Features">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phases">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#claimsreport-conversion" class="md-nav__link">
+  <a href="#phase-1-preparation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ClaimsReport Conversion
+        Phase 1: Preparation
       
     </span>
   </a>
@@ -1809,10 +1569,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#http-format-parameter" class="md-nav__link">
+  <a href="#phase-2-migrate-research-worker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        HTTP Format Parameter
+        Phase 2: Migrate Research Worker
       
     </span>
   </a>
@@ -1820,10 +1580,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#source-classification" class="md-nav__link">
+  <a href="#phase-3-migrate-synthesis-worker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Source Classification
+        Phase 3: Migrate Synthesis Worker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-migrate-verification-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Migrate Verification Worker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-migrate-coordinator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 5: Migrate Coordinator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-6-add-omniskill-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 6: Add OmniSkill Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-7-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 7: Cleanup
       
     </span>
   </a>
@@ -1836,10 +1640,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bug-fixes" class="md-nav__link">
+  <a href="#dependencies-between-phases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bug Fixes
+        Dependencies Between Phases
       
     </span>
   </a>
@@ -1847,10 +1651,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#changes" class="md-nav__link">
+  <a href="#timeline-estimates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Changes
+        Timeline Estimates
       
     </span>
   </a>
@@ -1858,10 +1662,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+  <a href="#rollback-plan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentation
+        Rollback Plan
       
     </span>
   </a>
@@ -1869,105 +1673,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
+  <a href="#success-metrics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dependencies
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Dependencies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#new-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New Dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updated-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updated Dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#infrastructure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Infrastructure
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Infrastructure">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#github-actions-updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitHub Actions Updates
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-guide" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migration Guide
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Migration Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#from-v07x" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        From v0.7.x
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Contributors
+        Success Metrics
       
     </span>
   </a>
@@ -1994,231 +1703,257 @@
   
 
 
-<h1 id="release-notes-v080">Release Notes v0.8.0<a class="headerlink" href="#release-notes-v080" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date:</strong> June 1, 2026</p>
-<p>This release introduces structured-evaluation ClaimsReport integration for standardized statistics output and PlexusOne unified navigation theming.</p>
-<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
+<h1 id="agent-team-stats-migration-implementation-plan">agent-team-stats Migration: Implementation Plan<a class="headerlink" href="#agent-team-stats-migration-implementation-plan" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p><strong>Project</strong>: agent-team-stats omniagent-worker migration
+<strong>Type</strong>: Migration
+<strong>Status</strong>: Planning
+<strong>Created</strong>: 2026-07-10</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>ClaimsReport Integration</strong> - Statistics can now be exported as structured-evaluation ClaimsReport format for standardized validation workflows</li>
-<li><strong>HTTP Format Parameter</strong> - New <code>?format=claims</code> query parameter for HTTP endpoints returns ClaimsReport JSON</li>
-<li><strong>PlexusOne Theme</strong> - Unified navigation and theming for MkDocs documentation site</li>
+<li>[ ] omniagent-worker MVP complete (Phase 1-3 from omniagent-worker PLAN.md)</li>
 </ul>
-<h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">&para;</a></h2>
-<h3 id="claimsreport-conversion">ClaimsReport Conversion<a class="headerlink" href="#claimsreport-conversion" title="Permanent link">&para;</a></h3>
-<p>New methods for converting statistics to structured-evaluation ClaimsReport format:</p>
-<div class="language-go highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Convert orchestration response to claims report</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">report</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">orchestrationResp</span><span class="p">.</span><span class="nx">ToClaimsReport</span><span class="p">()</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// Include verification failures for full audit trail</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nx">report</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">orchestrationResp</span><span class="p">.</span><span class="nx">ToClaimsReportWithFailures</span><span class="p">(</span><span class="nx">failures</span><span class="p">)</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">// Convert verification response directly</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nx">report</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">verificationResp</span><span class="p">.</span><span class="nx">ToClaimsReport</span><span class="p">(</span><span class="s">&quot;topic-name&quot;</span><span class="p">)</span>
-</span></code></pre></div>
-<h3 id="http-format-parameter">HTTP Format Parameter<a class="headerlink" href="#http-format-parameter" title="Permanent link">&para;</a></h3>
-<p>Request ClaimsReport JSON output via query parameter:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Orchestration endpoint</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8080/orchestrate?format=claims&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;topic&quot;: &quot;climate change statistics&quot;}&#39;</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># Verification endpoint</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8081/verify?format=claims&amp;topic=climate&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;statistics&quot;: [...]}&#39;</span>
-</span></code></pre></div>
-<h3 id="source-classification">Source Classification<a class="headerlink" href="#source-classification" title="Permanent link">&para;</a></h3>
-<p>Authoritative sources are automatically classified with high reliability:</p>
-<table>
-<thead>
-<tr>
-<th>Source</th>
-<th>Classification</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>WHO, CDC, NIH, FDA, EPA</td>
-<td>ReputableVendor / ReliabilityHigh</td>
-</tr>
-<tr>
-<td>Census Bureau, BLS, Federal Reserve</td>
-<td>ReputableVendor / ReliabilityHigh</td>
-</tr>
-<tr>
-<td>NASA, NOAA</td>
-<td>ReputableVendor / ReliabilityHigh</td>
-</tr>
-<tr>
-<td>Pew Research Center, Gallup</td>
-<td>ReputableVendor / ReliabilityHigh</td>
-</tr>
-<tr>
-<td>Other sources</td>
-<td>Community / Default reliability</td>
-</tr>
-</tbody>
-</table>
-<h2 id="bug-fixes">Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Fixed gosec false positive with nolint directive</li>
-</ul>
-<h2 id="changes">Changes<a class="headerlink" href="#changes" title="Permanent link">&para;</a></h2>
-<ul>
-<li>MkDocs navigation switched to vertical style for improved readability</li>
-</ul>
-<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
-<ul>
-<li>README shields updated</li>
-<li>MkDocs index page shields removed for cleaner appearance</li>
-</ul>
-<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
-<h3 id="new-dependencies">New Dependencies<a class="headerlink" href="#new-dependencies" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Package</th>
-<th>Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>github.com/plexusone/structured-evaluation</code></td>
-<td>v0.6.0</td>
-</tr>
-</tbody>
-</table>
-<h3 id="updated-dependencies">Updated Dependencies<a class="headerlink" href="#updated-dependencies" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Package</th>
-<th>Old Version</th>
-<th>New Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>github.com/cloudwego/eino</code></td>
-<td>v0.7.36</td>
-<td>v0.9.2</td>
-</tr>
-<tr>
-<td><code>github.com/grokify/mogo</code></td>
-<td>v0.73.3</td>
-<td>v0.74.5</td>
-</tr>
-<tr>
-<td><code>github.com/modelcontextprotocol/go-sdk</code></td>
-<td>v1.4.0</td>
-<td>v1.6.0</td>
-</tr>
-<tr>
-<td><code>github.com/danielgtaylor/huma/v2</code></td>
-<td>v2.35.0</td>
-<td>v2.38.0</td>
-</tr>
-<tr>
-<td><code>github.com/plexusone/agentkit</code></td>
-<td>v0.5.0</td>
-<td>v0.6.0</td>
-</tr>
-<tr>
-<td><code>github.com/plexusone/omnillm</code></td>
-<td>v0.13.0</td>
-<td>v0.15.3</td>
-</tr>
-<tr>
-<td><code>github.com/plexusone/omniobserve</code></td>
-<td>v0.7.0</td>
-<td>v0.8.0</td>
-</tr>
-<tr>
-<td><code>github.com/a2aproject/a2a-go</code></td>
-<td>v0.3.7</td>
-<td>v0.3.15</td>
-</tr>
-<tr>
-<td><code>google.golang.org/genai</code></td>
-<td>v1.48.0</td>
-<td>v1.58.0</td>
-</tr>
-<tr>
-<td><code>google.golang.org/adk</code></td>
-<td>v0.5.0</td>
-<td>v1.4.0</td>
-</tr>
-</tbody>
-</table>
-<h2 id="infrastructure">Infrastructure<a class="headerlink" href="#infrastructure" title="Permanent link">&para;</a></h2>
-<h3 id="github-actions-updates">GitHub Actions Updates<a class="headerlink" href="#github-actions-updates" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Old Version</th>
-<th>New Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>docker/login-action</code></td>
-<td>v3</td>
-<td>v4</td>
-</tr>
-<tr>
-<td><code>docker/build-push-action</code></td>
-<td>v6</td>
-<td>v7</td>
-</tr>
-<tr>
-<td><code>docker/metadata-action</code></td>
-<td>v5</td>
-<td>v6</td>
-</tr>
-<tr>
-<td><code>docker/setup-buildx-action</code></td>
-<td>v3</td>
-<td>v4</td>
-</tr>
-<tr>
-<td><code>azure/setup-helm</code></td>
-<td>v4</td>
-<td>v5</td>
-</tr>
-</tbody>
-</table>
-<h2 id="migration-guide">Migration Guide<a class="headerlink" href="#migration-guide" title="Permanent link">&para;</a></h2>
-<h3 id="from-v07x">From v0.7.x<a class="headerlink" href="#from-v07x" title="Permanent link">&para;</a></h3>
-<p>No breaking changes. To use the new ClaimsReport integration:</p>
+<h2 id="phases">Phases<a class="headerlink" href="#phases" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-preparation">Phase 1: Preparation<a class="headerlink" href="#phase-1-preparation" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Prepare the codebase for migration without breaking changes.</p>
+<p><strong>Tasks</strong>:</p>
 <ol>
+<li>Create new directory structure</li>
+<li>[ ] Create <code>workers/</code> directory</li>
+<li>[ ] Create <code>coordinator/</code> directory</li>
 <li>
-<p><strong>Update dependency</strong>:
-   <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/plexusone/agent-team-stats@v0.8.0
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>go<span class="w"> </span>mod<span class="w"> </span>tidy
-</span></code></pre></div></p>
+<p>[ ] Create <code>omniskill/</code> directory</p>
 </li>
 <li>
-<p><strong>Use ClaimsReport conversion</strong> (optional):
-   <div class="language-go highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/agent-team-stats/pkg/models&quot;</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1">// After orchestration</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nx">resp</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">orchestrator</span><span class="p">.</span><span class="nx">Orchestrate</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">)</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nx">claimsReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">ToClaimsReport</span><span class="p">()</span>
-</span></code></pre></div></p>
+<p>Add dependencies</p>
+</li>
+<li>[ ] Add <code>github.com/plexusone/omniagent-worker</code> to go.mod</li>
+<li>
+<p>[ ] Run <code>go mod tidy</code></p>
 </li>
 <li>
-<p><strong>Use HTTP format parameter</strong> (optional):
-   <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8080/orchestrate?format=claims&quot;</span><span class="w"> </span>...
-</span></code></pre></div></p>
+<p>Create baseline tests</p>
 </li>
+<li>[ ] Add integration test that captures current CLI output</li>
+<li>[ ] Document current behavior for regression testing</li>
 </ol>
-<h2 id="contributors">Contributors<a class="headerlink" href="#contributors" title="Permanent link">&para;</a></h2>
-<ul>
-<li>John Wang (@grokify)</li>
-</ul>
-<hr />
-<p><strong>Full Changelog:</strong> <a href="https://github.com/plexusone/agent-team-stats/compare/v0.7.0...v0.8.0"><code>v0.7.0...v0.8.0</code></a></p>
+<p><strong>Exit Criteria</strong>: New directories exist, dependency added, baseline captured.</p>
+<h3 id="phase-2-migrate-research-worker">Phase 2: Migrate Research Worker<a class="headerlink" href="#phase-2-migrate-research-worker" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Migrate the simplest worker first (no LLM required).</p>
+<p><strong>Tasks</strong>:</p>
+<ol>
+<li>Implement Research worker</li>
+<li>[ ] Create <code>workers/research/worker.go</code></li>
+<li>[ ] Implement <code>Worker</code> interface</li>
+<li>
+<p>[ ] Move search logic from <code>agents/research/</code></p>
+</li>
+<li>
+<p>Test in isolation</p>
+</li>
+<li>[ ] Unit tests for Research worker</li>
+<li>[ ] Verify search functionality unchanged</li>
+</ol>
+<p><strong>Exit Criteria</strong>: Research worker passes all tests.</p>
+<h3 id="phase-3-migrate-synthesis-worker">Phase 3: Migrate Synthesis Worker<a class="headerlink" href="#phase-3-migrate-synthesis-worker" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Migrate the LLM-based extraction worker.</p>
+<p><strong>Tasks</strong>:</p>
+<ol>
+<li>Implement Synthesis worker</li>
+<li>[ ] Create <code>workers/synthesis/worker.go</code></li>
+<li>[ ] Implement <code>Worker</code> interface with LLM</li>
+<li>
+<p>[ ] Move extraction logic from <code>agents/synthesis/</code></p>
+</li>
+<li>
+<p>Test in isolation</p>
+</li>
+<li>[ ] Unit tests for Synthesis worker</li>
+<li>[ ] Verify extraction quality unchanged</li>
+</ol>
+<p><strong>Exit Criteria</strong>: Synthesis worker passes all tests.</p>
+<h3 id="phase-4-migrate-verification-worker">Phase 4: Migrate Verification Worker<a class="headerlink" href="#phase-4-migrate-verification-worker" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Migrate the LLM-based verification worker.</p>
+<p><strong>Tasks</strong>:</p>
+<ol>
+<li>Implement Verification worker</li>
+<li>[ ] Create <code>workers/verification/worker.go</code></li>
+<li>[ ] Implement <code>Worker</code> interface with LLM</li>
+<li>
+<p>[ ] Move verification logic from <code>agents/verification/</code></p>
+</li>
+<li>
+<p>Test in isolation</p>
+</li>
+<li>[ ] Unit tests for Verification worker</li>
+<li>[ ] Verify verification accuracy unchanged</li>
+</ol>
+<p><strong>Exit Criteria</strong>: Verification worker passes all tests.</p>
+<h3 id="phase-5-migrate-coordinator">Phase 5: Migrate Coordinator<a class="headerlink" href="#phase-5-migrate-coordinator" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Replace orchestration with omniagent-worker Coordinator.</p>
+<p><strong>Tasks</strong>:</p>
+<ol>
+<li>Implement Coordinator</li>
+<li>[ ] Create <code>coordinator/coordinator.go</code></li>
+<li>[ ] Create <code>coordinator/workflow.go</code> (wrap Eino graph)</li>
+<li>
+<p>[ ] Use omniagent-worker.Coordinator with Pool</p>
+</li>
+<li>
+<p>Add AgentOps integration</p>
+</li>
+<li>[ ] Configure AgentOps store</li>
+<li>
+<p>[ ] Verify traces created</p>
+</li>
+<li>
+<p>Update CLI</p>
+</li>
+<li>[ ] Update <code>main.go</code> to use new Coordinator</li>
+<li>
+<p>[ ] Remove old orchestration code paths</p>
+</li>
+<li>
+<p>Test end-to-end</p>
+</li>
+<li>[ ] Integration tests</li>
+<li>[ ] Regression tests against baseline</li>
+</ol>
+<p><strong>Exit Criteria</strong>: CLI works with new Coordinator, AgentOps traces visible.</p>
+<h3 id="phase-6-add-omniskill-interface">Phase 6: Add OmniSkill Interface<a class="headerlink" href="#phase-6-add-omniskill-interface" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Expose statistics verification as an omniskill.</p>
+<p><strong>Tasks</strong>:</p>
+<ol>
+<li>Implement skill</li>
+<li>[ ] Create <code>omniskill/skill.go</code></li>
+<li>[ ] Create <code>omniskill/doc.go</code></li>
+<li>
+<p>[ ] Implement <code>skill.Skill</code> interface</p>
+</li>
+<li>
+<p>Test skill</p>
+</li>
+<li>[ ] Unit tests for skill</li>
+<li>
+<p>[ ] Integration test with mock OmniAgent</p>
+</li>
+<li>
+<p>Document usage</p>
+</li>
+<li>[ ] Add example in README</li>
+<li>[ ] Document configuration options</li>
+</ol>
+<p><strong>Exit Criteria</strong>: omniskill package can be imported and used.</p>
+<h3 id="phase-7-cleanup">Phase 7: Cleanup<a class="headerlink" href="#phase-7-cleanup" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Remove old code and finalize migration.</p>
+<p><strong>Tasks</strong>:</p>
+<ol>
+<li>Remove old code</li>
+<li>[ ] Remove <code>agents/</code> directory (keep <code>agents/direct/</code> if needed)</li>
+<li>[ ] Remove <code>pkg/agent/</code> directory</li>
+<li>[ ] Remove <code>pkg/llm/</code> directory (if fully replaced)</li>
+<li>
+<p>[ ] Remove old orchestration code</p>
+</li>
+<li>
+<p>Update documentation</p>
+</li>
+<li>[ ] Update README.md</li>
+<li>[ ] Update architecture diagrams</li>
+<li>
+<p>[ ] Document migration for reference</p>
+</li>
+<li>
+<p>Final testing</p>
+</li>
+<li>[ ] Full regression test</li>
+<li>[ ] Performance comparison</li>
+<li>[ ] AgentOps trace verification</li>
+</ol>
+<p><strong>Exit Criteria</strong>: Clean codebase, all tests pass, documentation complete.</p>
+<h2 id="dependencies-between-phases">Dependencies Between Phases<a class="headerlink" href="#dependencies-between-phases" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Prerequisites (omniagent-worker MVP)
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    ▼
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Phase 1 (Preparation)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    ▼
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Phase 2 (Research Worker)
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    │
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    ▼
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Phase 3 (Synthesis Worker)
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    │
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    ▼
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>Phase 4 (Verification Worker)
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    │
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    ▼
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>Phase 5 (Coordinator)
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    │
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    ▼
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>Phase 6 (OmniSkill)
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    │
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    ▼
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>Phase 7 (Cleanup)
+</span></code></pre></div>
+<h2 id="timeline-estimates">Timeline Estimates<a class="headerlink" href="#timeline-estimates" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Estimated Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 1</td>
+<td>0.5 day</td>
+</tr>
+<tr>
+<td>Phase 2</td>
+<td>1 day</td>
+</tr>
+<tr>
+<td>Phase 3</td>
+<td>1 day</td>
+</tr>
+<tr>
+<td>Phase 4</td>
+<td>1 day</td>
+</tr>
+<tr>
+<td>Phase 5</td>
+<td>1-2 days</td>
+</tr>
+<tr>
+<td>Phase 6</td>
+<td>1 day</td>
+</tr>
+<tr>
+<td>Phase 7</td>
+<td>0.5 day</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>6-8 days</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Note: Requires omniagent-worker MVP (~5-8 days) to be complete first.</p>
+<h2 id="rollback-plan">Rollback Plan<a class="headerlink" href="#rollback-plan" title="Permanent link">&para;</a></h2>
+<p>If migration fails at any phase:</p>
+<ol>
+<li>Keep old code in <code>agents/</code> until Phase 7</li>
+<li>CLI can be reverted to use old paths</li>
+<li>Git history preserves all original code</li>
+</ol>
+<h2 id="success-metrics">Success Metrics<a class="headerlink" href="#success-metrics" title="Permanent link">&para;</a></h2>
+<ol>
+<li>All existing tests pass</li>
+<li>CLI produces identical output (regression test)</li>
+<li>No performance degradation (&lt; 5% slower)</li>
+<li>AgentOps traces show complete workflow</li>
+<li>omniskill can be imported and executed</li>
+</ol>
 
 
 
@@ -2294,10 +2029,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

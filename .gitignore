@@ -24,3 +24,6 @@ main.zip
 
 # Ideation notes
 IDEATION_CHAT*.md
+
+# MkDocs generated site
+site/

@@ -28,7 +28,7 @@
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-url]: https://github.com/plexusone/agent-team-stats/blob/main/LICENSE
 
-A multi-agent system for finding and verifying statistics from reputable web sources using Go, built with [Google ADK (Agent Development Kit)](https://github.com/google/adk-go) and [Eino](https://github.com/cloudwego/eino).
+A multi-agent system for finding and verifying statistics from reputable web sources using Go, built with [omniagent-worker](https://github.com/plexusone/omniagent-worker), [Google ADK (Agent Development Kit)](https://github.com/google/adk-go), and [Eino](https://github.com/cloudwego/eino).
 
 ## Overview
 
@@ -71,49 +71,42 @@ The system implements a **4-agent architecture** with clear separation of concer
   URLs only     Statistics     Verified Stats
 ```
 
-### Agent Responsibilities
+### Worker Architecture (omniagent-worker)
 
-#### 1. Research Agent (`agents/research/`) - Web Search Only
+The system uses [omniagent-worker](https://github.com/plexusone/omniagent-worker) for worker lifecycle, coordination, and observability.
+
+#### 1. Research Worker (`workers/research/`) - Web Search Only
 - **No LLM required** - Pure search functionality
+- Implements `omniagent-worker.Worker` interface
 - Web search via Serper/SerpAPI integration
 - Returns URLs with metadata (title, snippet, domain)
 - Prioritizes reputable sources (`.gov`, `.edu`, research orgs)
 - Output: List of `SearchResult` objects
-- Port: **8001**
 
-#### 2. Synthesis Agent (`agents/synthesis/`) - Google ADK ⭐ NEW
-- **LLM-heavy** extraction agent
-- Built with Google ADK and LLM (Gemini/Claude/OpenAI/Ollama)
+#### 2. Synthesis Worker (`workers/synthesis/`) - LLM Extraction
+- **LLM-heavy** extraction worker
+- Implements `omniagent-worker.Worker` interface
 - Fetches webpage content from URLs
 - Extracts numerical statistics using LLM analysis
 - Finds verbatim excerpts containing statistics
 - Creates `CandidateStatistic` objects with proper metadata
-- Port: **8004**
 
-#### 3. Verification Agent (`agents/verification/`) - Google ADK
-- **LLM-light** validation agent
+#### 3. Verification Worker (`workers/verification/`) - LLM Validation
+- **LLM-light** validation worker
+- Implements `omniagent-worker.Worker` interface
 - Re-fetches source URLs to verify content
 - Checks excerpts exist verbatim in source
 - Validates numerical values match exactly
 - Flags hallucinations and discrepancies
 - Returns verification results with pass/fail reasons
-- Port: **8002**
 
-#### 4a. Orchestration Agent - Google ADK (`agents/orchestration/`)
-- Built with Google ADK for LLM-driven workflow decisions
+#### 4. Coordinator (`coordinator/`) - Workflow Orchestration
+- Built with `omniagent-worker.Coordinator`
+- **Deterministic graph-based workflow** (no LLM for orchestration)
 - Coordinates: Research → Synthesis → Verification
 - Implements adaptive retry logic
-- Dynamic quality control
-- Port: **8000**
-
-#### 4b. Orchestration Agent - Eino (`agents/orchestration-eino/`) ⭐ RECOMMENDED
-- **Deterministic graph-based workflow** (no LLM for orchestration)
-- Type-safe orchestration with Eino framework
-- Predictable, reproducible behavior
-- Faster and lower cost
+- AgentOps tracing via OpenTelemetry
 - Workflow: ValidateInput → Research → Synthesis → Verification → QualityCheck → Format
-- Port: **8000** (same port as ADK, but they don't run simultaneously)
-- **Recommended for production use**
 
 ## Features
 
@@ -526,19 +519,20 @@ Enable A2A with: `A2A_ENABLED=true`
 ## Project Structure
 
 ```
-stats-agent/
-├── agents/
-│   ├── direct/             # Direct search agent (Huma + OpenAPI, port 8005) ⭐ NEW
-│   │   └── main.go
-│   ├── orchestration/      # Orchestration agent (Google ADK, port 8000)
-│   │   └── main.go
-│   ├── orchestration-eino/ # Orchestration agent (Eino, port 8000) ⭐
-│   │   └── main.go
-│   ├── research/           # Research agent (port 8001)
-│   │   └── main.go
-│   ├── synthesis/          # Synthesis agent (Google ADK, port 8004) ⭐
-│   │   └── main.go
-│   └── verification/       # Verification agent (Google ADK, port 8002)
+agent-team-stats/
+├── workers/                # omniagent-worker based workers
+│   ├── research/           # Research worker (web search)
+│   │   └── worker.go
+│   ├── synthesis/          # Synthesis worker (LLM extraction)
+│   │   └── worker.go
+│   └── verification/       # Verification worker (LLM validation)
+│       └── worker.go
+├── coordinator/            # Workflow coordinator
+│   └── coordinator.go      # omniagent-worker.Coordinator implementation
+├── omniskill/              # OmniAgent skill integration
+│   └── stats.go            # Skill interface for omniagent
+├── cmd/
+│   └── coordinator/        # Coordinator CLI entrypoint
 │       └── main.go
 ├── pkg/
 │   ├── config/            # Configuration management
@@ -577,14 +571,17 @@ make clean
 ## Technology Stack
 
 - **Language**: Go 1.21+
+- **Worker Framework**:
+  - [omniagent-worker](https://github.com/plexusone/omniagent-worker) - Go-first multi-agent worker framework ⭐
 - **Agent Frameworks**:
-  - [Google ADK (Agent Development Kit)](https://github.com/google/adk-go) - LLM-based agents + A2A protocol ⭐
-  - [Eino](https://github.com/cloudwego/eino) - Deterministic graph orchestration ⭐
+  - [Google ADK (Agent Development Kit)](https://github.com/google/adk-go) - LLM-based agents + A2A protocol
+  - [Eino](https://github.com/cloudwego/eino) - Deterministic graph orchestration
 - **LLM Integration**:
   - [OmniLLM](https://github.com/plexusone/omnillm) - Multi-provider LLM abstraction
   - Supports: Gemini, Claude, OpenAI, xAI Grok, Ollama
 - **Observability**:
   - [OmniObserve](https://github.com/plexusone/omniobserve) - Unified LLM observability
+  - AgentOps tracing via OpenTelemetry
   - Supports: Comet Opik, Langfuse, Arize Phoenix
 - **Protocols**:
   - HTTP - Custom security, flexibility (ports 800x)
@@ -637,9 +634,9 @@ Contributions welcome! Please:
 
 ## Acknowledgments
 
-- Built with [Google ADK (Agent Development Kit)](https://github.com/google/adk-go)
-- Uses [Eino](https://github.com/cloudwego/eino) for deterministic orchestration
-- Multi-LLM support via [OmniLLM](https://github.com/plexusone/omnillm)
-- LLM observability via [OmniObserve](https://github.com/plexusone/omniobserve)
+- Worker framework: [omniagent-worker](https://github.com/plexusone/omniagent-worker)
+- Agent frameworks: [Google ADK](https://github.com/google/adk-go), [Eino](https://github.com/cloudwego/eino)
+- Multi-LLM support: [OmniLLM](https://github.com/plexusone/omnillm)
+- LLM observability: [OmniObserve](https://github.com/plexusone/omniobserve)
 - A2A protocol for agent interoperability
 - Inspired by multi-agent collaboration frameworks

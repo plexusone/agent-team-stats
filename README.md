@@ -258,29 +258,17 @@ See [DOCKER.md](DOCKER.md) for complete Docker deployment guide.
 
 ### Local Development Setup
 
-#### Running the Agents Locally
+#### Running the Coordinator
 
-##### Option 1: Run all agents with Eino orchestrator (Recommended)
+The coordinator runs all workers in-process using omniagent-worker:
+
 ```bash
-make run-all-eino
-```
+# Build and run the coordinator
+make build
+./bin/stats-coordinator --port 8080
 
-##### Option 2: Run all agents with ADK orchestrator
-```bash
-make run-all
-```
-
-##### Option 3: Run each agent separately (in different terminals)
-```bash
-# Terminal 1: Research Agent (ADK)
-make run-research
-
-# Terminal 2: Verification Agent (ADK)
-make run-verification
-
-# Terminal 3: Orchestration Agent (choose one)
-make run-orchestration       # ADK version (LLM-based)
-make run-orchestration-eino  # Eino version (deterministic, recommended)
+# With AgentOps tracing
+./bin/stats-coordinator --port 8080 --agentops-dsn postgres://...
 ```
 
 #### Using the CLI
@@ -408,11 +396,11 @@ See [MCP_SERVER.md](MCP_SERVER.md) for detailed setup instructions.
 
 ### API Usage
 
-You can also call the agents directly via HTTP (works with both Docker and local deployment):
+You can call the coordinator via HTTP:
 
 ```bash
-# Call orchestration agent (port 8000 - supports both ADK and Eino)
-curl -X POST http://localhost:8000/orchestrate \
+# Call coordinator (default port 8080)
+curl -X POST http://localhost:8080/orchestrate \
   -H "Content-Type: application/json" \
   -d '{
     "topic": "climate change",
@@ -422,7 +410,7 @@ curl -X POST http://localhost:8000/orchestrate \
   }'
 
 # Get ClaimsReport format (structured-evaluation compatible)
-curl -X POST "http://localhost:8000/orchestrate?format=claims" \
+curl -X POST "http://localhost:8080/orchestrate?format=claims" \
   -H "Content-Type: application/json" \
   -d '{"topic": "climate change", "min_verified_stats": 5}'
 ```
@@ -485,14 +473,12 @@ See [LLM_CONFIGURATION.md](LLM_CONFIGURATION.md) for detailed LLM setup.
 - [Langfuse](https://langfuse.com/) - Open-source LLM observability
 - [Arize Phoenix](https://phoenix.arize.com/) - ML observability platform
 
-#### Other Configuration
+#### Coordinator Configuration
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `RESEARCH_AGENT_URL` | Research agent URL | `http://localhost:8001` |
-| `SYNTHESIS_AGENT_URL` | Synthesis agent URL | `http://localhost:8004` |
-| `VERIFICATION_AGENT_URL` | Verification agent URL | `http://localhost:8002` |
-| `ORCHESTRATOR_URL` | Orchestrator URL (both ADK/Eino) | `http://localhost:8000` |
+| `COORDINATOR_PORT` | Coordinator HTTP port | `8080` |
+| `AGENTOPS_DSN` | AgentOps tracing DSN (postgres) | - |
 
 ### Deployment Modes
 
@@ -570,8 +556,8 @@ make clean
 - **Worker Framework**:
   - [omniagent-worker](https://github.com/plexusone/omniagent-worker) - Go-first multi-agent worker framework ⭐
 - **Agent Frameworks**:
-  - [Google ADK (Agent Development Kit)](https://github.com/google/adk-go) - LLM-based agents + A2A protocol
-  - [Eino](https://github.com/cloudwego/eino) - Deterministic graph orchestration
+  - [Google ADK](https://github.com/google/adk-go) - LLM model interface + A2A protocol
+  - [Eino](https://github.com/cloudwego/eino) - Workflow graph primitives
 - **LLM Integration**:
   - [OmniLLM](https://github.com/plexusone/omnillm) - Multi-provider LLM abstraction
   - Supports: Gemini, Claude, OpenAI, xAI Grok, Ollama
@@ -589,16 +575,17 @@ make clean
 ## How It Works
 
 1. **User Request**: User provides a topic via CLI or API
-2. **Orchestration**: Orchestrator receives request and initiates workflow
-3. **Research Phase**: Research agent searches web for candidate statistics
-4. **Verification Phase**: Verification agent validates each candidate
-5. **Quality Control**: Orchestrator checks if minimum verified stats met
-6. **Retry Logic**: If needed, request more candidates and verify
-7. **Response**: Return verified statistics in structured JSON format
+2. **Coordination**: Coordinator receives request and initiates workflow
+3. **Research Phase**: Research worker searches web for candidate URLs
+4. **Synthesis Phase**: Synthesis worker extracts statistics from URLs
+5. **Verification Phase**: Verification worker validates each statistic
+6. **Quality Control**: Coordinator checks if minimum verified stats met
+7. **Retry Logic**: If needed, request more candidates and verify
+8. **Response**: Return verified statistics in structured JSON format
 
 ## Reputable Sources
 
-The research agent prioritizes these source types:
+The research worker prioritizes these source types:
 
 - **Government Agencies**: CDC, NIH, Census Bureau, EPA, etc.
 - **Academic Institutions**: Universities, research journals

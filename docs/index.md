@@ -26,7 +26,7 @@ This project implements a sophisticated multi-agent architecture that leverages 
 ### Technical Stack
 
 - **Multi-LLM providers** - Gemini, Claude, OpenAI, Ollama, xAI Grok via unified interface
-- **Google ADK integration** - For LLM-based agents
+- **omniagent-worker** - Go-first multi-agent worker framework
 - **Eino framework** - Deterministic graph orchestration (Recommended)
 - **A2A Protocol** - Agent-to-Agent interoperability (Google standard)
 - **LLM Observability** - OmniObserve integration (Opik, Langfuse, Phoenix)

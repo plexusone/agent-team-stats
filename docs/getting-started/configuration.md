@@ -60,28 +60,25 @@ See [LLM Configuration](../guides/llm-configuration.md) for detailed LLM setup.
 - [Langfuse](https://langfuse.com/) - Open-source LLM observability
 - [Arize Phoenix](https://phoenix.arize.com/) - ML observability platform
 
-### Agent URL Configuration
+### Coordinator Configuration
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `RESEARCH_AGENT_URL` | Research agent URL | `http://localhost:8001` |
-| `SYNTHESIS_AGENT_URL` | Synthesis agent URL | `http://localhost:8004` |
-| `VERIFICATION_AGENT_URL` | Verification agent URL | `http://localhost:8002` |
-| `ORCHESTRATOR_URL` | Orchestrator URL (both ADK/Eino) | `http://localhost:8000` |
+| `COORDINATOR_PORT` | Coordinator HTTP port | `8080` |
+| `AGENTOPS_DSN` | AgentOps tracing DSN (postgres) | - |
 
-## Port Configuration
+## Deployment Modes
 
-Each agent exposes both HTTP and A2A (Agent-to-Agent) protocol endpoints:
+Workers can run in two modes:
 
-| Agent | HTTP Port | A2A Port | Description |
-|-------|-----------|----------|-------------|
-| **Orchestration (ADK/Eino)** | **8000** | **9000** | Graph-based workflow coordination |
-| Research (ADK) | 8001 | 9001 | Web search via Serper/SerpAPI |
-| Verification (ADK) | 8002 | 9002 | LLM-based verification |
-| Synthesis (ADK) | 8004 | 9004 | LLM-based statistics extraction |
-| **Direct (Huma)** | **8005** | - | Direct LLM search with OpenAPI docs |
+| Mode | Description | Use Case |
+|------|-------------|----------|
+| **In-Process** (default) | Workers run within the Coordinator via Pool | Development, single-process deployment |
+| **HTTP Services** | Workers run as separate HTTP services | Microservices, scaling individual workers |
 
-### A2A Endpoints per Agent
+**Default Port (Coordinator):** `8080`
+
+### A2A Protocol Support
 
 - `GET /.well-known/agent-card.json` - Agent discovery
 - `POST /invoke` - JSON-RPC execution

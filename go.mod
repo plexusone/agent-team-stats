@@ -3,10 +3,7 @@ module github.com/plexusone/agent-team-stats
 go 1.26.4
 
 require (
-	github.com/a2aproject/a2a-go v0.3.15
 	github.com/cloudwego/eino v0.9.12
-	github.com/danielgtaylor/huma/v2 v2.38.0
-	github.com/go-chi/chi/v5 v5.3.1
 	github.com/go-playground/validator/v10 v10.30.3
 	github.com/grokify/mogo v0.74.6
 	github.com/jessevdk/go-flags v1.6.1
@@ -16,41 +13,41 @@ require (
 	github.com/plexusone/omnillm v0.17.0
 	github.com/plexusone/omniobserve v0.11.0
 	github.com/plexusone/omniserp v0.9.0
-	github.com/plexusone/omniskill v0.9.0
+	github.com/plexusone/omniskill v0.10.0
 	github.com/plexusone/opik-go v0.8.0
 	github.com/plexusone/phoenix-go v0.2.1
-	github.com/plexusone/structured-evaluation v0.8.0
+	github.com/plexusone/structured-evaluation v0.9.0
 	google.golang.org/adk v1.5.0
 	google.golang.org/genai v1.63.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
-	ariga.io/atlas v1.2.2 // indirect
+	ariga.io/atlas v1.2.3 // indirect
 	cloud.google.com/go v0.123.0 // indirect
-	cloud.google.com/go/auth v0.20.0 // indirect
+	cloud.google.com/go/auth v0.21.0 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
 	entgo.io/ent v0.14.6 // indirect
-	github.com/OpenRouterTeam/go-sdk v0.5.12 // indirect
-	github.com/a2aproject/a2a-go/v2 v2.3.1 // indirect
+	github.com/OpenRouterTeam/go-sdk v0.5.17 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
-	github.com/anthropics/anthropic-sdk-go v1.56.0 // indirect
+	github.com/anthropics/anthropic-sdk-go v1.57.0 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
+	github.com/apparentlymart/go-textseg/v17 v17.0.1 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.42.1 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.14 // indirect
-	github.com/aws/aws-sdk-go-v2/config v1.32.27 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.26 // indirect
+	github.com/aws/aws-sdk-go-v2/config v1.32.29 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.28 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.30 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.30 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.30 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.31 // indirect
-	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.54.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.55.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.13 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.30 // indirect
-	github.com/aws/aws-sdk-go-v2/service/signin v1.2.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.31.5 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.36.8 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sts v1.43.5 // indirect
+	github.com/aws/aws-sdk-go-v2/service/signin v1.4.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.32.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.37.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sts v1.44.0 // indirect
 	github.com/aws/smithy-go v1.27.3 // indirect
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/bmatcuk/doublestar v1.3.4 // indirect
@@ -70,6 +67,7 @@ require (
 	github.com/felixge/httpsnoop v1.1.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.13 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
+	github.com/go-chi/chi/v5 v5.3.1 // indirect
 	github.com/go-faster/errors v0.7.1 // indirect
 	github.com/go-faster/jx v1.2.0 // indirect
 	github.com/go-faster/yaml v0.4.6 // indirect
@@ -84,20 +82,20 @@ require (
 	github.com/google/s2a-go v0.1.9 // indirect
 	github.com/google/safehtml v0.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/googleapis/enterprise-certificate-proxy v0.3.17 // indirect
-	github.com/googleapis/gax-go/v2 v2.22.0 // indirect
+	github.com/googleapis/enterprise-certificate-proxy v0.3.18 // indirect
+	github.com/googleapis/gax-go/v2 v2.23.0 // indirect
 	github.com/goph/emperror v0.17.2 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
-	github.com/grokify/oscompat v0.4.0 // indirect
+	github.com/grokify/oscompat v0.5.0 // indirect
 	github.com/grokify/sogo v0.15.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.29.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.24.0 // indirect
 	github.com/invopop/jsonschema v0.14.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
+	github.com/klauspost/cpuid/v2 v2.4.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/lib/pq v1.12.3 // indirect
-	github.com/lufia/plan9stats v0.0.0-20260330125221-c963978e514e // indirect
+	github.com/lufia/plan9stats v0.0.0-20260627054121-477a66015f15 // indirect
 	github.com/mailru/easyjson v0.9.2 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
 	github.com/mattn/go-isatty v0.0.22 // indirect
@@ -106,10 +104,10 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/nikolalohinski/gonja v1.5.3 // indirect
-	github.com/ogen-go/ogen v1.22.0 // indirect
+	github.com/ogen-go/ogen v1.23.0 // indirect
 	github.com/openai/openai-go v1.12.0 // indirect
 	github.com/pb33f/ordered-map/v2 v2.3.1 // indirect
-	github.com/pelletier/go-toml/v2 v2.4.0 // indirect
+	github.com/pelletier/go-toml/v2 v2.4.3 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/plexusone/omni-anthropic v0.3.0 // indirect
 	github.com/plexusone/omni-aws v0.9.0 // indirect
@@ -123,7 +121,7 @@ require (
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/segmentio/asm v1.2.1 // indirect
 	github.com/segmentio/encoding v0.5.4 // indirect
-	github.com/shirou/gopsutil/v4 v4.26.5 // indirect
+	github.com/shirou/gopsutil/v4 v4.26.6 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/slongfield/pyfmt v0.0.0-20220222012616-ea85ff4c361f // indirect
@@ -140,7 +138,7 @@ require (
 	github.com/yargevad/filepathx v1.0.0 // indirect
 	github.com/yosida95/uritemplate/v3 v3.0.2 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
-	github.com/zclconf/go-cty v1.18.1 // indirect
+	github.com/zclconf/go-cty v1.19.0 // indirect
 	github.com/zclconf/go-cty-yaml v1.2.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.69.0 // indirect
@@ -155,19 +153,19 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.6 // indirect
-	golang.org/x/arch v0.28.0 // indirect
-	golang.org/x/crypto v0.53.0 // indirect
-	golang.org/x/exp v0.0.0-20260611194520-c48552f49976 // indirect
-	golang.org/x/mod v0.37.0 // indirect
-	golang.org/x/net v0.56.0 // indirect
+	golang.org/x/arch v0.29.0 // indirect
+	golang.org/x/crypto v0.54.0 // indirect
+	golang.org/x/exp v0.0.0-20260709172345-9ea1abe57597 // indirect
+	golang.org/x/mod v0.38.0 // indirect
+	golang.org/x/net v0.57.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
-	golang.org/x/sync v0.21.0 // indirect
-	golang.org/x/sys v0.46.0 // indirect
-	golang.org/x/text v0.38.0 // indirect
-	golang.org/x/tools v0.46.0 // indirect
-	google.golang.org/api v0.287.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20260630182238-925bb5da69e7 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260630182238-925bb5da69e7 // indirect
+	golang.org/x/sync v0.22.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/text v0.40.0 // indirect
+	golang.org/x/tools v0.48.0 // indirect
+	google.golang.org/api v0.288.0 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20260706201446-f0a921348800 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260706201446-f0a921348800 // indirect
 	google.golang.org/grpc v1.82.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

@@ -6,6 +6,69 @@
   "commitConvention": "conventional",
   "releases": [
     {
+      "version": "v0.9.0",
+      "date": "2026-07-12",
+      "commit": "11188fa",
+      "highlights": [
+        { "description": "Migration from standalone Google ADK agents to omniagent-worker based architecture" },
+        { "description": "Workers implement `omniagent-worker.Worker` interface for unified lifecycle management" },
+        { "description": "New Coordinator using `omniagent-worker.Coordinator` with AgentOps tracing" },
+        { "description": "OmniSkill integration for embedding in OmniAgent" }
+      ],
+      "breaking": [
+        { "description": "Legacy `agents/` directory removed - replaced by `workers/` and `coordinator/`", "commit": "b7797d0" }
+      ],
+      "upgradeGuide": [
+        { "description": "Workers now in `workers/` directory implementing omniagent-worker.Worker interface" },
+        { "description": "Orchestration replaced by `coordinator/` using omniagent-worker.Coordinator" },
+        { "description": "Use `cmd/coordinator/main.go` as CLI entrypoint instead of individual agent binaries" }
+      ],
+      "added": [
+        { "description": "Research worker implementing omniagent-worker.Worker interface", "commit": "63bd423" },
+        { "description": "Synthesis worker implementing omniagent-worker.Worker interface", "commit": "5280743" },
+        { "description": "Verification worker implementing omniagent-worker.Worker interface", "commit": "369615a" },
+        { "description": "Coordinator package using omniagent-worker.Coordinator", "commit": "0c445aa" },
+        { "description": "Coordinator CLI entrypoint with AgentOps support", "commit": "52cfe68" },
+        { "description": "OmniSkill interface for OmniAgent integration", "commit": "eeff008" },
+        { "description": "omniagent-worker migration specifications", "commit": "c13d39d" }
+      ],
+      "removed": [
+        { "description": "`agents/direct/` - Direct search agent", "commit": "b7797d0" },
+        { "description": "`agents/orchestration/` - ADK orchestration agent", "commit": "b7797d0" },
+        { "description": "`agents/orchestration-eino/` - Eino orchestration agent", "commit": "b7797d0" },
+        { "description": "`agents/research/` - Research agent", "commit": "b7797d0" },
+        { "description": "`agents/synthesis/` - Synthesis agent", "commit": "b7797d0" },
+        { "description": "`agents/verification/` - Verification agent", "commit": "b7797d0" }
+      ],
+      "tests": [
+        { "description": "Coordinator unit and integration tests", "commit": "0b51b16" }
+      ],
+      "documentation": [
+        { "description": "README updated for worker-based architecture", "commit": "11188fa" },
+        { "description": "MkDocs site updated for omniagent-worker architecture", "commit": "1e9f635" },
+        { "description": "README shields updated", "commit": "e6193ff" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omniagent-worker` v0.1.0 (new)", "commit": "7675b72" },
+        { "description": "`github.com/plexusone/omniskill` v0.9.0 (new)", "commit": "7675b72" },
+        { "description": "`github.com/cloudwego/eino` v0.9.2 → v0.9.12", "commit": "e27de03" },
+        { "description": "`github.com/plexusone/omnillm` v0.15.3 → v0.17.0", "commit": "b6d9a02" },
+        { "description": "`github.com/plexusone/omniobserve` v0.8.0 → v0.11.0", "commit": "d4e23fe" },
+        { "description": "`github.com/plexusone/omniserp` v0.8.1 → v0.9.0", "commit": "35d89a5" },
+        { "description": "`github.com/plexusone/structured-evaluation` v0.6.0 → v0.8.0", "commit": "fa35782" },
+        { "description": "`google.golang.org/adk` v1.4.0 → v1.5.0", "commit": "1d7247e" },
+        { "description": "`google.golang.org/genai` v1.58.0 → v1.63.0", "commit": "a62f6b5" }
+      ],
+      "chores": [
+        { "description": "Add site/ to gitignore for MkDocs output", "commit": "3c8e7f0" },
+        { "description": "Update gitignore for workers and binaries", "commit": "92f30ab" }
+      ],
+      "infrastructure": [
+        { "description": "GitHub Actions: `actions/checkout` v6 → v7", "commit": "3b020af" },
+        { "description": "GitHub Actions: `gitleaks/gitleaks-action` v2 → v3", "commit": "452859c" }
+      ]
+    },
+    {
       "version": "v0.8.0",
       "date": "2026-06-01",
       "highlights": [

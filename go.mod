@@ -8,7 +8,7 @@ require (
 	github.com/grokify/mogo v0.74.6
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/modelcontextprotocol/go-sdk v1.6.1
-	github.com/plexusone/agentkit v0.6.1
+	github.com/plexusone/agentkit v0.7.0
 	github.com/plexusone/omniagent-worker v0.1.0
 	github.com/plexusone/omnillm v0.17.0
 	github.com/plexusone/omniobserve v0.11.0

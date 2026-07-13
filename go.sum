@@ -234,8 +234,8 @@ github.com/pelletier/go-toml/v2 v2.4.3/go.mod h1:2gIqNv+qfxSVS7cM2xJQKtLSTLUE9V8
 github.com/pkg/errors v0.8.0/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
-github.com/plexusone/agentkit v0.6.1 h1:GXB+ThWwuEctV9bVi68cj5nJdWL372a5BtNk+QNCvlc=
-github.com/plexusone/agentkit v0.6.1/go.mod h1:6ZPiqnn5a1qs6od5WD8BFNyDnBuLsqMIrTtd1BqcgTc=
+github.com/plexusone/agentkit v0.7.0 h1:P3wmdrYlcA2DwyHIT1vEV9NluTqndH1ApsUHR86ijzk=
+github.com/plexusone/agentkit v0.7.0/go.mod h1:JdQEC4MM/g0GGsUj5nFDB08LIXIXSlCLkZgnA6EGM+c=
 github.com/plexusone/omni-anthropic v0.3.0 h1:KfPJKxYyqgjs4C3HWD7i6zPYyEmd9c9+2J0WCh2LaDI=
 github.com/plexusone/omni-anthropic v0.3.0/go.mod h1:uC4i/6Bh9wAESmofRKDFyFY7JF3Rq3grSegzlc1BJzI=
 github.com/plexusone/omni-aws v0.9.0 h1:w8E8GX407SQuzxPi9kmaLuvy5rTKgae+zmhMvnR12mw=

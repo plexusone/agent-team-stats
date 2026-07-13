@@ -534,10 +534,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#agent-url-configuration" class="md-nav__link">
+  <a href="#coordinator-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Agent URL Configuration
+        Coordinator Configuration
       
     </span>
   </a>
@@ -550,22 +550,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#port-configuration" class="md-nav__link">
+  <a href="#deployment-modes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Port Configuration
+        Deployment Modes
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Port Configuration">
+    <nav class="md-nav" aria-label="Deployment Modes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a2a-endpoints-per-agent" class="md-nav__link">
+  <a href="#a2a-protocol-support" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A2A Endpoints per Agent
+        A2A Protocol Support
       
     </span>
   </a>
@@ -1496,6 +1496,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.8.0/" class="md-nav__link">
         
   
@@ -1814,10 +1842,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#agent-url-configuration" class="md-nav__link">
+  <a href="#coordinator-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Agent URL Configuration
+        Coordinator Configuration
       
     </span>
   </a>
@@ -1830,22 +1858,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#port-configuration" class="md-nav__link">
+  <a href="#deployment-modes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Port Configuration
+        Deployment Modes
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Port Configuration">
+    <nav class="md-nav" aria-label="Deployment Modes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#a2a-endpoints-per-agent" class="md-nav__link">
+  <a href="#a2a-protocol-support" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A2A Endpoints per Agent
+        A2A Protocol Support
       
     </span>
   </a>
@@ -2121,7 +2149,7 @@
 <li><a href="https://langfuse.com/">Langfuse</a> - Open-source LLM observability</li>
 <li><a href="https://phoenix.arize.com/">Arize Phoenix</a> - ML observability platform</li>
 </ul>
-<h3 id="agent-url-configuration">Agent URL Configuration<a class="headerlink" href="#agent-url-configuration" title="Permanent link">&para;</a></h3>
+<h3 id="coordinator-configuration">Coordinator Configuration<a class="headerlink" href="#coordinator-configuration" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -2132,104 +2160,75 @@
 </thead>
 <tbody>
 <tr>
-<td><code>RESEARCH_AGENT_URL</code></td>
-<td>Research agent URL</td>
-<td><code>http://localhost:8001</code></td>
+<td><code>COORDINATOR_PORT</code></td>
+<td>Coordinator HTTP port</td>
+<td><code>8080</code></td>
 </tr>
 <tr>
-<td><code>SYNTHESIS_AGENT_URL</code></td>
-<td>Synthesis agent URL</td>
-<td><code>http://localhost:8004</code></td>
-</tr>
-<tr>
-<td><code>VERIFICATION_AGENT_URL</code></td>
-<td>Verification agent URL</td>
-<td><code>http://localhost:8002</code></td>
-</tr>
-<tr>
-<td><code>ORCHESTRATOR_URL</code></td>
-<td>Orchestrator URL (both ADK/Eino)</td>
-<td><code>http://localhost:8000</code></td>
+<td><code>AGENTOPS_DSN</code></td>
+<td>AgentOps tracing DSN (postgres)</td>
+<td>-</td>
 </tr>
 </tbody>
 </table>
-<h2 id="port-configuration">Port Configuration<a class="headerlink" href="#port-configuration" title="Permanent link">&para;</a></h2>
-<p>Each agent exposes both HTTP and A2A (Agent-to-Agent) protocol endpoints:</p>
+<h2 id="deployment-modes">Deployment Modes<a class="headerlink" href="#deployment-modes" title="Permanent link">&para;</a></h2>
+<p>Workers can run in two modes:</p>
 <table>
 <thead>
 <tr>
-<th>Agent</th>
-<th>HTTP Port</th>
-<th>A2A Port</th>
+<th>Mode</th>
 <th>Description</th>
+<th>Use Case</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Orchestration (ADK/Eino)</strong></td>
-<td><strong>8000</strong></td>
-<td><strong>9000</strong></td>
-<td>Graph-based workflow coordination</td>
+<td><strong>In-Process</strong> (default)</td>
+<td>Workers run within the Coordinator via Pool</td>
+<td>Development, single-process deployment</td>
 </tr>
 <tr>
-<td>Research (ADK)</td>
-<td>8001</td>
-<td>9001</td>
-<td>Web search via Serper/SerpAPI</td>
-</tr>
-<tr>
-<td>Verification (ADK)</td>
-<td>8002</td>
-<td>9002</td>
-<td>LLM-based verification</td>
-</tr>
-<tr>
-<td>Synthesis (ADK)</td>
-<td>8004</td>
-<td>9004</td>
-<td>LLM-based statistics extraction</td>
-</tr>
-<tr>
-<td><strong>Direct (Huma)</strong></td>
-<td><strong>8005</strong></td>
-<td>-</td>
-<td>Direct LLM search with OpenAPI docs</td>
+<td><strong>HTTP Services</strong></td>
+<td>Workers run as separate HTTP services</td>
+<td>Microservices, scaling individual workers</td>
 </tr>
 </tbody>
 </table>
-<h3 id="a2a-endpoints-per-agent">A2A Endpoints per Agent<a class="headerlink" href="#a2a-endpoints-per-agent" title="Permanent link">&para;</a></h3>
+<p><strong>Default Port (Coordinator):</strong> <code>8080</code></p>
+<h3 id="a2a-protocol-support">A2A Protocol Support<a class="headerlink" href="#a2a-protocol-support" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>GET /.well-known/agent-card.json</code> - Agent discovery</li>
 <li><code>POST /invoke</code> - JSON-RPC execution</li>
 </ul>
 <p>Enable A2A with: <code>A2A_ENABLED=true</code></p>
 <h2 id="project-structure">Project Structure<a class="headerlink" href="#project-structure" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>stats-agent-team/
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── agents/
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   ├── direct/             # Direct search agent (Huma + OpenAPI, port 8005)
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│   │   └── main.go
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├── orchestration/      # Orchestration agent (Google ADK, port 8000)
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   │   └── main.go
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├── orchestration-eino/ # Orchestration agent (Eino, port 8000)
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   │   └── main.go
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   ├── research/           # Research agent (port 8001)
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   │   └── main.go
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   ├── synthesis/          # Synthesis agent (Google ADK, port 8004)
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   │   └── main.go
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   └── verification/       # Verification agent (Google ADK, port 8002)
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│       └── main.go
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>├── pkg/
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│   ├── config/            # Configuration management
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│   ├── direct/            # Direct LLM search service
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   ├── llm/               # Multi-provider LLM factory (OmniLLM + OmniObserve)
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│   │   └── adapters/      # OmniLLM adapter for ADK integration
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│   ├── models/            # Shared data models
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│   └── orchestration/     # Orchestration logic
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>├── main.go                # CLI entry point
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>├── Makefile               # Build and run commands
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>├── go.mod                 # Go dependencies
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>├── .env.example           # Environment template
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>└── README.md              # This file
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>agent-team-stats/
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── workers/                # omniagent-worker based workers
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   ├── research/           # Research worker (web search)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│   │   └── worker.go
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├── synthesis/          # Synthesis worker (LLM extraction)
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   │   └── worker.go
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   └── verification/       # Verification worker (LLM validation)
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│       └── worker.go
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├── coordinator/            # Workflow coordinator
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   └── coordinator.go      # omniagent-worker.Coordinator implementation
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>├── omniskill/              # OmniAgent skill integration
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   └── stats.go            # Skill interface for omniagent
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>├── cmd/
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   └── coordinator/        # Coordinator CLI entrypoint
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│       └── main.go
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>├── pkg/
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│   ├── config/            # Configuration management
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   ├── direct/            # Direct LLM search service
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│   ├── llm/               # Multi-provider LLM factory (OmniLLM + OmniObserve)
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│   │   └── adapters/      # OmniLLM adapter for ADK integration
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│   ├── models/            # Shared data models
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│   └── orchestration/     # Orchestration logic
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>├── main.go                # CLI entry point
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>├── Makefile               # Build and run commands
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>├── go.mod                 # Go dependencies
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>├── .env.example           # Environment template
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>└── README.md              # This file
 </span></code></pre></div>
 <h2 id="development-commands">Development Commands<a class="headerlink" href="#development-commands" title="Permanent link">&para;</a></h2>
 <h3 id="building">Building<a class="headerlink" href="#building" title="Permanent link">&para;</a></h3>

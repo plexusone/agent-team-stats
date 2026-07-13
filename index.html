@@ -1455,6 +1455,34 @@
   
   
     <li class="md-nav__item">
+      <a href="releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="releases/v0.8.0/" class="md-nav__link">
         
   
@@ -1859,7 +1887,7 @@
 
 
 <h1 id="statistics-agent-team">Statistics Agent Team<a class="headerlink" href="#statistics-agent-team" title="Permanent link">&para;</a></h1>
-<p>A multi-agent system for finding and verifying statistics from reputable web sources using Go, built with <a href="https://github.com/google/adk-go">Google ADK (Agent Development Kit)</a> and <a href="https://github.com/cloudwego/eino">Eino</a>.</p>
+<p>A multi-agent system for finding and verifying statistics from reputable web sources using Go, built with <a href="https://github.com/plexusone/omniagent-worker">omniagent-worker</a>, <a href="https://github.com/google/adk-go">Google ADK</a>, and <a href="https://github.com/cloudwego/eino">Eino</a>.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This project implements a sophisticated multi-agent architecture that leverages LLMs and web search to find verifiable statistics, prioritizing well-known and respected publishers. The system ensures accuracy through automated verification of sources.</p>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
@@ -1881,7 +1909,7 @@
 <h3 id="technical-stack">Technical Stack<a class="headerlink" href="#technical-stack" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Multi-LLM providers</strong> - Gemini, Claude, OpenAI, Ollama, xAI Grok via unified interface</li>
-<li><strong>Google ADK integration</strong> - For LLM-based agents</li>
+<li><strong>omniagent-worker</strong> - Go-first multi-agent worker framework</li>
 <li><strong>Eino framework</strong> - Deterministic graph orchestration (Recommended)</li>
 <li><strong>A2A Protocol</strong> - Agent-to-Agent interoperability (Google standard)</li>
 <li><strong>LLM Observability</strong> - OmniObserve integration (Opik, Langfuse, Phoenix)</li>
@@ -1950,18 +1978,23 @@
 <h2 id="technology-stack">Technology Stack<a class="headerlink" href="#technology-stack" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Language</strong>: Go 1.21+</li>
+<li><strong>Worker Framework</strong>:<ul>
+<li><a href="https://github.com/plexusone/omniagent-worker">omniagent-worker</a> - Go-first multi-agent worker framework</li>
+</ul>
+</li>
 <li><strong>Agent Frameworks</strong>:<ul>
 <li><a href="https://github.com/google/adk-go">Google ADK (Agent Development Kit)</a> - LLM-based agents + A2A protocol</li>
 <li><a href="https://github.com/cloudwego/eino">Eino</a> - Deterministic graph orchestration</li>
 </ul>
 </li>
 <li><strong>LLM Integration</strong>:<ul>
-<li><a href="https://github.com/agentplexus/omnillm">OmniLLM</a> - Multi-provider LLM abstraction</li>
+<li><a href="https://github.com/plexusone/omnillm">OmniLLM</a> - Multi-provider LLM abstraction</li>
 <li>Supports: Gemini, Claude, OpenAI, xAI Grok, Ollama</li>
 </ul>
 </li>
 <li><strong>Observability</strong>:<ul>
-<li><a href="https://github.com/agentplexus/omniobserve">OmniObserve</a> - Unified LLM observability</li>
+<li><a href="https://github.com/plexusone/omniobserve">OmniObserve</a> - Unified LLM observability</li>
+<li>AgentOps tracing via OpenTelemetry</li>
 <li>Supports: Comet Opik, Langfuse, Arize Phoenix</li>
 </ul>
 </li>
@@ -1971,7 +2004,7 @@
 </ul>
 </li>
 <li><strong>Search</strong>:<ul>
-<li><a href="https://github.com/agentplexus/omniserp">OmniSerp</a> - Unified serp API abstraction</li>
+<li><a href="https://github.com/plexusone/omniserp">OmniSerp</a> - Unified serp API abstraction</li>
 <li>Supports: Serper.dev, SerpAPI</li>
 </ul>
 </li>
@@ -1997,10 +2030,10 @@
 </ol>
 <h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Built with <a href="https://github.com/google/adk-go">Google ADK (Agent Development Kit)</a></li>
-<li>Uses <a href="https://github.com/cloudwego/eino">Eino</a> for deterministic orchestration</li>
-<li>Multi-LLM support via <a href="https://github.com/agentplexus/omnillm">OmniLLM</a></li>
-<li>LLM observability via <a href="https://github.com/agentplexus/omniobserve">OmniObserve</a></li>
+<li>Worker framework: <a href="https://github.com/plexusone/omniagent-worker">omniagent-worker</a></li>
+<li>Agent frameworks: <a href="https://github.com/google/adk-go">Google ADK</a>, <a href="https://github.com/cloudwego/eino">Eino</a></li>
+<li>Multi-LLM support: <a href="https://github.com/plexusone/omnillm">OmniLLM</a></li>
+<li>LLM observability: <a href="https://github.com/plexusone/omniobserve">OmniObserve</a></li>
 <li>A2A protocol for agent interoperability</li>
 <li>Inspired by multi-agent collaboration frameworks</li>
 </ul>

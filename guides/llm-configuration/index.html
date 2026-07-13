@@ -1629,6 +1629,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.8.0/" class="md-nav__link">
         
   
@@ -2288,10 +2316,11 @@
 2. Creates the appropriate LLM model based on <code>LLM_PROVIDER</code>
 3. Returns a <code>model.LLM</code> interface compatible with Google ADK</p>
 <h3 id="integration-points">Integration Points<a class="headerlink" href="#integration-points" title="Permanent link">&para;</a></h3>
-<p>All agents use the model factory:
-- <strong>Research Agent</strong> (<code>agents/research/main.go</code>)
-- <strong>Verification Agent</strong> (<code>agents/verification/main.go</code>)
-- <strong>Orchestration Agent</strong> (<code>agents/orchestration/main.go</code>)</p>
+<p>All workers use the model factory via OmniLLM:</p>
+<ul>
+<li><strong>Synthesis Worker</strong> (<code>workers/synthesis/worker.go</code>) - LLM-heavy extraction</li>
+<li><strong>Verification Worker</strong> (<code>workers/verification/worker.go</code>) - LLM-light validation</li>
+</ul>
 <p>Example usage:
 <div class="language-go highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Create model using factory</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nx">modelFactory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">llm</span><span class="p">.</span><span class="nx">NewModelFactory</span><span class="p">(</span><span class="nx">cfg</span><span class="p">)</span>

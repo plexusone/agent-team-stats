@@ -33,9 +33,9 @@ This project implements a sophisticated multi-agent architecture that leverages 
 
 ## Architecture
 
-The system implements a **4-agent architecture** with clear separation of concerns:
+The system implements a **worker-based architecture** using [omniagent-worker](https://github.com/plexusone/omniagent-worker) with clear separation of concerns:
 
-> **Architecture**: Built with **Google ADK** for LLM-based operations. **Two orchestration options** available: ADK-based (LLM-driven decisions) and Eino-based (deterministic graph workflow). See [4_AGENT_ARCHITECTURE.md](4_AGENT_ARCHITECTURE.md) for complete details.
+> **Architecture**: Built with **omniagent-worker** for worker lifecycle and coordination. Workers implement the `Worker` interface and are orchestrated by a `Coordinator` with deterministic graph workflow and AgentOps tracing. See [docs/architecture](docs/architecture/) for complete details.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -45,18 +45,17 @@ The system implements a **4-agent architecture** with clear separation of concer
                     │
                     ▼
 ┌─────────────────────────────────────────────────────────┐
-│            ORCHESTRATION AGENT                          │
-│              (Port 8000 - Both ADK/Eino)                │
-│  • Coordinates 4-agent workflow                         │
+│                   COORDINATOR                           │
+│            (omniagent-worker.Coordinator)               │
+│  • Coordinates worker workflow                          │
 │  • Manages retry logic                                  │
-│  • Ensures quality standards                            │
+│  • AgentOps tracing via OpenTelemetry                   │
 └─────┬─────────────┬────────────────┬────────────────────┘
       │             │                │
       ▼             ▼                ▼
 ┌────────────┐ ┌──────────┐ ┌─────────────────┐
 │  RESEARCH  │ │SYNTHESIS │ │  VERIFICATION   │
-│   AGENT    │ │  AGENT   │ │     AGENT       │
-│ Port 8001  │ │Port 8004 │ │   Port 8002     │
+│   WORKER   │ │  WORKER  │ │     WORKER      │
 │            │ │          │ │                 │
 │ • Search   │─│• Fetch   │─│• Re-fetch URLs  │
 │   Serper   │ │  URLs    │ │• Validate text  │
@@ -126,8 +125,8 @@ The system uses [omniagent-worker](https://github.com/plexusone/omniagent-worker
 
 ### Technical Stack
 - ✅ **Multi-LLM providers** - Gemini, Claude, OpenAI, Ollama, xAI Grok via unified interface
-- ✅ **Google ADK integration** - For LLM-based agents
-- ✅ **Eino framework** - Deterministic graph orchestration ⭐ Recommended
+- ✅ **omniagent-worker** - Go-first multi-agent worker framework
+- ✅ **Eino framework** - Deterministic graph orchestration
 - ✅ **A2A Protocol** - Agent-to-Agent interoperability (Google standard) 🔗
 - ✅ **LLM Observability** - OmniObserve integration (Opik, Langfuse, Phoenix) 👁️
 - ✅ **Huma v2** - OpenAPI 3.1 docs for Direct agent
@@ -495,19 +494,19 @@ See [LLM_CONFIGURATION.md](LLM_CONFIGURATION.md) for detailed LLM setup.
 | `VERIFICATION_AGENT_URL` | Verification agent URL | `http://localhost:8002` |
 | `ORCHESTRATOR_URL` | Orchestrator URL (both ADK/Eino) | `http://localhost:8000` |
 
-### Port Configuration
+### Deployment Modes
 
-Each agent exposes both HTTP and A2A (Agent-to-Agent) protocol endpoints:
+Workers can run in two modes:
 
-| Agent | HTTP Port | A2A Port | Description |
-|-------|-----------|----------|-------------|
-| **Orchestration (ADK/Eino)** ⭐ | **8000** | **9000** | Graph-based workflow coordination |
-| Research (ADK) | 8001 | 9001 | Web search via Serper/SerpAPI |
-| Verification (ADK) | 8002 | 9002 | LLM-based verification |
-| Synthesis (ADK) | 8004 | 9004 | LLM-based statistics extraction |
-| **Direct (Huma)** ⭐ | **8005** | - | Direct LLM search with OpenAPI docs |
+| Mode | Description | Use Case |
+|------|-------------|----------|
+| **In-Process** (default) | Workers run within the Coordinator process via Pool | Development, single-process deployment |
+| **HTTP Services** | Workers run as separate HTTP services | Microservices, scaling individual workers |
 
-**A2A Endpoints per Agent:**
+**Default Port (Coordinator):** `8080`
+
+**A2A Protocol Support:**
+
 - `GET /.well-known/agent-card.json` - Agent discovery
 - `POST /invoke` - JSON-RPC execution
 

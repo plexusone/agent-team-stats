@@ -3,7 +3,7 @@ module github.com/plexusone/agent-team-stats
 go 1.26.4
 
 require (
-	github.com/cloudwego/eino v0.9.12
+	github.com/cloudwego/eino v0.9.13
 	github.com/go-playground/validator/v10 v10.30.3
 	github.com/grokify/mogo v0.74.6
 	github.com/jessevdk/go-flags v1.6.1

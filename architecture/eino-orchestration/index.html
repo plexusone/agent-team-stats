@@ -16,7 +16,7 @@
         <link rel="prev" href="../4-agent-architecture/">
       
       
-        <link rel="next" href="../../guides/docker/">
+        <link rel="next" href="../real-veal-loops/">
       
       
         
@@ -701,30 +701,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#eino-workflow-graph" class="md-nav__link">
+  <a href="#two-composed-loops-not-one-linear-graph" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Eino Workflow Graph
+        Two Composed Loops, Not One Linear Graph
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Eino Workflow Graph">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#node-descriptions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Node Descriptions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1049,6 +1032,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../real-veal-loops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REAL and VEAL Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2126,30 +2137,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#eino-workflow-graph" class="md-nav__link">
+  <a href="#two-composed-loops-not-one-linear-graph" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Eino Workflow Graph
+        Two Composed Loops, Not One Linear Graph
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Eino Workflow Graph">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#node-descriptions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Node Descriptions
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2532,33 +2526,37 @@ This ensures all nodes have compatible input/output types.</p>
 <li><strong>Lower cost</strong>: Only uses LLMs in research/verification agents</li>
 <li><strong>More reliable</strong>: Graph compilation validates workflow before execution</li>
 </ul>
-<h2 id="eino-workflow-graph">Eino Workflow Graph<a class="headerlink" href="#eino-workflow-graph" title="Permanent link">&para;</a></h2>
-<p>The Eino orchestrator implements this deterministic workflow:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>START
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  ↓
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>[1. Validate Input]
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  ↓
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>[2. Research] ──────────→ Call Research Agent
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  ↓
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>[3. Verification] ──────→ Call Verification Agent
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  ↓
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>[4. Quality Check] ────→ Deterministic decision (verified &gt;= target?)
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  ↓
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>[5. Retry Research?] ──→ If needed, request more candidates
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  ↓
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>[6. Format Response]
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>  ↓
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>END
+<h2 id="two-composed-loops-not-one-linear-graph">Two Composed Loops, Not One Linear Graph<a class="headerlink" href="#two-composed-loops-not-one-linear-graph" title="Permanent link">&para;</a></h2>
+<p>The Eino orchestrator implements the workflow as two bounded loops — a REAL
+loop for discovery and a VEAL loop for verification — rather than a single
+linear pipeline. <strong>See <a href="../real-veal-loops/">REAL and VEAL
+Loops</a> for the full explanation of why and how they
+compose.</strong> Summary:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Orchestrate()
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  REAL loop (up to 5 rounds, mission: reach MinVerifiedStats):
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    Read     — verified count so far, domains VEAL has rejected
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    Evaluate — shortfall = target - verified; done if &lt;= 0
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    Act      — one discovery round via the Eino graph below, then hand
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>               the batch to the VEAL loop
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    Loop     — repeat until mission complete or rounds exhausted
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    ┌─ discovery graph (Eino, compiled once, invoked per round) ─┐
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    │  START → [Research] → [Synthesis] → END                    │
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    └───────────────────────────────────────────────────────────┘
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    VEAL loop (up to 3 attempts per batch, state: verified-or-rejected):
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>      Validate — verification agent + local aggregator-source check
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>      Evaluate — GO, or NO-GO with a specific reason
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>      Act      — targeted fix for fixable reasons only; reject otherwise
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>      Loop     — re-validate until converged or attempts exhausted
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>  Format Response — Partial: true if still short after REAL&#39;s rounds
 </span></code></pre></div>
-<h3 id="node-descriptions">Node Descriptions<a class="headerlink" href="#node-descriptions" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>Validate Input</strong>: Set defaults, validate parameters</li>
-<li><strong>Research</strong>: HTTP call to research agent for candidates</li>
-<li><strong>Verification</strong>: HTTP call to verification agent</li>
-<li><strong>Quality Check</strong>: Deterministic comparison (verified count vs target)</li>
-<li><strong>Retry Research</strong>: Conditional retry based on quality check</li>
-<li><strong>Format Response</strong>: Build final JSON output</li>
-</ol>
+<p>Only <code>Research → Synthesis</code> is an Eino graph (<code>buildDiscoveryGraph</code>) — the
+loop-and-retry logic itself is plain bounded Go, since the fixes it applies
+are branchy per-candidate decisions that don't map cleanly onto a linear
+graph. Eino's type-safe steps handle what's genuinely linear within a round;
+the loops decide how many rounds to run.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="running-the-eino-orchestrator">Running the Eino Orchestrator<a class="headerlink" href="#running-the-eino-orchestrator" title="Permanent link">&para;</a></h3>
 <h4 id="option-1-run-with-eino-orchestrator">Option 1: Run with Eino orchestrator<a class="headerlink" href="#option-1-run-with-eino-orchestrator" title="Permanent link">&para;</a></h4>
@@ -2678,23 +2676,24 @@ This ensures all nodes have compatible input/output types.</p>
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nx">g</span><span class="p">.</span><span class="nx">AddLambdaNode</span><span class="p">(</span><span class="s">&quot;validate_input&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">validateInputLambda</span><span class="p">)</span>
 </span></code></pre></div></p>
 <h4 id="2-type-safe-state">2. Type-Safe State<a class="headerlink" href="#2-type-safe-state" title="Permanent link">&para;</a></h4>
-<p>State is passed through typed structs:
-- <code>OrchestrationRequest</code> → Input
+<p>State is passed through typed structs within a discovery round:
+- <code>discoveryInput</code> (request + domains already rejected by VEAL) → Input
 - <code>ResearchState</code> → After research
-- <code>VerificationState</code> → After verification
-- <code>QualityDecision</code> → After quality check
-- <code>OrchestrationResponse</code> → Output</p>
+- <code>SynthesisState</code> → Output of the discovery graph, handed to the VEAL loop</p>
+<p><code>OrchestrationResponse</code> is built directly by <code>Orchestrate()</code> after the REAL
+loop completes — see <a href="../real-veal-loops/">REAL and VEAL Loops</a> for how the
+loop and the graph fit together.</p>
 <h4 id="3-graph-edges">3. Graph Edges<a class="headerlink" href="#3-graph-edges" title="Permanent link">&para;</a></h4>
-<p>Edges define workflow sequence:
-<div class="language-go highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">g</span><span class="p">.</span><span class="nx">AddEdge</span><span class="p">(</span><span class="nx">compose</span><span class="p">.</span><span class="nx">START</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;validate_input&quot;</span><span class="p">)</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nx">g</span><span class="p">.</span><span class="nx">AddEdge</span><span class="p">(</span><span class="s">&quot;validate_input&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;research&quot;</span><span class="p">)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nx">g</span><span class="p">.</span><span class="nx">AddEdge</span><span class="p">(</span><span class="s">&quot;research&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;verification&quot;</span><span class="p">)</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1">// ... etc</span>
+<p>Edges define the per-round workflow sequence:
+<div class="language-go highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nx">g</span><span class="p">.</span><span class="nx">AddEdge</span><span class="p">(</span><span class="nx">compose</span><span class="p">.</span><span class="nx">START</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;research&quot;</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nx">g</span><span class="p">.</span><span class="nx">AddEdge</span><span class="p">(</span><span class="s">&quot;research&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;synthesis&quot;</span><span class="p">)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nx">g</span><span class="p">.</span><span class="nx">AddEdge</span><span class="p">(</span><span class="s">&quot;synthesis&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">compose</span><span class="p">.</span><span class="nx">END</span><span class="p">)</span>
 </span></code></pre></div></p>
 <h4 id="4-graph-compilation">4. Graph Compilation<a class="headerlink" href="#4-graph-compilation" title="Permanent link">&para;</a></h4>
-<p>Graph is compiled before execution:
-<div class="language-go highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">compiledGraph</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">oa</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">Compile</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">compiledGraph</span><span class="p">.</span><span class="nx">Invoke</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">)</span>
+<p>The discovery graph is compiled once per <code>Orchestrate()</code> call, then invoked
+once per REAL round:
+<div class="language-go highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nx">compiledDiscovery</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">discoveryGraph</span><span class="p">.</span><span class="nx">Compile</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nx">synthState</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">compiledDiscovery</span><span class="p">.</span><span class="nx">Invoke</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">discoveryInput</span><span class="p">{</span><span class="nx">Request</span><span class="p">:</span><span class="w"> </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">ExcludedDomains</span><span class="p">:</span><span class="w"> </span><span class="nx">excludedDomains</span><span class="p">})</span>
 </span></code></pre></div></p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <h3 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h3>
@@ -2744,13 +2743,20 @@ This ensures all nodes have compatible input/output types.</p>
 <li><strong>Type Safety</strong>: Compile-time validation</li>
 </ul>
 <h2 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h2>
-<p>The Eino orchestrator provides detailed logging with <code>[Eino]</code> prefix:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>[Eino] Validating input for topic: climate change
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>[Eino] Executing research for topic: climate change
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>[Eino] Verifying 15 candidates
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>[Eino] Quality check: 12 verified (target: 10)
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>[Eino] Quality target met
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>[Eino] Formatting response with 12 verified statistics
+<p>The Eino orchestrator logs each loop's iterations, so you can see the REAL
+and VEAL loops converge (or exhaust their attempts) in real time:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>REAL loop: starting topic=climate change target=10 max_attempts=5
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>REAL loop: round attempt=1 max_attempts=5 shortfall=10 excluded_domains=0
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>REAL/discovery: research topic=climate change excluded_domains=0
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>REAL/discovery: research completed sources=18 filtered_out=0
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>REAL/discovery: synthesis sources=18
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>REAL/discovery: synthesis completed candidates=15
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>VEAL loop: validate attempt=1 max_attempts=3 candidates=15
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>VEAL loop: act — searching for a primary-source replacement name=&quot;X users&quot; rejected_domain=stats-aggregator.example
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>VEAL loop: rejecting candidate name=&quot;Y metric&quot; reason=unknown attempt=1
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>VEAL loop: validate attempt=2 max_attempts=3 candidates=1
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>REAL loop: round complete attempt=1 round_candidates=15 round_verified=12 total_verified=12
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>REAL loop: target met verified=12 attempts_used=0
 </span></code></pre></div></p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ol>

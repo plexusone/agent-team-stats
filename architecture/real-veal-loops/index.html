@@ -10,27 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://plexusone.github.io/agent-team-stats/specs/omniagent-worker-migration/PRD/">
+        <link rel="canonical" href="https://plexusone.github.io/agent-team-stats/architecture/real-veal-loops/">
       
       
+        <link rel="prev" href="../eino-orchestration/">
+      
+      
+        <link rel="next" href="../../guides/docker/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>agent-team-stats Migration: Product Requirements Document - Stats Agent Team</title>
+        <title>REAL and VEAL Loops - Stats Agent Team</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +55,7 @@
     
       <link rel="stylesheet" href="https://plexusone.dev/css/plexusone-mkdocs.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#agent-team-stats-migration-product-requirements-document" class="md-skip">
+        <a href="#real-and-veal-loops-eino-orchestrator" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +101,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Stats Agent Team" class="md-header__button md-logo" aria-label="Stats Agent Team" data-md-component="logo">
+    <a href="../.." title="Stats Agent Team" class="md-header__button md-logo" aria-label="Stats Agent Team" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -117,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              agent-team-stats Migration: Product Requirements Document
+              REAL and VEAL Loops
             
           </span>
         </div>
@@ -236,7 +240,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Stats Agent Team" class="md-nav__button md-logo" aria-label="Stats Agent Team" data-md-component="logo">
+    <a href="../.." title="Stats Agent Team" class="md-nav__button md-logo" aria-label="Stats Agent Team" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -266,7 +270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -347,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../getting-started/installation/" class="md-nav__link">
+      <a href="../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -375,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../getting-started/quickstart/" class="md-nav__link">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
         
   
   
@@ -403,7 +407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../getting-started/configuration/" class="md-nav__link">
+      <a href="../../getting-started/configuration/" class="md-nav__link">
         
   
   
@@ -435,8 +439,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -447,13 +453,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -474,7 +478,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -492,7 +496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../architecture/overview/" class="md-nav__link">
+      <a href="../overview/" class="md-nav__link">
         
   
   
@@ -520,7 +524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../architecture/4-agent-architecture/" class="md-nav__link">
+      <a href="../4-agent-architecture/" class="md-nav__link">
         
   
   
@@ -548,7 +552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../architecture/eino-orchestration/" class="md-nav__link">
+      <a href="../eino-orchestration/" class="md-nav__link">
         
   
   
@@ -573,10 +577,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../architecture/real-veal-loops/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REAL and VEAL Loops
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -592,6 +623,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-two-loops-not-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why two loops, not one
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-real-loop-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The REAL loop — discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-veal-loop-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The VEAL loop — verification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-they-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How they compose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bounds-and-escalation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bounds and escalation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -665,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/docker/" class="md-nav__link">
+      <a href="../../guides/docker/" class="md-nav__link">
         
   
   
@@ -693,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/kubernetes/" class="md-nav__link">
+      <a href="../../guides/kubernetes/" class="md-nav__link">
         
   
   
@@ -721,7 +838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/aws-agentcore/" class="md-nav__link">
+      <a href="../../guides/aws-agentcore/" class="md-nav__link">
         
   
   
@@ -749,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/mcp-server/" class="md-nav__link">
+      <a href="../../guides/mcp-server/" class="md-nav__link">
         
   
   
@@ -777,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/claims-report/" class="md-nav__link">
+      <a href="../../guides/claims-report/" class="md-nav__link">
         
   
   
@@ -805,7 +922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/llm-configuration/" class="md-nav__link">
+      <a href="../../guides/llm-configuration/" class="md-nav__link">
         
   
   
@@ -833,7 +950,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/multi-llm-support/" class="md-nav__link">
+      <a href="../../guides/multi-llm-support/" class="md-nav__link">
         
   
   
@@ -861,7 +978,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/llm-integration/" class="md-nav__link">
+      <a href="../../guides/llm-integration/" class="md-nav__link">
         
   
   
@@ -889,7 +1006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/search-integration/" class="md-nav__link">
+      <a href="../../guides/search-integration/" class="md-nav__link">
         
   
   
@@ -978,7 +1095,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../operations/security/" class="md-nav__link">
+      <a href="../../operations/security/" class="md-nav__link">
         
   
   
@@ -1006,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../operations/scaling/" class="md-nav__link">
+      <a href="../../operations/scaling/" class="md-nav__link">
         
   
   
@@ -1034,7 +1151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../operations/chart-testing/" class="md-nav__link">
+      <a href="../../operations/chart-testing/" class="md-nav__link">
         
   
   
@@ -1123,7 +1240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/lint-fixes/" class="md-nav__link">
+      <a href="../../development/lint-fixes/" class="md-nav__link">
         
   
   
@@ -1212,7 +1329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../reference/roadmap/" class="md-nav__link">
+      <a href="../../reference/roadmap/" class="md-nav__link">
         
   
   
@@ -1301,7 +1418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.9.0/" class="md-nav__link">
+      <a href="../../releases/v0.9.0/" class="md-nav__link">
         
   
   
@@ -1329,7 +1446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.8.0/" class="md-nav__link">
+      <a href="../../releases/v0.8.0/" class="md-nav__link">
         
   
   
@@ -1357,7 +1474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.7.0/" class="md-nav__link">
+      <a href="../../releases/v0.7.0/" class="md-nav__link">
         
   
   
@@ -1385,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.6.0/" class="md-nav__link">
+      <a href="../../releases/v0.6.0/" class="md-nav__link">
         
   
   
@@ -1413,7 +1530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.5.0/" class="md-nav__link">
+      <a href="../../releases/v0.5.0/" class="md-nav__link">
         
   
   
@@ -1441,7 +1558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.4.0/" class="md-nav__link">
+      <a href="../../releases/v0.4.0/" class="md-nav__link">
         
   
   
@@ -1469,7 +1586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.3.0/" class="md-nav__link">
+      <a href="../../releases/v0.3.0/" class="md-nav__link">
         
   
   
@@ -1497,7 +1614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.2.0/" class="md-nav__link">
+      <a href="../../releases/v0.2.0/" class="md-nav__link">
         
   
   
@@ -1525,7 +1642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../releases/v0.1.0/" class="md-nav__link">
+      <a href="../../releases/v0.1.0/" class="md-nav__link">
         
   
   
@@ -1580,10 +1697,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#why-two-loops-not-one" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Overview
+        Why two loops, not one
       
     </span>
   </a>
@@ -1591,10 +1708,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#problem-statement" class="md-nav__link">
+  <a href="#the-real-loop-discovery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Problem Statement
+        The REAL loop — discovery
       
     </span>
   </a>
@@ -1602,127 +1719,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#the-veal-loop-verification" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Goals">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#primary-goals" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Primary Goals
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#non-goals" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Non-Goals
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#users" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Users
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Users">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#primary-user" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Primary User
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#secondary-users" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Secondary Users
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Requirements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#functional-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Functional Requirements
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#non-functional-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Non-Functional Requirements
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#success-criteria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Success Criteria
+        The VEAL loop — verification
       
     </span>
   </a>
@@ -1730,49 +1730,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dependencies" class="md-nav__link">
+  <a href="#how-they-compose" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dependencies
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Dependencies">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#upstream-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Upstream Dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#downstream-dependents" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Downstream Dependents
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#risks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Risks
+        How they compose
       
     </span>
   </a>
@@ -1780,10 +1741,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#timeline" class="md-nav__link">
+  <a href="#bounds-and-escalation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Timeline
+        Bounds and escalation
       
     </span>
   </a>
@@ -1791,10 +1752,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
+  <a href="#source" class="md-nav__link">
     <span class="md-ellipsis">
       
-        References
+        Source
       
     </span>
   </a>
@@ -1821,196 +1782,138 @@
   
 
 
-<h1 id="agent-team-stats-migration-product-requirements-document">agent-team-stats Migration: Product Requirements Document<a class="headerlink" href="#agent-team-stats-migration-product-requirements-document" title="Permanent link">&para;</a></h1>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p><strong>Project</strong>: agent-team-stats omniagent-worker migration
-<strong>Type</strong>: Migration
-<strong>Status</strong>: Planning
-<strong>Created</strong>: 2026-07-10</p>
-<h2 id="problem-statement">Problem Statement<a class="headerlink" href="#problem-statement" title="Permanent link">&para;</a></h2>
-<p>agent-team-stats currently implements custom agent patterns that should be:</p>
+<h1 id="real-and-veal-loops-eino-orchestrator">REAL and VEAL Loops (Eino Orchestrator)<a class="headerlink" href="#real-and-veal-loops-eino-orchestrator" title="Permanent link">&para;</a></h1>
+<p>The Eino orchestrator (<code>pkg/orchestration/eino.go</code>) implements statistics
+research as two composed, bounded loops, following the org's <a href="https://productbuildershq.com/frameworks/loop-engineering">Loop
+Engineering</a>
+REAL/VEAL patterns rather than a single linear pipeline with an ad-hoc retry.</p>
+<p>This page explains what each loop does, why they're separate, and how they
+interact. If you haven't read the Loop Engineering framework, the short
+version: <strong>REAL creates, VEAL maintains.</strong> REAL is a mission-driven loop with
+a single actor that works toward a goal. VEAL is a state-driven loop that
+separates a read-only validator from a fix-it actor, converging a batch of
+work to a valid state.</p>
+<h2 id="why-two-loops-not-one">Why two loops, not one<a class="headerlink" href="#why-two-loops-not-one" title="Permanent link">&para;</a></h2>
+<p>Earlier versions of this orchestrator had a single linear graph — Research →
+Synthesis → Verification → Quality Check → "Retry Research" (a stub that
+didn't actually retry anything) → Format Response. That conflated two
+different problems:</p>
 <ol>
-<li>Extracted into reusable omniagent-worker package</li>
-<li>Enhanced with AgentOps observability</li>
-<li>Exposed as an omniskill for OmniAgent integration</li>
-<li>Maintained as the canonical reference implementation</li>
+<li><strong>Finding enough raw material.</strong> "We don't have enough candidate
+   statistics yet — go search again" is an open-ended discovery problem. It
+   doesn't matter <em>why</em> the candidate pool is short; the fix is always
+   "search more, ideally excluding what already failed."</li>
+<li><strong>Making sure what was found is actually correct.</strong> "This candidate's
+   excerpt doesn't verify, or its source is a known low-trust aggregator" is
+   a convergence problem. The fix is specific to <em>why</em> it failed — a
+   transient fetch failure needs a re-fetch; an aggregator-sourced claim
+   needs a different source entirely, not a re-fetch of the same bad one.</li>
 </ol>
-<p>Current state:</p>
-<ul>
-<li>4 agents (Orchestrator, Research, Synthesis, Verification) with custom implementations</li>
-<li><code>pkg/agent/base.go</code> provides shared LLM setup</li>
-<li>Eino and ADK orchestration options exist</li>
-<li>No AgentOps tracing for agent lifecycle</li>
-<li>Cannot be embedded as a skill</li>
-</ul>
-<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
-<h3 id="primary-goals">Primary Goals<a class="headerlink" href="#primary-goals" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>Migrate to omniagent-worker</strong> - Use Worker/Coordinator from omniagent-worker</li>
-<li><strong>Add full AgentOps observability</strong> - Workflow, task, handoff tracing</li>
-<li><strong>Add omniskill interface</strong> - Expose as embeddable skill</li>
-<li><strong>Maintain backward compatibility</strong> - CLI and standalone deployment still work</li>
-<li><strong>Establish as reference implementation</strong> - Document patterns for future teams</li>
-</ol>
-<h3 id="non-goals">Non-Goals<a class="headerlink" href="#non-goals" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Not changing the core statistics logic</li>
-<li>Not adding new agents or capabilities (yet)</li>
-<li>Not migrating to Multi-Agent Spec (that's a separate future project)</li>
-</ol>
-<h2 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h2>
-<h3 id="primary-user">Primary User<a class="headerlink" href="#primary-user" title="Permanent link">&para;</a></h3>
-<ul>
-<li>PlexusOne internal development (ourselves)</li>
-<li>CLI users of stats-agent</li>
-</ul>
-<h3 id="secondary-users">Secondary Users<a class="headerlink" href="#secondary-users" title="Permanent link">&para;</a></h3>
-<ul>
-<li>OmniAgent users who want statistics verification as a skill</li>
-<li>Developers using this as a reference for building agent teams</li>
-</ul>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<h3 id="functional-requirements">Functional Requirements<a class="headerlink" href="#functional-requirements" title="Permanent link">&para;</a></h3>
+<p>Separating them means the retry logic can actually be <em>targeted</em> — the
+"stats aggregator" problem this loop was built to catch (see below) needs a
+different response than "the page timed out."</p>
+<h2 id="the-real-loop-discovery">The REAL loop — discovery<a class="headerlink" href="#the-real-loop-discovery" title="Permanent link">&para;</a></h2>
+<p><strong>Mission:</strong> find at least <code>MinVerifiedStats</code> verified statistics about
+<code>Topic</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Read      → How many verified statistics exist so far? Which domains
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>            has VEAL already rejected?
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Evaluate  → shortfall = target - verified. Done if shortfall &lt;= 0.
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Act       → Run one discovery round: Research (web search, excluding
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            rejected domains) → Synthesis (LLM extraction) → hand the
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            batch to the VEAL loop before counting anything.
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Loop      → Repeat until the mission is complete or realMaxAttempts
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            (5) rounds are exhausted.
+</span></code></pre></div>
+<p>Each round is one invocation of the Eino discovery graph
+(<code>buildDiscoveryGraph</code>): a small, type-safe, two-node graph (<code>Research</code> →
+<code>Synthesis</code>) compiled once per <code>Orchestrate()</code> call and invoked once per REAL
+round. This is where Eino's graph model earns its keep — the loop itself is
+plain bounded Go, but each round's steps are still compile-time-typed.</p>
+<p>If the mission isn't complete after <code>realMaxAttempts</code> rounds, the response is
+explicitly marked <code>Partial: true</code> with the shortfall — never padded to look
+complete.</p>
+<h2 id="the-veal-loop-verification">The VEAL loop — verification<a class="headerlink" href="#the-veal-loop-verification" title="Permanent link">&para;</a></h2>
+<p><strong>State to converge:</strong> every candidate in a REAL round's batch should end up
+either <code>Verified</code> or explicitly rejected with a reason. Nothing lingers in
+between.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Validate  → Read-only: call the verification agent (re-fetches the URL,
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>            checks the excerpt appears verbatim) AND check locally
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>            whether the source URL is a known aggregator domain
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>            (models.IsKnownAggregatorURL) — a check independent of
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            whether the excerpt happens to match.
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Evaluate  → GO (verified, not aggregator-sourced) or NO-GO with a
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            specific reason: aggregator-source, fetch-failed,
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            excerpt-not-found, or unknown.
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Act       → Only for fixable reasons, and only if attempts remain:
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>              - aggregator-source: search specifically for a
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                primary-source replacement for *this one claim*,
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                excluding the rejected domain.
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>              - fetch-failed / excerpt-not-found: resubmit unchanged —
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>                these are often transient, and re-validating is itself
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>                the fix.
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>              - unknown: not fixable. Reject.
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>Loop      → Re-validate the batch (verified candidates plus any
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            successful replacements). Repeat up to vealMaxAttempts (3)
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            per batch.
+</span></code></pre></div>
+<p>An aggregator-sourced candidate is rejected <strong>even if its excerpt verifies
+verbatim</strong> — a matching excerpt only proves the aggregator page says what was
+extracted, not that the underlying number is correct. This is the specific
+gap a 2026-08 verifiability audit of published case studies found by hand:
+<code>getpanto.ai</code>-sourced statistics had verbatim-matching excerpts and still
+turned out to include a distorted figure (a "9.6 → 2.4 day" PR-cycle claim
+that didn't match the real customer story it was supposedly summarizing) and
+one contradicted by an independent market-sizing source. The VEAL loop's
+validator step exists specifically so that pattern is caught automatically,
+before publication, instead of by a manual review pass after the fact.</p>
+<p>Domains that produce an aggregator-source rejection are returned to the REAL
+loop, which excludes them from its next discovery round — so a bad source
+doesn't just get one claim rejected, it stops being re-surfaced by search
+for the rest of that <code>Orchestrate()</code> call.</p>
+<h2 id="how-they-compose">How they compose<a class="headerlink" href="#how-they-compose" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Orchestrate()
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  for attempt in 1..realMaxAttempts:        ← REAL
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    if verified &gt;= target: stop
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    batch = discover(excluding: rejectedDomains)
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    verified_batch, rejected_domains = vealVerify(batch)   ← VEAL, per round
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    verified += verified_batch
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    rejectedDomains += rejected_domains
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  return verified (Partial: true if still short)
+</span></code></pre></div>
+<p>VEAL runs once per REAL round, on that round's fresh batch — not once at the
+end over everything. This means a bad source discovered in round 1 is
+already excluded from round 2's search, rather than only being flagged after
+all rounds complete.</p>
+<h2 id="bounds-and-escalation">Bounds and escalation<a class="headerlink" href="#bounds-and-escalation" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>ID</th>
-<th>Requirement</th>
-<th>Priority</th>
+<th>Loop</th>
+<th>Max attempts</th>
+<th>What "exhausted" means</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>F1</td>
-<td>Migrate Research worker to omniagent-worker.Worker</td>
-<td>Must</td>
+<td>REAL (discovery)</td>
+<td>5</td>
+<td>Return <code>Partial: true</code> with whatever was verified — never silently pad the count</td>
 </tr>
 <tr>
-<td>F2</td>
-<td>Migrate Synthesis worker to omniagent-worker.Worker</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>F3</td>
-<td>Migrate Verification worker to omniagent-worker.Worker</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>F4</td>
-<td>Migrate Coordinator to omniagent-worker.Coordinator</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>F5</td>
-<td>Add omniskill/ with StatsVerificationSkill</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>F6</td>
-<td>Maintain CLI functionality</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>F7</td>
-<td>Maintain standalone HTTP deployment</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>F8</td>
-<td>Add AgentOps traces for all operations</td>
-<td>Must</td>
+<td>VEAL (verification)</td>
+<td>3 per batch</td>
+<td>Reject the candidate outright — never silently keep an unverified or aggregator-sourced statistic</td>
 </tr>
 </tbody>
 </table>
-<h3 id="non-functional-requirements">Non-Functional Requirements<a class="headerlink" href="#non-functional-requirements" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Requirement</th>
-<th>Priority</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>N1</td>
-<td>No regression in verification accuracy</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>N2</td>
-<td>No significant performance degradation</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>N3</td>
-<td>Clear separation between domain and infrastructure</td>
-<td>Must</td>
-</tr>
-<tr>
-<td>N4</td>
-<td>Document migration patterns</td>
-<td>Should</td>
-</tr>
-</tbody>
-</table>
-<h2 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
-<ol>
-<li>All existing tests pass</li>
-<li>CLI produces same results as before</li>
-<li>AgentOps traces show complete workflow visibility</li>
-<li>omniskill can be imported and used in OmniAgent</li>
-<li>Standalone deployment still works</li>
-</ol>
-<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
-<h3 id="upstream-dependencies">Upstream Dependencies<a class="headerlink" href="#upstream-dependencies" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>github.com/plexusone/omniagent-worker</code> - New dependency (MVP must be complete)</li>
-<li><code>github.com/plexusone/omniskill</code> - For skill interface</li>
-</ul>
-<h3 id="downstream-dependents">Downstream Dependents<a class="headerlink" href="#downstream-dependents" title="Permanent link">&para;</a></h3>
-<ul>
-<li>OmniAgent (as a skill provider)</li>
-</ul>
-<h2 id="risks">Risks<a class="headerlink" href="#risks" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Risk</th>
-<th>Likelihood</th>
-<th>Impact</th>
-<th>Mitigation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>omniagent-worker MVP delays</td>
-<td>Medium</td>
-<td>High</td>
-<td>Can proceed with spec docs while waiting</td>
-</tr>
-<tr>
-<td>Breaking changes during migration</td>
-<td>Medium</td>
-<td>Medium</td>
-<td>Incremental migration, one worker at a time</td>
-</tr>
-<tr>
-<td>Performance regression</td>
-<td>Low</td>
-<td>Medium</td>
-<td>Benchmark before/after</td>
-</tr>
-</tbody>
-</table>
-<h2 id="timeline">Timeline<a class="headerlink" href="#timeline" title="Permanent link">&para;</a></h2>
-<p>See PLAN.md for detailed phases.</p>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../../../IDEATION_CHAT.md">IDEATION_CHAT.md</a> - Original discussion</li>
-<li><a href="https://github.com/plexusone/omniagent-worker/docs/specs/origin/">omniagent-worker specs</a></li>
-<li><a href="https://github.com/plexusone/omniskill">omniskill</a> - Skill interface</li>
-</ul>
+<p>Both bounds are intentionally on the low end of the framework's guidance
+(REAL: 5–100 for open-ended missions; VEAL: 3–5). Discovery here is narrowly
+scoped — one topic, one target count — and verification failures that don't
+resolve in a few targeted attempts usually indicate the source genuinely
+isn't verifiable, not that one more retry would help.</p>
+<h2 id="source">Source<a class="headerlink" href="#source" title="Permanent link">&para;</a></h2>
+<p><code>pkg/orchestration/eino.go</code> — see <code>Orchestrate</code> (REAL), <code>vealVerify</code> /
+<code>vealAct</code> (VEAL), and <code>buildDiscoveryGraph</code> (the per-round Eino graph).</p>
 
 
 
@@ -2086,10 +1989,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

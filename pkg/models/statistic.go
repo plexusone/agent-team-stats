@@ -63,11 +63,14 @@ type ResearchRequest struct {
 	ReputableOnly bool   `json:"reputable_only"` // Only search reputable sources
 }
 
-// ResearchResponse represents the response from research agent
+// ResearchResponse represents the response from research agent. The
+// research worker's job is source discovery (web search), not extraction —
+// it returns SearchResults (URL/title/snippet/domain), not
+// CandidateStatistics. Extraction is the synthesis worker's job.
 type ResearchResponse struct {
-	Topic      string               `json:"topic"`
-	Candidates []CandidateStatistic `json:"candidates"`
-	Timestamp  time.Time            `json:"timestamp"`
+	Topic         string         `json:"topic"`
+	SearchResults []SearchResult `json:"search_results"`
+	Timestamp     time.Time      `json:"timestamp"`
 }
 
 // VerificationRequest represents a request to verify statistics

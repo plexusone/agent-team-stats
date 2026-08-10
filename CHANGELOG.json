@@ -6,322 +6,955 @@
   "commitConvention": "conventional",
   "releases": [
     {
+      "version": "v0.10.0",
+      "date": "2026-08-09",
+      "commit": "34b66c3",
+      "highlights": [
+        {
+          "description": "Eino orchestrator rewritten around REAL (discovery) and VEAL (verification) loops, replacing the old linear graph and its unimplemented \"Retry Research\" step"
+        },
+        {
+          "description": "`Statistic`/`CandidateStatistic` gain `Precision` and `AsOfDate`, sourced from the LLM and propagated into `claims.StatisticalDetail`"
+        },
+        {
+          "description": "Known stats-aggregator domains are rejected during verification via `models.IsKnownAggregatorURL`"
+        },
+        {
+          "description": "Fixed a previously-silent bug where discovery decoded into an unused `candidates` field instead of the research worker's actual `search_results`"
+        }
+      ],
+      "added": [
+        {
+          "description": "REAL discovery loop and VEAL verification loop in the Eino orchestrator (`pkg/orchestration/eino.go`)",
+          "commit": "34b66c3"
+        },
+        {
+          "description": "`Precision` and `AsOfDate` fields on `Statistic`/`CandidateStatistic`, with `ParseAsOfDate` helper",
+          "commit": "079e9ba"
+        },
+        {
+          "description": "`models.IsKnownAggregatorURL` and aggregator-aware `classifySourceType`, wired into `claim.SetStatistical(...)`",
+          "commit": "2779a7d"
+        },
+        {
+          "description": "Research/synthesis LLM prompts now request `precision` and `as_of_date` per statistic",
+          "commit": "d74772e"
+        }
+      ],
+      "fixed": [
+        {
+          "description": "`ResearchResponse` decoded into an unused `candidates` field instead of the research worker's actual `search_results`, likely causing zero discovery results in production",
+          "commit": "34b66c3"
+        }
+      ],
+      "dependencies": [
+        {
+          "description": "`github.com/plexusone/structured-evaluation` v0.9.0 → v0.12.0",
+          "commit": "914eeff"
+        },
+        {
+          "description": "`github.com/plexusone/omniskill` v0.10.0 → v0.12.0",
+          "commit": "cfac2b2"
+        },
+        {
+          "description": "`github.com/plexusone/omniobserve` v0.11.0 → v0.12.0",
+          "commit": "8a63eaf"
+        },
+        {
+          "description": "`github.com/plexusone/agentkit` v0.6.1 → v0.7.0",
+          "commit": "2e3732c"
+        },
+        {
+          "description": "`github.com/cloudwego/eino` v0.9.12 → v0.9.13",
+          "commit": "7befd4f"
+        },
+        {
+          "description": "`github.com/modelcontextprotocol/go-sdk` v1.6.1 → v1.7.0",
+          "commit": "21ae0e1"
+        },
+        {
+          "description": "`google.golang.org/adk` v1.5.0 → v1.5.1",
+          "commit": "7719d5b"
+        },
+        {
+          "description": "`google.golang.org/genai` v1.63.0 → v1.67.0",
+          "commit": "a933f71"
+        }
+      ],
+      "infrastructure": [
+        {
+          "description": "GitHub Actions: `actions/setup-go` v6 → v7",
+          "commit": "364c67e"
+        },
+        {
+          "description": "GitHub Actions: `actions/setup-python` v6 → v7",
+          "commit": "9d16f82"
+        },
+        {
+          "description": "GitHub Actions: `docker/login-action` v4 → v4.6.0",
+          "commit": "c035a95"
+        }
+      ],
+      "chores": [
+        {
+          "description": "Exclude `go.opentelemetry.io/otel/log` v0.21.0 in go.mod pending an `adk` release compatible with newer otel/log",
+          "commit": "b4021c5"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "New REAL and VEAL Loops architecture page",
+          "commit": "af916d5"
+        },
+        {
+          "description": "Fixed stale Eino Orchestration workflow diagram and logging example (predated the Synthesis step)",
+          "commit": "af916d5"
+        },
+        {
+          "description": "Fixed 4-Agent Architecture `/research` API example (`candidates` → `search_results`)",
+          "commit": "af916d5"
+        },
+        {
+          "description": "README updated with a REAL/VEAL Loops summary",
+          "commit": "af916d5"
+        }
+      ],
+      "tests": [
+        {
+          "description": "New `pkg/orchestration/eino_test.go` covering rejection classification, VEAL actor behavior, and discovery-graph compilation",
+          "commit": "34b66c3"
+        }
+      ]
+    },
+    {
       "version": "v0.9.0",
       "date": "2026-07-12",
       "commit": "11188fa",
       "highlights": [
-        { "description": "Migration from standalone Google ADK agents to omniagent-worker based architecture" },
-        { "description": "Workers implement `omniagent-worker.Worker` interface for unified lifecycle management" },
-        { "description": "New Coordinator using `omniagent-worker.Coordinator` with AgentOps tracing" },
-        { "description": "OmniSkill integration for embedding in OmniAgent" }
+        {
+          "description": "Migration from standalone Google ADK agents to omniagent-worker based architecture"
+        },
+        {
+          "description": "Workers implement `omniagent-worker.Worker` interface for unified lifecycle management"
+        },
+        {
+          "description": "New Coordinator using `omniagent-worker.Coordinator` with AgentOps tracing"
+        },
+        {
+          "description": "OmniSkill integration for embedding in OmniAgent"
+        }
       ],
       "breaking": [
-        { "description": "Legacy `agents/` directory removed - replaced by `workers/` and `coordinator/`", "commit": "b7797d0" }
+        {
+          "description": "Legacy `agents/` directory removed - replaced by `workers/` and `coordinator/`",
+          "commit": "b7797d0"
+        }
       ],
       "upgradeGuide": [
-        { "description": "Workers now in `workers/` directory implementing omniagent-worker.Worker interface" },
-        { "description": "Orchestration replaced by `coordinator/` using omniagent-worker.Coordinator" },
-        { "description": "Use `cmd/coordinator/main.go` as CLI entrypoint instead of individual agent binaries" }
+        {
+          "description": "Workers now in `workers/` directory implementing omniagent-worker.Worker interface"
+        },
+        {
+          "description": "Orchestration replaced by `coordinator/` using omniagent-worker.Coordinator"
+        },
+        {
+          "description": "Use `cmd/coordinator/main.go` as CLI entrypoint instead of individual agent binaries"
+        }
       ],
       "added": [
-        { "description": "Research worker implementing omniagent-worker.Worker interface", "commit": "63bd423" },
-        { "description": "Synthesis worker implementing omniagent-worker.Worker interface", "commit": "5280743" },
-        { "description": "Verification worker implementing omniagent-worker.Worker interface", "commit": "369615a" },
-        { "description": "Coordinator package using omniagent-worker.Coordinator", "commit": "0c445aa" },
-        { "description": "Coordinator CLI entrypoint with AgentOps support", "commit": "52cfe68" },
-        { "description": "OmniSkill interface for OmniAgent integration", "commit": "eeff008" },
-        { "description": "omniagent-worker migration specifications", "commit": "c13d39d" }
+        {
+          "description": "Research worker implementing omniagent-worker.Worker interface",
+          "commit": "63bd423"
+        },
+        {
+          "description": "Synthesis worker implementing omniagent-worker.Worker interface",
+          "commit": "5280743"
+        },
+        {
+          "description": "Verification worker implementing omniagent-worker.Worker interface",
+          "commit": "369615a"
+        },
+        {
+          "description": "Coordinator package using omniagent-worker.Coordinator",
+          "commit": "0c445aa"
+        },
+        {
+          "description": "Coordinator CLI entrypoint with AgentOps support",
+          "commit": "52cfe68"
+        },
+        {
+          "description": "OmniSkill interface for OmniAgent integration",
+          "commit": "eeff008"
+        },
+        {
+          "description": "omniagent-worker migration specifications",
+          "commit": "c13d39d"
+        }
       ],
       "removed": [
-        { "description": "`agents/direct/` - Direct search agent", "commit": "b7797d0" },
-        { "description": "`agents/orchestration/` - ADK orchestration agent", "commit": "b7797d0" },
-        { "description": "`agents/orchestration-eino/` - Eino orchestration agent", "commit": "b7797d0" },
-        { "description": "`agents/research/` - Research agent", "commit": "b7797d0" },
-        { "description": "`agents/synthesis/` - Synthesis agent", "commit": "b7797d0" },
-        { "description": "`agents/verification/` - Verification agent", "commit": "b7797d0" }
+        {
+          "description": "`agents/direct/` - Direct search agent",
+          "commit": "b7797d0"
+        },
+        {
+          "description": "`agents/orchestration/` - ADK orchestration agent",
+          "commit": "b7797d0"
+        },
+        {
+          "description": "`agents/orchestration-eino/` - Eino orchestration agent",
+          "commit": "b7797d0"
+        },
+        {
+          "description": "`agents/research/` - Research agent",
+          "commit": "b7797d0"
+        },
+        {
+          "description": "`agents/synthesis/` - Synthesis agent",
+          "commit": "b7797d0"
+        },
+        {
+          "description": "`agents/verification/` - Verification agent",
+          "commit": "b7797d0"
+        }
       ],
       "tests": [
-        { "description": "Coordinator unit and integration tests", "commit": "0b51b16" }
+        {
+          "description": "Coordinator unit and integration tests",
+          "commit": "0b51b16"
+        }
       ],
       "documentation": [
-        { "description": "README updated for worker-based architecture", "commit": "11188fa" },
-        { "description": "MkDocs site updated for omniagent-worker architecture", "commit": "1e9f635" },
-        { "description": "README shields updated", "commit": "e6193ff" }
+        {
+          "description": "README updated for worker-based architecture",
+          "commit": "11188fa"
+        },
+        {
+          "description": "MkDocs site updated for omniagent-worker architecture",
+          "commit": "1e9f635"
+        },
+        {
+          "description": "README shields updated",
+          "commit": "e6193ff"
+        }
       ],
       "dependencies": [
-        { "description": "`github.com/plexusone/omniagent-worker` v0.1.0 (new)", "commit": "7675b72" },
-        { "description": "`github.com/plexusone/omniskill` v0.9.0 (new)", "commit": "7675b72" },
-        { "description": "`github.com/cloudwego/eino` v0.9.2 → v0.9.12", "commit": "e27de03" },
-        { "description": "`github.com/plexusone/omnillm` v0.15.3 → v0.17.0", "commit": "b6d9a02" },
-        { "description": "`github.com/plexusone/omniobserve` v0.8.0 → v0.11.0", "commit": "d4e23fe" },
-        { "description": "`github.com/plexusone/omniserp` v0.8.1 → v0.9.0", "commit": "35d89a5" },
-        { "description": "`github.com/plexusone/structured-evaluation` v0.6.0 → v0.8.0", "commit": "fa35782" },
-        { "description": "`google.golang.org/adk` v1.4.0 → v1.5.0", "commit": "1d7247e" },
-        { "description": "`google.golang.org/genai` v1.58.0 → v1.63.0", "commit": "a62f6b5" }
+        {
+          "description": "`github.com/plexusone/omniagent-worker` v0.1.0 (new)",
+          "commit": "7675b72"
+        },
+        {
+          "description": "`github.com/plexusone/omniskill` v0.9.0 (new)",
+          "commit": "7675b72"
+        },
+        {
+          "description": "`github.com/cloudwego/eino` v0.9.2 → v0.9.12",
+          "commit": "e27de03"
+        },
+        {
+          "description": "`github.com/plexusone/omnillm` v0.15.3 → v0.17.0",
+          "commit": "b6d9a02"
+        },
+        {
+          "description": "`github.com/plexusone/omniobserve` v0.8.0 → v0.11.0",
+          "commit": "d4e23fe"
+        },
+        {
+          "description": "`github.com/plexusone/omniserp` v0.8.1 → v0.9.0",
+          "commit": "35d89a5"
+        },
+        {
+          "description": "`github.com/plexusone/structured-evaluation` v0.6.0 → v0.8.0",
+          "commit": "fa35782"
+        },
+        {
+          "description": "`google.golang.org/adk` v1.4.0 → v1.5.0",
+          "commit": "1d7247e"
+        },
+        {
+          "description": "`google.golang.org/genai` v1.58.0 → v1.63.0",
+          "commit": "a62f6b5"
+        }
       ],
       "chores": [
-        { "description": "Add site/ to gitignore for MkDocs output", "commit": "3c8e7f0" },
-        { "description": "Update gitignore for workers and binaries", "commit": "92f30ab" }
+        {
+          "description": "Add site/ to gitignore for MkDocs output",
+          "commit": "3c8e7f0"
+        },
+        {
+          "description": "Update gitignore for workers and binaries",
+          "commit": "92f30ab"
+        }
       ],
       "infrastructure": [
-        { "description": "GitHub Actions: `actions/checkout` v6 → v7", "commit": "3b020af" },
-        { "description": "GitHub Actions: `gitleaks/gitleaks-action` v2 → v3", "commit": "452859c" }
+        {
+          "description": "GitHub Actions: `actions/checkout` v6 → v7",
+          "commit": "3b020af"
+        },
+        {
+          "description": "GitHub Actions: `gitleaks/gitleaks-action` v2 → v3",
+          "commit": "452859c"
+        }
       ]
     },
     {
       "version": "v0.8.0",
       "date": "2026-06-01",
       "highlights": [
-        { "description": "Structured-evaluation ClaimsReport integration for standardized statistics output" },
-        { "description": "PlexusOne unified navigation and theming for documentation" }
+        {
+          "description": "Structured-evaluation ClaimsReport integration for standardized statistics output"
+        },
+        {
+          "description": "PlexusOne unified navigation and theming for documentation"
+        }
       ],
       "added": [
-        { "description": "ClaimsReport conversion methods for OrchestrationResponse and VerificationResponse", "commit": "ed5901e" },
-        { "description": "HTTP `?format=claims` query parameter for ClaimsReport JSON output", "commit": "2fdfe84" },
-        { "description": "Source classification mapping authoritative sources to ReliabilityHigh", "commit": "ed5901e" },
-        { "description": "PlexusOne unified navigation and theme for MkDocs site", "commit": "4411fc8" }
+        {
+          "description": "ClaimsReport conversion methods for OrchestrationResponse and VerificationResponse",
+          "commit": "ed5901e"
+        },
+        {
+          "description": "HTTP `?format=claims` query parameter for ClaimsReport JSON output",
+          "commit": "2fdfe84"
+        },
+        {
+          "description": "Source classification mapping authoritative sources to ReliabilityHigh",
+          "commit": "ed5901e"
+        },
+        {
+          "description": "PlexusOne unified navigation and theme for MkDocs site",
+          "commit": "4411fc8"
+        }
       ],
       "fixed": [
-        { "description": "gosec false positive with nolint directive", "commit": "8130c1d" }
+        {
+          "description": "gosec false positive with nolint directive",
+          "commit": "8130c1d"
+        }
       ],
       "changed": [
-        { "description": "MkDocs navigation switched to vertical style", "commit": "013a2de" }
+        {
+          "description": "MkDocs navigation switched to vertical style",
+          "commit": "013a2de"
+        }
       ],
       "documentation": [
-        { "description": "README shields updated", "commit": "84fe3fc" },
-        { "description": "MkDocs index page shields removed", "commit": "fb145f7" }
+        {
+          "description": "README shields updated",
+          "commit": "84fe3fc"
+        },
+        {
+          "description": "MkDocs index page shields removed",
+          "commit": "fb145f7"
+        }
       ],
       "dependencies": [
-        { "description": "`github.com/plexusone/structured-evaluation` v0.6.0 (new)", "commit": "81ff6df" },
-        { "description": "`github.com/cloudwego/eino` v0.7.36 → v0.9.2", "commit": "627738f" },
-        { "description": "`github.com/grokify/mogo` v0.73.3 → v0.74.5", "commit": "5371b97" },
-        { "description": "`github.com/modelcontextprotocol/go-sdk` v1.4.0 → v1.6.0", "commit": "0a16f3d" },
-        { "description": "`github.com/danielgtaylor/huma/v2` v2.35.0 → v2.38.0", "commit": "f97ff1a" },
-        { "description": "`github.com/plexusone/agentkit` v0.5.0 → v0.6.0", "commit": "d77484a" },
-        { "description": "`github.com/plexusone/omnillm` v0.13.0 → v0.15.3", "commit": "fcbcefa" },
-        { "description": "`github.com/plexusone/omniobserve` v0.7.0 → v0.8.0", "commit": "ff521b6" },
-        { "description": "`github.com/a2aproject/a2a-go` v0.3.7 → v0.3.15", "commit": "937b7f1" },
-        { "description": "`google.golang.org/genai` v1.48.0 → v1.58.0", "commit": "4566f42" },
-        { "description": "`google.golang.org/adk` v0.5.0 → v1.4.0", "commit": "3aee30a" }
+        {
+          "description": "`github.com/plexusone/structured-evaluation` v0.6.0 (new)",
+          "commit": "81ff6df"
+        },
+        {
+          "description": "`github.com/cloudwego/eino` v0.7.36 → v0.9.2",
+          "commit": "627738f"
+        },
+        {
+          "description": "`github.com/grokify/mogo` v0.73.3 → v0.74.5",
+          "commit": "5371b97"
+        },
+        {
+          "description": "`github.com/modelcontextprotocol/go-sdk` v1.4.0 → v1.6.0",
+          "commit": "0a16f3d"
+        },
+        {
+          "description": "`github.com/danielgtaylor/huma/v2` v2.35.0 → v2.38.0",
+          "commit": "f97ff1a"
+        },
+        {
+          "description": "`github.com/plexusone/agentkit` v0.5.0 → v0.6.0",
+          "commit": "d77484a"
+        },
+        {
+          "description": "`github.com/plexusone/omnillm` v0.13.0 → v0.15.3",
+          "commit": "fcbcefa"
+        },
+        {
+          "description": "`github.com/plexusone/omniobserve` v0.7.0 → v0.8.0",
+          "commit": "ff521b6"
+        },
+        {
+          "description": "`github.com/a2aproject/a2a-go` v0.3.7 → v0.3.15",
+          "commit": "937b7f1"
+        },
+        {
+          "description": "`google.golang.org/genai` v1.48.0 → v1.58.0",
+          "commit": "4566f42"
+        },
+        {
+          "description": "`google.golang.org/adk` v0.5.0 → v1.4.0",
+          "commit": "3aee30a"
+        }
       ],
       "infrastructure": [
-        { "description": "GitHub Actions: `docker/login-action` v3 → v4", "commit": "ef9a52a" },
-        { "description": "GitHub Actions: `docker/build-push-action` v6 → v7", "commit": "44c3a28" },
-        { "description": "GitHub Actions: `docker/metadata-action` v5 → v6", "commit": "35e4cc1" },
-        { "description": "GitHub Actions: `docker/setup-buildx-action` v3 → v4", "commit": "69f31f9" },
-        { "description": "GitHub Actions: `azure/setup-helm` v4 → v5", "commit": "26a1d59" }
+        {
+          "description": "GitHub Actions: `docker/login-action` v3 → v4",
+          "commit": "ef9a52a"
+        },
+        {
+          "description": "GitHub Actions: `docker/build-push-action` v6 → v7",
+          "commit": "44c3a28"
+        },
+        {
+          "description": "GitHub Actions: `docker/metadata-action` v5 → v6",
+          "commit": "35e4cc1"
+        },
+        {
+          "description": "GitHub Actions: `docker/setup-buildx-action` v3 → v4",
+          "commit": "69f31f9"
+        },
+        {
+          "description": "GitHub Actions: `azure/setup-helm` v4 → v5",
+          "commit": "26a1d59"
+        }
       ]
     },
     {
       "version": "v0.7.0",
       "date": "2026-03-01",
       "highlights": [
-        { "description": "Module migrated from `agentplexus` to `plexusone` organization" },
-        { "description": "Agent plugin specifications for Kiro and Claude Code sub-agents" },
-        { "description": "MkDocs documentation restructured for GitHub Pages deployment" }
+        {
+          "description": "Module migrated from `agentplexus` to `plexusone` organization"
+        },
+        {
+          "description": "Agent plugin specifications for Kiro and Claude Code sub-agents"
+        },
+        {
+          "description": "MkDocs documentation restructured for GitHub Pages deployment"
+        }
       ],
       "breaking": [
-        { "description": "Module path changed from `github.com/agentplexus/stats-agent-team` to `github.com/plexusone/agent-team-stats`", "commit": "800d563" }
+        {
+          "description": "Module path changed from `github.com/agentplexus/stats-agent-team` to `github.com/plexusone/agent-team-stats`",
+          "commit": "800d563"
+        }
       ],
       "upgradeGuide": [
-        { "description": "Update import paths from `github.com/agentplexus/stats-agent-team` to `github.com/plexusone/agent-team-stats`" },
-        { "description": "Update go.mod dependency to `github.com/plexusone/agent-team-stats v0.7.0`" }
+        {
+          "description": "Update import paths from `github.com/agentplexus/stats-agent-team` to `github.com/plexusone/agent-team-stats`"
+        },
+        {
+          "description": "Update go.mod dependency to `github.com/plexusone/agent-team-stats v0.7.0`"
+        }
       ],
       "added": [
-        { "description": "Kiro agent configuration files for local development (`plugins/kiro/agents/`)", "commit": "8005978" },
-        { "description": "Spec plugin definition with deployment targets (`plugins/spec/plugin.json`)", "commit": "8005978" },
-        { "description": "Agent specification markdown files for orchestration workflow", "commit": "8005978" }
+        {
+          "description": "Kiro agent configuration files for local development (`plugins/kiro/agents/`)",
+          "commit": "8005978"
+        },
+        {
+          "description": "Spec plugin definition with deployment targets (`plugins/spec/plugin.json`)",
+          "commit": "8005978"
+        },
+        {
+          "description": "Agent specification markdown files for orchestration workflow",
+          "commit": "8005978"
+        }
       ],
       "changed": [
-        { "description": "Module path migrated from `agentplexus` to `plexusone` organization", "commit": "800d563" },
-        { "description": "All dependencies migrated from `agentplexus/*` to `plexusone/*` packages", "commit": "800d563" },
-        { "description": "CDK module updated to use `agentkit-aws-cdk v0.2.0`", "commit": "df594f7" },
-        { "description": "MkDocs source moved from `docsrc/` to `docs/` for gh-pages deployment", "commit": "514f793" }
+        {
+          "description": "Module path migrated from `agentplexus` to `plexusone` organization",
+          "commit": "800d563"
+        },
+        {
+          "description": "All dependencies migrated from `agentplexus/*` to `plexusone/*` packages",
+          "commit": "800d563"
+        },
+        {
+          "description": "CDK module updated to use `agentkit-aws-cdk v0.2.0`",
+          "commit": "df594f7"
+        },
+        {
+          "description": "MkDocs source moved from `docsrc/` to `docs/` for gh-pages deployment",
+          "commit": "514f793"
+        }
       ],
       "documentation": [
-        { "description": "Updated README URLs for plexusone organization", "commit": "5598c54" },
-        { "description": "Restructured docs for `mkdocs gh-deploy` workflow", "commit": "514f793" },
-        { "description": "Updated mkdocs.yml with plexusone URLs and removed site_dir", "commit": "514f793" }
+        {
+          "description": "Updated README URLs for plexusone organization",
+          "commit": "5598c54"
+        },
+        {
+          "description": "Restructured docs for `mkdocs gh-deploy` workflow",
+          "commit": "514f793"
+        },
+        {
+          "description": "Updated mkdocs.yml with plexusone URLs and removed site_dir",
+          "commit": "514f793"
+        }
       ],
       "dependencies": [
-        { "description": "`github.com/plexusone/agentkit` v0.5.0 (was agentplexus/agentkit v0.4.0)", "commit": "800d563" },
-        { "description": "`github.com/plexusone/omnillm` v0.13.0 (was agentplexus/omnillm v0.11.0)", "commit": "800d563" },
-        { "description": "`github.com/plexusone/omniobserve` v0.7.0 (was agentplexus/omniobserve v0.5.1)", "commit": "800d563" },
-        { "description": "`github.com/plexusone/omniserp` v0.8.0 (was agentplexus/omniserp v0.7.0)", "commit": "800d563" },
-        { "description": "`github.com/plexusone/opik-go` v0.6.0 (was agentplexus/go-opik v0.5.1)", "commit": "800d563" },
-        { "description": "`github.com/plexusone/phoenix-go` v0.2.0 (was agentplexus/go-phoenix v0.1.1)", "commit": "800d563" },
-        { "description": "`github.com/cloudwego/eino` v0.7.32 → v0.7.36", "commit": "2e6f858" },
-        { "description": "`github.com/grokify/mogo` v0.72.7 → v0.73.3", "commit": "5cb7fba" },
-        { "description": "`github.com/go-chi/chi/v5` v5.2.4 → v5.2.5", "commit": "4ad2d66" },
-        { "description": "`github.com/modelcontextprotocol/go-sdk` v1.3.0 → v1.4.0", "commit": "7cb49ed" },
-        { "description": "`google.golang.org/genai` v1.42.0 → v1.48.0", "commit": "89b1689" },
-        { "description": "`google.golang.org/adk` v0.4.0 → v0.5.0", "commit": "800d563" },
-        { "description": "`github.com/a2aproject/a2a-go` v0.3.6 → v0.3.7", "commit": "800d563" },
-        { "description": "`github.com/plexusone/agentkit-aws-cdk` v0.2.0 (CDK module)", "commit": "df594f7" }
+        {
+          "description": "`github.com/plexusone/agentkit` v0.5.0 (was agentplexus/agentkit v0.4.0)",
+          "commit": "800d563"
+        },
+        {
+          "description": "`github.com/plexusone/omnillm` v0.13.0 (was agentplexus/omnillm v0.11.0)",
+          "commit": "800d563"
+        },
+        {
+          "description": "`github.com/plexusone/omniobserve` v0.7.0 (was agentplexus/omniobserve v0.5.1)",
+          "commit": "800d563"
+        },
+        {
+          "description": "`github.com/plexusone/omniserp` v0.8.0 (was agentplexus/omniserp v0.7.0)",
+          "commit": "800d563"
+        },
+        {
+          "description": "`github.com/plexusone/opik-go` v0.6.0 (was agentplexus/go-opik v0.5.1)",
+          "commit": "800d563"
+        },
+        {
+          "description": "`github.com/plexusone/phoenix-go` v0.2.0 (was agentplexus/go-phoenix v0.1.1)",
+          "commit": "800d563"
+        },
+        {
+          "description": "`github.com/cloudwego/eino` v0.7.32 → v0.7.36",
+          "commit": "2e6f858"
+        },
+        {
+          "description": "`github.com/grokify/mogo` v0.72.7 → v0.73.3",
+          "commit": "5cb7fba"
+        },
+        {
+          "description": "`github.com/go-chi/chi/v5` v5.2.4 → v5.2.5",
+          "commit": "4ad2d66"
+        },
+        {
+          "description": "`github.com/modelcontextprotocol/go-sdk` v1.3.0 → v1.4.0",
+          "commit": "7cb49ed"
+        },
+        {
+          "description": "`google.golang.org/genai` v1.42.0 → v1.48.0",
+          "commit": "89b1689"
+        },
+        {
+          "description": "`google.golang.org/adk` v0.4.0 → v0.5.0",
+          "commit": "800d563"
+        },
+        {
+          "description": "`github.com/a2aproject/a2a-go` v0.3.6 → v0.3.7",
+          "commit": "800d563"
+        },
+        {
+          "description": "`github.com/plexusone/agentkit-aws-cdk` v0.2.0 (CDK module)",
+          "commit": "df594f7"
+        }
       ],
       "infrastructure": [
-        { "description": "Updated `.gitignore` to exclude `.claude/` directory", "commit": "33ff021" },
-        { "description": "Updated `cdk/.gitignore` to exclude compiled binary", "commit": "df594f7" },
-        { "description": "Bump `actions/upload-artifact` from 6 to 7", "commit": "240bca4" }
+        {
+          "description": "Updated `.gitignore` to exclude `.claude/` directory",
+          "commit": "33ff021"
+        },
+        {
+          "description": "Updated `cdk/.gitignore` to exclude compiled binary",
+          "commit": "df594f7"
+        },
+        {
+          "description": "Bump `actions/upload-artifact` from 6 to 7",
+          "commit": "240bca4"
+        }
       ]
     },
     {
       "version": "v0.6.0",
       "date": "2026-01-18",
       "highlights": [
-        { "description": "Unified configuration loading with agentkit integration and OmniVault secret management" }
+        {
+          "description": "Unified configuration loading with agentkit integration and OmniVault secret management"
+        }
       ],
       "added": [
-        { "description": "Unified configuration loading from config.json, environment variables, and OmniVault secrets via `config.Load(ctx)`", "commit": "6afdba6" },
-        { "description": "AWS CDK deployment infrastructure in `cdk/` directory", "commit": "6afdba6" },
-        { "description": "Runtime config files: `config.json` for local development, `config.aws.json` for AWS deployment", "commit": "6afdba6" },
-        { "description": "AWS AgentCore deployment guide (`docs/guides/aws-agentcore.md`)", "commit": "6afdba6" }
+        {
+          "description": "Unified configuration loading from config.json, environment variables, and OmniVault secrets via `config.Load(ctx)`",
+          "commit": "6afdba6"
+        },
+        {
+          "description": "AWS CDK deployment infrastructure in `cdk/` directory",
+          "commit": "6afdba6"
+        },
+        {
+          "description": "Runtime config files: `config.json` for local development, `config.aws.json` for AWS deployment",
+          "commit": "6afdba6"
+        },
+        {
+          "description": "AWS AgentCore deployment guide (`docs/guides/aws-agentcore.md`)",
+          "commit": "6afdba6"
+        }
       ],
       "changed": [
-        { "description": "OmniLLM adapter updated for v0.11.0 unified Providers API", "commit": "8e871e7" },
-        { "description": "`Config` struct now embeds `*akconfig.Config` for unified configuration", "commit": "6afdba6" }
+        {
+          "description": "OmniLLM adapter updated for v0.11.0 unified Providers API",
+          "commit": "8e871e7"
+        },
+        {
+          "description": "`Config` struct now embeds `*akconfig.Config` for unified configuration",
+          "commit": "6afdba6"
+        }
       ],
       "infrastructure": [
-        { "description": "Added `build_maintenance` flag for patch release Docker images", "commit": "230c242" }
+        {
+          "description": "Added `build_maintenance` flag for patch release Docker images",
+          "commit": "230c242"
+        }
       ],
       "documentation": [
-        { "description": "Updated MCP_SERVER.md documentation", "commit": "0565794" }
+        {
+          "description": "Updated MCP_SERVER.md documentation",
+          "commit": "0565794"
+        }
       ],
       "dependencies": [
-        { "description": "`github.com/agentplexus/omnillm` v0.10.0 → v0.11.0", "commit": "b5dd35a" },
-        { "description": "`github.com/agentplexus/agentkit` v0.2.0 → v0.3.0", "commit": "6afdba6" },
-        { "description": "`github.com/agentplexus/go-opik` v0.5.0 → v0.5.1", "commit": "b5dd35a" },
-        { "description": "`github.com/agentplexus/go-phoenix` v0.1.0 → v0.1.1", "commit": "b5dd35a" },
-        { "description": "`github.com/agentplexus/omnivault` v0.1.0 → v0.2.0", "commit": "b5dd35a" },
-        { "description": "`github.com/cloudwego/eino` v0.7.17 → v0.7.21", "commit": "b5dd35a" },
-        { "description": "`github.com/a2aproject/a2a-go` v0.3.3 → v0.3.4", "commit": "cf00da2" },
-        { "description": "`github.com/grokify/mogo` v0.72.5 → v0.72.6", "commit": "ced640f" },
-        { "description": "`google.golang.org/genai` v1.40.0 → v1.42.0", "commit": "b5dd35a" }
+        {
+          "description": "`github.com/agentplexus/omnillm` v0.10.0 → v0.11.0",
+          "commit": "b5dd35a"
+        },
+        {
+          "description": "`github.com/agentplexus/agentkit` v0.2.0 → v0.3.0",
+          "commit": "6afdba6"
+        },
+        {
+          "description": "`github.com/agentplexus/go-opik` v0.5.0 → v0.5.1",
+          "commit": "b5dd35a"
+        },
+        {
+          "description": "`github.com/agentplexus/go-phoenix` v0.1.0 → v0.1.1",
+          "commit": "b5dd35a"
+        },
+        {
+          "description": "`github.com/agentplexus/omnivault` v0.1.0 → v0.2.0",
+          "commit": "b5dd35a"
+        },
+        {
+          "description": "`github.com/cloudwego/eino` v0.7.17 → v0.7.21",
+          "commit": "b5dd35a"
+        },
+        {
+          "description": "`github.com/a2aproject/a2a-go` v0.3.3 → v0.3.4",
+          "commit": "cf00da2"
+        },
+        {
+          "description": "`github.com/grokify/mogo` v0.72.5 → v0.72.6",
+          "commit": "ced640f"
+        },
+        {
+          "description": "`google.golang.org/genai` v1.40.0 → v1.42.0",
+          "commit": "b5dd35a"
+        }
       ]
     },
     {
       "version": "v0.5.1",
       "date": "2026-01-04",
       "fixed": [
-        { "description": "Docker build failing due to multi-file agents (build directory instead of single main.go)", "commit": "3eea642" }
+        {
+          "description": "Docker build failing due to multi-file agents (build directory instead of single main.go)",
+          "commit": "3eea642"
+        }
       ]
     },
     {
       "version": "v0.5.0",
       "date": "2026-01-04",
       "highlights": [
-        { "description": "LLM observability with Phoenix support, configurable HTTP timeouts, and structured logging" }
+        {
+          "description": "LLM observability with Phoenix support, configurable HTTP timeouts, and structured logging"
+        }
       ],
       "added": [
-        { "description": "Phoenix observability provider support for LLM tracing", "commit": "49a181c" },
-        { "description": "`HTTP_TIMEOUT_SECONDS` environment variable for configurable HTTP client/server timeout", "commit": "42c747c" },
-        { "description": "`pkg/logging` package for centralized structured logging with slog", "commit": "1e8e18d" },
-        { "description": "Provider-specific observability configuration (PHOENIX_API_KEY, PHOENIX_SPACE_ID)", "commit": "42c747c" }
+        {
+          "description": "Phoenix observability provider support for LLM tracing",
+          "commit": "49a181c"
+        },
+        {
+          "description": "`HTTP_TIMEOUT_SECONDS` environment variable for configurable HTTP client/server timeout",
+          "commit": "42c747c"
+        },
+        {
+          "description": "`pkg/logging` package for centralized structured logging with slog",
+          "commit": "1e8e18d"
+        },
+        {
+          "description": "Provider-specific observability configuration (PHOENIX_API_KEY, PHOENIX_SPACE_ID)",
+          "commit": "42c747c"
+        }
       ],
       "changed": [
-        { "description": "All agents refactored to use structured logging package", "commit": "a7a4ae2" },
-        { "description": "HTTP servers now use configurable timeouts from config", "commit": "a7a4ae2" },
-        { "description": "OmniLLM adapter updated to pass timeout configuration", "commit": "0451ab4" }
+        {
+          "description": "All agents refactored to use structured logging package",
+          "commit": "a7a4ae2"
+        },
+        {
+          "description": "HTTP servers now use configurable timeouts from config",
+          "commit": "a7a4ae2"
+        },
+        {
+          "description": "OmniLLM adapter updated to pass timeout configuration",
+          "commit": "0451ab4"
+        }
       ],
       "dependencies": [
-        { "description": "`github.com/agentplexus/omnillm` v0.9.0 → v0.10.0", "commit": "49a181c" },
-        { "description": "`github.com/agentplexus/go-phoenix` v0.1.0 (new)", "commit": "49a181c" },
-        { "description": "`github.com/agentplexus/go-opik` v0.4.0 → v0.5.0", "commit": "0712195" },
-        { "description": "`github.com/agentplexus/omniobserve` v0.4.0 → v0.5.0", "commit": "0712195" },
-        { "description": "`github.com/cloudwego/eino` v0.7.14 → v0.7.17", "commit": "dc2529d" },
-        { "description": "`github.com/agentplexus/omniserp` v0.6.0 → v0.7.0", "commit": "a50bd6b" }
+        {
+          "description": "`github.com/agentplexus/omnillm` v0.9.0 → v0.10.0",
+          "commit": "49a181c"
+        },
+        {
+          "description": "`github.com/agentplexus/go-phoenix` v0.1.0 (new)",
+          "commit": "49a181c"
+        },
+        {
+          "description": "`github.com/agentplexus/go-opik` v0.4.0 → v0.5.0",
+          "commit": "0712195"
+        },
+        {
+          "description": "`github.com/agentplexus/omniobserve` v0.4.0 → v0.5.0",
+          "commit": "0712195"
+        },
+        {
+          "description": "`github.com/cloudwego/eino` v0.7.14 → v0.7.17",
+          "commit": "dc2529d"
+        },
+        {
+          "description": "`github.com/agentplexus/omniserp` v0.6.0 → v0.7.0",
+          "commit": "a50bd6b"
+        }
       ]
     },
     {
       "version": "v0.4.0",
       "date": "2025-12-27",
       "highlights": [
-        { "description": "Helm chart for Kubernetes deployment and MkDocs documentation site" }
+        {
+          "description": "Helm chart for Kubernetes deployment and MkDocs documentation site"
+        }
       ],
       "added": [
-        { "description": "Helm chart for Kubernetes deployment with Minikube and EKS support", "commit": "e98e9fc" },
-        { "description": "Parameterized Dockerfile (`Dockerfile.agent`) for building all agent images", "commit": "e98e9fc" },
-        { "description": "CI/CD pipeline with Gitleaks, Trivy, Kubeconform, and Polaris", "commit": "e98e9fc" },
-        { "description": "Go struct validation for Helm values (`pkg/helm/`)", "commit": "e98e9fc" },
-        { "description": "Helm chart unit tests with helm-unittest", "commit": "e98e9fc" },
-        { "description": "MkDocs documentation site with Material theme", "commit": "507f869" }
+        {
+          "description": "Helm chart for Kubernetes deployment with Minikube and EKS support",
+          "commit": "e98e9fc"
+        },
+        {
+          "description": "Parameterized Dockerfile (`Dockerfile.agent`) for building all agent images",
+          "commit": "e98e9fc"
+        },
+        {
+          "description": "CI/CD pipeline with Gitleaks, Trivy, Kubeconform, and Polaris",
+          "commit": "e98e9fc"
+        },
+        {
+          "description": "Go struct validation for Helm values (`pkg/helm/`)",
+          "commit": "e98e9fc"
+        },
+        {
+          "description": "Helm chart unit tests with helm-unittest",
+          "commit": "e98e9fc"
+        },
+        {
+          "description": "MkDocs documentation site with Material theme",
+          "commit": "507f869"
+        }
       ],
       "changed": [
-        { "description": "Module moved from `github.com/grokify/stats-agent-team` to `github.com/agentplexus/stats-agent-team`", "breaking": true, "commit": "3347628" },
-        { "description": "Dependencies renamed: metallm → omnillm, metaobserve → omniobserve, metaserp → omniserp", "breaking": true, "commit": "3347628" }
+        {
+          "description": "Module moved from `github.com/grokify/stats-agent-team` to `github.com/agentplexus/stats-agent-team`",
+          "breaking": true,
+          "commit": "3347628"
+        },
+        {
+          "description": "Dependencies renamed: metallm → omnillm, metaobserve → omniobserve, metaserp → omniserp",
+          "breaking": true,
+          "commit": "3347628"
+        }
       ],
       "fixed": [
-        { "description": "Unchecked error return value in Helm validation registration", "commit": "e98e9fc" }
+        {
+          "description": "Unchecked error return value in Helm validation registration",
+          "commit": "e98e9fc"
+        }
       ]
     },
     {
       "version": "v0.3.0",
       "date": "2025-12-21",
       "highlights": [
-        { "description": "A2A Inter-Agent Protocol and LLM Observability via MetaObserve" }
+        {
+          "description": "A2A Inter-Agent Protocol and LLM Observability via MetaObserve"
+        }
       ],
       "added": [
-        { "description": "A2A Inter-Agent Protocol support for all agents", "commit": "8c3fe06" },
-        { "description": "LLM Observability via MetaObserve (Opik, Langfuse, Phoenix backends)", "commit": "21ca3c9" },
-        { "description": "MetaLLM adapter replacing gollm adapter", "commit": "21ca3c9" },
-        { "description": "Security documentation (`README_SECURITY.md`)", "commit": "30e0af1" },
-        { "description": "Project roadmap (`ROADMAP.md`)", "commit": "bab9ff8" },
-        { "description": "Presentation materials (`presentation.md`)", "commit": "bab9ff8" }
+        {
+          "description": "A2A Inter-Agent Protocol support for all agents",
+          "commit": "8c3fe06"
+        },
+        {
+          "description": "LLM Observability via MetaObserve (Opik, Langfuse, Phoenix backends)",
+          "commit": "21ca3c9"
+        },
+        {
+          "description": "MetaLLM adapter replacing gollm adapter",
+          "commit": "21ca3c9"
+        },
+        {
+          "description": "Security documentation (`README_SECURITY.md`)",
+          "commit": "30e0af1"
+        },
+        {
+          "description": "Project roadmap (`ROADMAP.md`)",
+          "commit": "bab9ff8"
+        },
+        {
+          "description": "Presentation materials (`presentation.md`)",
+          "commit": "bab9ff8"
+        }
       ],
       "changed": [
-        { "description": "Enhanced team stats finding performance via `make run-all-eino`", "commit": "6df1221" }
+        {
+          "description": "Enhanced team stats finding performance via `make run-all-eino`",
+          "commit": "6df1221"
+        }
       ],
       "dependencies": [
-        { "description": "`github.com/cloudwego/eino` 0.7.8 → 0.7.10", "commit": "9ba64db" },
-        { "description": "`github.com/a2aproject/a2a-go` (new)", "commit": "8c3fe06" },
-        { "description": "`github.com/grokify/metallm` (new)", "commit": "21ca3c9" },
-        { "description": "`github.com/grokify/metaobserve` (new)", "commit": "21ca3c9" }
+        {
+          "description": "`github.com/cloudwego/eino` 0.7.8 → 0.7.10",
+          "commit": "9ba64db"
+        },
+        {
+          "description": "`github.com/a2aproject/a2a-go` (new)",
+          "commit": "8c3fe06"
+        },
+        {
+          "description": "`github.com/grokify/metallm` (new)",
+          "commit": "21ca3c9"
+        },
+        {
+          "description": "`github.com/grokify/metaobserve` (new)",
+          "commit": "21ca3c9"
+        }
       ]
     },
     {
       "version": "v0.2.0",
       "date": "2025-12-14",
       "highlights": [
-        { "description": "Complete 4-agent architecture with Synthesis Agent and multi-LLM provider support" }
+        {
+          "description": "Complete 4-agent architecture with Synthesis Agent and multi-LLM provider support"
+        }
       ],
       "added": [
-        { "description": "Synthesis Agent for LLM-powered statistic extraction from web content", "commit": "8917623" },
-        { "description": "Complete 4-agent architecture (Research, Synthesis, Verification, Orchestration)", "commit": "657f1a3" },
-        { "description": "Docker support with Dockerfile, docker-compose.yml, and entrypoint script", "commit": "074583b" },
-        { "description": "Serper/SerpAPI integration for real web search", "commit": "9f248e9" },
-        { "description": "Multi-LLM provider support (Gemini, Claude, OpenAI, xAI Grok, Ollama)", "commit": "dc69c7e" },
-        { "description": "Direct LLM search mode with `--direct` CLI flag", "commit": "bc9597e" },
-        { "description": "Base agent package (`pkg/agent/base.go`)", "commit": "657f1a3" }
+        {
+          "description": "Synthesis Agent for LLM-powered statistic extraction from web content",
+          "commit": "8917623"
+        },
+        {
+          "description": "Complete 4-agent architecture (Research, Synthesis, Verification, Orchestration)",
+          "commit": "657f1a3"
+        },
+        {
+          "description": "Docker support with Dockerfile, docker-compose.yml, and entrypoint script",
+          "commit": "074583b"
+        },
+        {
+          "description": "Serper/SerpAPI integration for real web search",
+          "commit": "9f248e9"
+        },
+        {
+          "description": "Multi-LLM provider support (Gemini, Claude, OpenAI, xAI Grok, Ollama)",
+          "commit": "dc69c7e"
+        },
+        {
+          "description": "Direct LLM search mode with `--direct` CLI flag",
+          "commit": "bc9597e"
+        },
+        {
+          "description": "Base agent package (`pkg/agent/base.go`)",
+          "commit": "657f1a3"
+        }
       ],
       "changed": [
-        { "description": "Removed pre-built binaries from `bin/` directory", "breaking": true, "commit": "ef20e4b" },
-        { "description": "Research agent API changes for 4-agent architecture compatibility", "breaking": true, "commit": "657f1a3" }
+        {
+          "description": "Removed pre-built binaries from `bin/` directory",
+          "breaking": true,
+          "commit": "ef20e4b"
+        },
+        {
+          "description": "Research agent API changes for 4-agent architecture compatibility",
+          "breaking": true,
+          "commit": "657f1a3"
+        }
       ],
       "fixed": [
-        { "description": "Search functionality issues", "commit": "ad14475" },
-        { "description": "LLM support for synthesis and verification agents", "commit": "99c9447" }
+        {
+          "description": "Search functionality issues",
+          "commit": "ad14475"
+        },
+        {
+          "description": "LLM support for synthesis and verification agents",
+          "commit": "99c9447"
+        }
       ],
       "dependencies": [
-        { "description": "`github.com/grokify/gollm` (new)", "commit": "e0eb7da" },
-        { "description": "`github.com/grokify/metasearch` (new)", "commit": "9f248e9" }
+        {
+          "description": "`github.com/grokify/gollm` (new)",
+          "commit": "e0eb7da"
+        },
+        {
+          "description": "`github.com/grokify/metasearch` (new)",
+          "commit": "9f248e9"
+        }
       ]
     },
     {
       "version": "v0.1.0",
       "date": "2025-12-13",
       "highlights": [
-        { "description": "Initial release with 3-agent architecture using Google ADK and Eino orchestration" }
+        {
+          "description": "Initial release with 3-agent architecture using Google ADK and Eino orchestration"
+        }
       ],
       "added": [
-        { "description": "Initial release with 3-agent architecture (Research, Verification, Orchestration)", "commit": "666bb5f" },
-        { "description": "Research Agent with Google ADK and Gemini 2.0 Flash", "commit": "bff3d22" },
-        { "description": "Verification Agent for source validation", "commit": "666bb5f" },
-        { "description": "ADK Orchestration Agent with LLM-based coordination", "commit": "bff3d22" },
-        { "description": "Eino Orchestration Agent with deterministic graph-based workflow", "commit": "f04d2e8" },
-        { "description": "MCP Server integration for Claude Code", "commit": "6dc4ebd" },
-        { "description": "Multi-LLM provider support (Gemini, Claude, OpenAI, Ollama)", "commit": "12b30b2" },
-        { "description": "Structured JSON output for verified statistics", "commit": "666bb5f" },
-        { "description": "GitHub Actions CI/CD with golangci-lint", "commit": "a9ffc2c" }
+        {
+          "description": "Initial release with 3-agent architecture (Research, Verification, Orchestration)",
+          "commit": "666bb5f"
+        },
+        {
+          "description": "Research Agent with Google ADK and Gemini 2.0 Flash",
+          "commit": "bff3d22"
+        },
+        {
+          "description": "Verification Agent for source validation",
+          "commit": "666bb5f"
+        },
+        {
+          "description": "ADK Orchestration Agent with LLM-based coordination",
+          "commit": "bff3d22"
+        },
+        {
+          "description": "Eino Orchestration Agent with deterministic graph-based workflow",
+          "commit": "f04d2e8"
+        },
+        {
+          "description": "MCP Server integration for Claude Code",
+          "commit": "6dc4ebd"
+        },
+        {
+          "description": "Multi-LLM provider support (Gemini, Claude, OpenAI, Ollama)",
+          "commit": "12b30b2"
+        },
+        {
+          "description": "Structured JSON output for verified statistics",
+          "commit": "666bb5f"
+        },
+        {
+          "description": "GitHub Actions CI/CD with golangci-lint",
+          "commit": "a9ffc2c"
+        }
       ]
     }
   ]

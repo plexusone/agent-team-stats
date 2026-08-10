@@ -17,6 +17,7 @@ import (
 	"github.com/plexusone/agent-team-stats/pkg/config"
 	"github.com/plexusone/agent-team-stats/pkg/llm"
 	"github.com/plexusone/agent-team-stats/pkg/models"
+	"github.com/plexusone/structured-evaluation/claims"
 )
 
 // Worker extracts statistics from webpage content using LLM.
@@ -207,6 +208,8 @@ For each statistic found, provide:
 2. value: The EXACT numerical value from the text (as a number, not string)
 3. unit: The unit of measurement
 4. excerpt: The verbatim excerpt from the text containing this EXACT statistic (50-200 characters)
+5. precision: One of "exact" (the text states this value directly), "approximate" (the text itself qualifies it, e.g. "1M+", "~50%%", "over 20,000"), "estimated" (a third-party/analyst estimate the text attributes to someone else), or "range" (a bounded range — put the more notable end in value and describe the range in the excerpt)
+6. as_of_date: The date the underlying fact was true (e.g. the period an earnings figure describes, or the date a statement was made), as YYYY-MM-DD, ONLY if the text states or clearly implies one. Omit the field entirely if unknown — never guess.
 
 Return valid JSON array. Return empty array [] ONLY if absolutely no statistics are found.
 
@@ -239,10 +242,12 @@ JSON output with ALL statistics:`, topic, result.URL, result.Domain, content)
 
 	// Parse JSON response
 	type StatExtraction struct {
-		Name    string  `json:"name"`
-		Value   float32 `json:"value"`
-		Unit    string  `json:"unit"`
-		Excerpt string  `json:"excerpt"`
+		Name      string           `json:"name"`
+		Value     float32          `json:"value"`
+		Unit      string           `json:"unit"`
+		Excerpt   string           `json:"excerpt"`
+		Precision claims.Precision `json:"precision,omitempty"`
+		AsOfDate  string           `json:"as_of_date,omitempty"` // YYYY-MM-DD from the LLM; parsed below
 	}
 
 	var extractions []StatExtraction
@@ -260,13 +265,19 @@ JSON output with ALL statistics:`, topic, result.URL, result.Domain, content)
 		if ext.Value == 0 || ext.Excerpt == "" {
 			continue
 		}
+		asOfDate, err := models.ParseAsOfDate(ext.AsOfDate)
+		if err != nil {
+			w.Logger().Warn("ignoring unparseable as_of_date from LLM", "value", ext.AsOfDate, "error", err)
+		}
 		candidates = append(candidates, models.CandidateStatistic{
 			Name:      ext.Name,
 			Value:     ext.Value,
 			Unit:      ext.Unit,
+			Precision: ext.Precision,
 			Source:    result.Domain,
 			SourceURL: result.URL,
 			Excerpt:   ext.Excerpt,
+			AsOfDate:  asOfDate,
 		})
 	}
 

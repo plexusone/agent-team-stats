@@ -17,6 +17,7 @@ import (
 	"github.com/plexusone/agent-team-stats/pkg/llm"
 	"github.com/plexusone/agent-team-stats/pkg/logging"
 	"github.com/plexusone/agent-team-stats/pkg/models"
+	"github.com/plexusone/structured-evaluation/claims"
 )
 
 // LLMSearchService provides direct LLM-based statistics search (like ChatGPT)
@@ -59,9 +60,11 @@ For each statistic, provide:
 1. name: Brief description
 2. value: The exact numerical value (as a plain number, NO commas or formatting)
 3. unit: Unit of measurement
-4. source: Name of the authoritative source
-5. source_url: Direct URL to the source (if available)
-6. excerpt: Exact quote containing the statistic
+4. precision: One of "exact" (the source states this value directly), "approximate" (the source itself qualifies it, e.g. "1M+", "~50%%", "over 20,000"), "estimated" (a third-party/analyst estimate, not source-stated), or "range" (a bounded range — put the more notable end in value and describe the range in the excerpt)
+5. source: Name of the authoritative source
+6. source_url: Direct URL to the source (if available)
+7. excerpt: Exact quote containing the statistic
+8. as_of_date: The date the underlying fact was true (e.g. the period an earnings figure describes, or the date a statement was made), as YYYY-MM-DD, if the source states or implies one. Omit if unknown — do not guess.
 
 IMPORTANT INSTRUCTIONS:
 - Prioritize statistics from reputable sources (government agencies, research organizations, academic institutions)
@@ -70,6 +73,7 @@ IMPORTANT INSTRUCTIONS:
 - Extract the exact numerical values
 - Provide verbatim excerpts
 - CRITICAL: The "value" field must be a plain number with NO commas (e.g., 2537 not 2,537)
+- Do not confuse "as_of_date" with when you found the statistic — it is when the fact was true
 
 Return a JSON array:
 [
@@ -77,14 +81,17 @@ Return a JSON array:
     "name": "Global temperature increase since 1880",
     "value": 1.1,
     "unit": "degrees Celsius",
+    "precision": "exact",
     "source": "NASA",
     "source_url": "https://climate.nasa.gov/vital-signs/global-temperature/",
-    "excerpt": "The planet's average surface temperature has risen about 1.1 degrees Celsius since the late 19th century"
+    "excerpt": "The planet's average surface temperature has risen about 1.1 degrees Celsius since the late 19th century",
+    "as_of_date": "2025-01-01"
   },
   {
     "name": "Example large number",
     "value": 75000,
     "unit": "people",
+    "precision": "approximate",
     "source": "Example",
     "source_url": "https://example.com",
     "excerpt": "Over 75,000 people participated"
@@ -119,12 +126,14 @@ Find at least %d statistics. Return only the JSON array, no other text.`, minSta
 
 	// Parse JSON
 	type StatResponse struct {
-		Name      string  `json:"name"`
-		Value     float32 `json:"value"`
-		Unit      string  `json:"unit"`
-		Source    string  `json:"source"`
-		SourceURL string  `json:"source_url"`
-		Excerpt   string  `json:"excerpt"`
+		Name      string           `json:"name"`
+		Value     float32          `json:"value"`
+		Unit      string           `json:"unit"`
+		Precision claims.Precision `json:"precision,omitempty"`
+		Source    string           `json:"source"`
+		SourceURL string           `json:"source_url"`
+		Excerpt   string           `json:"excerpt"`
+		AsOfDate  string           `json:"as_of_date,omitempty"` // YYYY-MM-DD from the LLM; parsed below
 	}
 
 	var stats []StatResponse
@@ -135,13 +144,19 @@ Find at least %d statistics. Return only the JSON array, no other text.`, minSta
 	// Convert to candidate statistics for potential verification
 	candidates := make([]models.CandidateStatistic, 0, len(stats))
 	for _, stat := range stats {
+		asOfDate, err := models.ParseAsOfDate(stat.AsOfDate)
+		if err != nil {
+			s.logger.Warn("ignoring unparseable as_of_date from LLM", "value", stat.AsOfDate, "error", err)
+		}
 		candidates = append(candidates, models.CandidateStatistic{
 			Name:      stat.Name,
 			Value:     stat.Value,
 			Unit:      stat.Unit,
+			Precision: stat.Precision,
 			Source:    stat.Source,
 			SourceURL: stat.SourceURL,
 			Excerpt:   stat.Excerpt,
+			AsOfDate:  asOfDate,
 		})
 	}
 
@@ -157,11 +172,13 @@ Find at least %d statistics. Return only the JSON array, no other text.`, minSta
 			Name:      cand.Name,
 			Value:     cand.Value,
 			Unit:      cand.Unit,
+			Precision: cand.Precision,
 			Source:    cand.Source,
 			SourceURL: cand.SourceURL,
 			Excerpt:   cand.Excerpt,
 			Verified:  true, // Marked as verified since from LLM with sources (not web-verified)
 			DateFound: time.Now(),
+			AsOfDate:  cand.AsOfDate,
 		})
 	}
 

@@ -121,11 +121,13 @@ func (w *Worker) verifyStatistic(ctx context.Context, candidate models.Candidate
 				Name:      candidate.Name,
 				Value:     candidate.Value,
 				Unit:      candidate.Unit,
+				Precision: candidate.Precision,
 				Source:    candidate.Source,
 				SourceURL: candidate.SourceURL,
 				Excerpt:   candidate.Excerpt,
 				Verified:  false,
 				DateFound: time.Now(),
+				AsOfDate:  candidate.AsOfDate,
 			},
 			Verified: false,
 			Reason:   fmt.Sprintf("Failed to fetch source: %v", err),
@@ -143,11 +145,13 @@ func (w *Worker) verifyStatistic(ctx context.Context, candidate models.Candidate
 		Name:      candidate.Name,
 		Value:     candidate.Value,
 		Unit:      candidate.Unit,
+		Precision: candidate.Precision,
 		Source:    candidate.Source,
 		SourceURL: candidate.SourceURL,
 		Excerpt:   candidate.Excerpt,
 		Verified:  verified,
 		DateFound: time.Now(),
+		AsOfDate:  candidate.AsOfDate,
 	}
 
 	return models.VerificationResult{

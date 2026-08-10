@@ -9,11 +9,11 @@
 ## Phase 1 — structured-evaluation: Evidence-Gated Verdicts (v0.13.0)
 
 **Theme:** Tighten what earns 'verified': quote-with-value lint, source-role, corroboration, and staleness — additive/non-breaking (strictness in a new lint + criteria knobs, not DetermineVerdict yet). Ships as v0.13.0.
-**Status:** In progress — 1 of 5 items completed
+**Status:** In progress — 2 of 5 items completed
 
 - [x] `RMI-AGENTTEAMSTATS-001` claims.Lint + 'sevaluation lint' for claims reports
   - Add claims.Lint() and wire 'sevaluation lint <claims.json>'. Flags any verified claim lacking a resolving URL + quotedText, and where StatisticalDetail.Value does not appear in the quote. Advisory/gating validation, separate from DetermineVerdict (non-breaking). This is the exact check that would have caught the '$3B ARR' false positive.
-- [ ] `RMI-AGENTTEAMSTATS-002` Add sourceRole to ExternalValidation
+- [x] `RMI-AGENTTEAMSTATS-002` Add sourceRole to ExternalValidation
   - New sourceRole enum (primary | secondary-relay | secondary-analysis | self-reported) on ExternalValidation; regenerate claims.schema.json. Lint caps self-reported and secondary-analysis at needs-review unless corroborated.
 - [ ] `RMI-AGENTTEAMSTATS-003` Corroboration criteria + relatedClaimIds enforcement
   - minCorroboratingSources knob in ClaimsCriteria; lint/EvaluateClaims require N corroborating sources (via relatedClaimIds) for high-stakes categories. Single reputable source -> needs-review when threshold > 1.

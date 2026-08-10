@@ -1,27 +1,51 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/plexusone/structured-evaluation/claims"
+)
 
 // Statistic represents a verified statistic with its source
 type Statistic struct {
-	Name      string    `json:"name"`       // Name/description of the statistic
-	Value     float32   `json:"value"`      // Numerical value
-	Unit      string    `json:"unit"`       // Unit of measurement (e.g., "°C", "%", "million")
-	Source    string    `json:"source"`     // Name of the source (e.g., "Pew Research Center")
-	SourceURL string    `json:"source_url"` // URL to the source
-	Excerpt   string    `json:"excerpt"`    // Verbatim quote containing the statistic
-	Verified  bool      `json:"verified"`   // Whether this has been verified by verification agent
-	DateFound time.Time `json:"date_found"` // When this statistic was found
+	Name      string           `json:"name"`                 // Name/description of the statistic
+	Value     float32          `json:"value"`                // Numerical value
+	Unit      string           `json:"unit"`                 // Unit of measurement (e.g., "°C", "%", "million")
+	Precision claims.Precision `json:"precision,omitempty"`  // How exact Value is (exact/approximate/estimated/range); empty means unknown/unset
+	Source    string           `json:"source"`               // Name of the source (e.g., "Pew Research Center")
+	SourceURL string           `json:"source_url"`           // URL to the source
+	Excerpt   string           `json:"excerpt"`              // Verbatim quote containing the statistic
+	Verified  bool             `json:"verified"`             // Whether this has been verified by verification agent
+	DateFound time.Time        `json:"date_found"`           // When the research pipeline found this statistic (crawl time)
+	AsOfDate  *time.Time       `json:"as_of_date,omitempty"` // When the underlying fact was true, if known — distinct from DateFound
+}
+
+// ParseAsOfDate parses an LLM- or user-supplied "YYYY-MM-DD" as_of_date. An
+// empty string is not an error — the field is optional, and callers (LLM
+// prompts) are instructed to omit it rather than guess. A non-empty,
+// unparseable value is returned as an error so the caller can log and drop
+// it instead of silently keeping a bad date.
+func ParseAsOfDate(s string) (*time.Time, error) {
+	if s == "" {
+		return nil, nil
+	}
+	t, err := time.Parse("2006-01-02", s)
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
 }
 
 // CandidateStatistic represents an unverified statistic from research
 type CandidateStatistic struct {
-	Name      string  `json:"name"`
-	Value     float32 `json:"value"`
-	Unit      string  `json:"unit"`
-	Source    string  `json:"source"`
-	SourceURL string  `json:"source_url"`
-	Excerpt   string  `json:"excerpt"`
+	Name      string           `json:"name"`
+	Value     float32          `json:"value"`
+	Unit      string           `json:"unit"`
+	Precision claims.Precision `json:"precision,omitempty"`
+	Source    string           `json:"source"`
+	SourceURL string           `json:"source_url"`
+	Excerpt   string           `json:"excerpt"`
+	AsOfDate  *time.Time       `json:"as_of_date,omitempty"`
 }
 
 // VerificationResult represents the result of verifying a statistic

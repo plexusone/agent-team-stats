@@ -583,6 +583,32 @@ make clean
 7. **Retry Logic**: If needed, request more candidates and verify
 8. **Response**: Return verified statistics in structured JSON format
 
+### REAL/VEAL Loops (Eino Orchestrator)
+
+The Eino orchestrator (`pkg/orchestration/eino.go`) implements steps 3–7
+above as two composed, bounded loops rather than a single linear
+pipeline with an ad-hoc retry, following the org's [Loop
+Engineering](https://productbuildershq.com/frameworks/loop-engineering)
+REAL/VEAL patterns:
+
+- **REAL loop** (discovery, up to 5 rounds): "find at least N verified
+  statistics" is a mission — read the shortfall, search and extract a
+  new batch, hand it to VEAL, loop until the mission is met.
+- **VEAL loop** (verification, up to 3 attempts per batch): a read-only
+  validator checks each candidate — including whether its source is a
+  known low-trust aggregator, independent of whether the excerpt
+  verifies — and a separate actor attempts a *targeted* fix (a
+  primary-source replacement search for aggregator-sourced claims, a
+  re-validation pass for transient fetch failures) before anything is
+  counted as verified.
+
+Domains VEAL rejects are excluded from REAL's next round, so a bad
+source doesn't keep resurfacing within the same request.
+
+See [REAL and VEAL Loops](docs/architecture/real-veal-loops.md) for the
+full design and why the two problems (finding enough candidates vs.
+making sure they're correct) are deliberately kept separate.
+
 ## Reputable Sources
 
 The research worker prioritizes these source types:

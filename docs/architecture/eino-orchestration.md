@@ -45,36 +45,41 @@ This ensures all nodes have compatible input/output types.
 - **Lower cost**: Only uses LLMs in research/verification agents
 - **More reliable**: Graph compilation validates workflow before execution
 
-## Eino Workflow Graph
+## Two Composed Loops, Not One Linear Graph
 
-The Eino orchestrator implements this deterministic workflow:
+The Eino orchestrator implements the workflow as two bounded loops — a REAL
+loop for discovery and a VEAL loop for verification — rather than a single
+linear pipeline. **See [REAL and VEAL
+Loops](real-veal-loops.md) for the full explanation of why and how they
+compose.** Summary:
 
 ```
-START
-  ↓
-[1. Validate Input]
-  ↓
-[2. Research] ──────────→ Call Research Agent
-  ↓
-[3. Verification] ──────→ Call Verification Agent
-  ↓
-[4. Quality Check] ────→ Deterministic decision (verified >= target?)
-  ↓
-[5. Retry Research?] ──→ If needed, request more candidates
-  ↓
-[6. Format Response]
-  ↓
-END
+Orchestrate()
+  REAL loop (up to 5 rounds, mission: reach MinVerifiedStats):
+    Read     — verified count so far, domains VEAL has rejected
+    Evaluate — shortfall = target - verified; done if <= 0
+    Act      — one discovery round via the Eino graph below, then hand
+               the batch to the VEAL loop
+    Loop     — repeat until mission complete or rounds exhausted
+
+    ┌─ discovery graph (Eino, compiled once, invoked per round) ─┐
+    │  START → [Research] → [Synthesis] → END                    │
+    └───────────────────────────────────────────────────────────┘
+
+    VEAL loop (up to 3 attempts per batch, state: verified-or-rejected):
+      Validate — verification agent + local aggregator-source check
+      Evaluate — GO, or NO-GO with a specific reason
+      Act      — targeted fix for fixable reasons only; reject otherwise
+      Loop     — re-validate until converged or attempts exhausted
+
+  Format Response — Partial: true if still short after REAL's rounds
 ```
 
-### Node Descriptions
-
-1. **Validate Input**: Set defaults, validate parameters
-2. **Research**: HTTP call to research agent for candidates
-3. **Verification**: HTTP call to verification agent
-4. **Quality Check**: Deterministic comparison (verified count vs target)
-5. **Retry Research**: Conditional retry based on quality check
-6. **Format Response**: Build final JSON output
+Only `Research → Synthesis` is an Eino graph (`buildDiscoveryGraph`) — the
+loop-and-retry logic itself is plain bounded Go, since the fixes it applies
+are branchy per-candidate decisions that don't map cleanly onto a linear
+graph. Eino's type-safe steps handle what's genuinely linear within a round;
+the loops decide how many rounds to run.
 
 ## Usage
 
@@ -166,27 +171,29 @@ g.AddLambdaNode("validate_input", validateInputLambda)
 ```
 
 #### 2. Type-Safe State
-State is passed through typed structs:
-- `OrchestrationRequest` → Input
+State is passed through typed structs within a discovery round:
+- `discoveryInput` (request + domains already rejected by VEAL) → Input
 - `ResearchState` → After research
-- `VerificationState` → After verification
-- `QualityDecision` → After quality check
-- `OrchestrationResponse` → Output
+- `SynthesisState` → Output of the discovery graph, handed to the VEAL loop
+
+`OrchestrationResponse` is built directly by `Orchestrate()` after the REAL
+loop completes — see [REAL and VEAL Loops](real-veal-loops.md) for how the
+loop and the graph fit together.
 
 #### 3. Graph Edges
-Edges define workflow sequence:
+Edges define the per-round workflow sequence:
 ```go
-g.AddEdge(compose.START, "validate_input")
-g.AddEdge("validate_input", "research")
-g.AddEdge("research", "verification")
-// ... etc
+g.AddEdge(compose.START, "research")
+g.AddEdge("research", "synthesis")
+g.AddEdge("synthesis", compose.END)
 ```
 
 #### 4. Graph Compilation
-Graph is compiled before execution:
+The discovery graph is compiled once per `Orchestrate()` call, then invoked
+once per REAL round:
 ```go
-compiledGraph, err := oa.graph.Compile(ctx)
-result, err := compiledGraph.Invoke(ctx, req)
+compiledDiscovery, err := discoveryGraph.Compile(ctx)
+synthState, err := compiledDiscovery.Invoke(ctx, &discoveryInput{Request: req, ExcludedDomains: excludedDomains})
 ```
 
 ## Configuration
@@ -245,14 +252,21 @@ Add to your `.env` file to configure the Eino orchestrator URL.
 
 ## Logging
 
-The Eino orchestrator provides detailed logging with `[Eino]` prefix:
+The Eino orchestrator logs each loop's iterations, so you can see the REAL
+and VEAL loops converge (or exhaust their attempts) in real time:
 ```
-[Eino] Validating input for topic: climate change
-[Eino] Executing research for topic: climate change
-[Eino] Verifying 15 candidates
-[Eino] Quality check: 12 verified (target: 10)
-[Eino] Quality target met
-[Eino] Formatting response with 12 verified statistics
+REAL loop: starting topic=climate change target=10 max_attempts=5
+REAL loop: round attempt=1 max_attempts=5 shortfall=10 excluded_domains=0
+REAL/discovery: research topic=climate change excluded_domains=0
+REAL/discovery: research completed sources=18 filtered_out=0
+REAL/discovery: synthesis sources=18
+REAL/discovery: synthesis completed candidates=15
+VEAL loop: validate attempt=1 max_attempts=3 candidates=15
+VEAL loop: act — searching for a primary-source replacement name="X users" rejected_domain=stats-aggregator.example
+VEAL loop: rejecting candidate name="Y metric" reason=unknown attempt=1
+VEAL loop: validate attempt=2 max_attempts=3 candidates=1
+REAL loop: round complete attempt=1 round_candidates=15 round_verified=12 total_verified=12
+REAL loop: target met verified=12 attempts_used=0
 ```
 
 ## Next Steps

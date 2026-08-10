@@ -68,6 +68,7 @@ nav:
       - Overview: architecture/overview.md
       - 4-Agent Architecture: architecture/4-agent-architecture.md
       - Eino Orchestration: architecture/eino-orchestration.md
+      - REAL and VEAL Loops: architecture/real-veal-loops.md
   - Guides:
       - Docker Deployment: guides/docker.md
       - Kubernetes Deployment: guides/kubernetes.md

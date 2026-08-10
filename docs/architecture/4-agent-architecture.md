@@ -56,10 +56,17 @@ POST /research
 Response:
 {
   "topic": "climate change",
-  "candidates": [/* URLs as placeholder candidates */],
+  "search_results": [
+    {"url": "https://...", "title": "...", "snippet": "...", "domain": "..."}
+  ],
   "timestamp": "2025-12-13T10:30:00Z"
 }
 ```
+
+Note: the response key is `search_results`, not `candidates` — research
+returns *sources*, not extracted statistics. Extraction is the synthesis
+worker's job (below). See [REAL and VEAL Loops](real-veal-loops.md) for how
+the Eino orchestrator's discovery loop consumes this.
 
 ### 2. Synthesis Worker
 **Role**: Statistics Extraction

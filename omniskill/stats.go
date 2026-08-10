@@ -46,6 +46,11 @@ func (s *StatsSkill) Description() string {
 	return "Research, extract, and verify statistics from the web on any topic"
 }
 
+// Version returns the skill version.
+func (s *StatsSkill) Version() string {
+	return "0.1.0"
+}
+
 // Tools returns the tools provided by this skill.
 func (s *StatsSkill) Tools() []skill.Tool {
 	return []skill.Tool{

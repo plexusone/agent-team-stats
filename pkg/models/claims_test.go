@@ -7,6 +7,25 @@ import (
 	"github.com/plexusone/structured-evaluation/claims"
 )
 
+// assertLintClean runs claims.Lint over report and fails the test with the
+// full finding list if any claim marked verified doesn't actually earn the
+// label (missing quote/URL, insufficient corroboration, etc.) — the same
+// gate 'sevaluation lint' applies in CI to the case-study ledgers this
+// pipeline's output feeds. Wired into every conversion test below so a
+// regression in ToClaimsReport/ToClaimsReportWithFailures/
+// VerificationResponse.ToClaimsReport that stops setting QuotedText or a URL
+// on a verified claim fails go test, not just a manual audit.
+func assertLintClean(t *testing.T, report *claims.ClaimsReport) {
+	t.Helper()
+	findings := claims.Lint(report)
+	if claims.HasErrors(findings) {
+		t.Errorf("claims.Lint found %d finding(s), including errors:", len(findings))
+		for _, f := range findings {
+			t.Errorf("  [%s] %s: %s", f.Severity, f.ClaimID, f.Message)
+		}
+	}
+}
+
 func TestOrchestrationResponse_ToClaimsReport(t *testing.T) {
 	now := time.Now()
 	resp := &OrchestrationResponse{
@@ -85,6 +104,8 @@ func TestOrchestrationResponse_ToClaimsReport(t *testing.T) {
 	if claim1.Statistical.Unit != "°C" {
 		t.Errorf("expected Statistical.Unit °C, got %q", claim1.Statistical.Unit)
 	}
+
+	assertLintClean(t, report)
 }
 
 func TestOrchestrationResponse_ToClaimsReport_PrecisionAndAsOfDate(t *testing.T) {
@@ -122,6 +143,8 @@ func TestOrchestrationResponse_ToClaimsReport_PrecisionAndAsOfDate(t *testing.T)
 	if stat.AsOfDate == nil || !stat.AsOfDate.Equal(asOf) {
 		t.Errorf("expected AsOfDate %v, got %v", asOf, stat.AsOfDate)
 	}
+
+	assertLintClean(t, report)
 }
 
 func TestParseAsOfDate(t *testing.T) {
@@ -222,6 +245,8 @@ func TestOrchestrationResponse_ToClaimsReportWithFailures(t *testing.T) {
 	if failedClaim.Rationale != "Excerpt not found in source content" {
 		t.Errorf("expected rationale 'Excerpt not found in source content', got %q", failedClaim.Rationale)
 	}
+
+	assertLintClean(t, report)
 }
 
 func TestVerificationResponse_ToClaimsReport(t *testing.T) {
@@ -280,6 +305,40 @@ func TestVerificationResponse_ToClaimsReport(t *testing.T) {
 	// Check rejected claim
 	if report.Claims[1].Verdict != claims.VerdictRejected {
 		t.Errorf("expected second claim to be rejected, got %v", report.Claims[1].Verdict)
+	}
+
+	assertLintClean(t, report)
+}
+
+// TestClaimsLint_CatchesMissingQuoteOnVerifiedClaim demonstrates that the
+// gate assertLintClean applies actually works: a verified claim that loses
+// its QuotedText (the invariant ToClaimsReport currently upholds) must be
+// caught, not silently pass. This is the exact shape of the false positive
+// (a hand-authored "verified" claim with no verbatim excerpt) that
+// motivated wiring claims.Lint into this pipeline's tests in the first
+// place — see structured-evaluation's RMI-AGENTTEAMSTATS-001.
+func TestClaimsLint_CatchesMissingQuoteOnVerifiedClaim(t *testing.T) {
+	resp := &OrchestrationResponse{
+		Topic: "regression check",
+		Statistics: []Statistic{
+			{
+				Name:      "Broken claim",
+				Value:     42,
+				Unit:      "units",
+				Source:    "Example",
+				SourceURL: "https://example.com",
+				Excerpt:   "The value is 42 units",
+				Verified:  true,
+				DateFound: time.Now(),
+			},
+		},
+	}
+	report := resp.ToClaimsReport()
+	report.Claims[0].Validation.External.QuotedText = "" // simulate the regression
+
+	findings := claims.Lint(report)
+	if !claims.HasErrors(findings) {
+		t.Fatal("expected claims.Lint to flag a verified claim with no QuotedText, got no errors")
 	}
 }
 

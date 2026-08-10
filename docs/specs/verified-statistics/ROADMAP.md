@@ -9,7 +9,7 @@
 ## Phase 1 — structured-evaluation: Evidence-Gated Verdicts (v0.13.0)
 
 **Theme:** Tighten what earns 'verified': quote-with-value lint, source-role, corroboration, and staleness — additive/non-breaking (strictness in a new lint + criteria knobs, not DetermineVerdict yet). Ships as v0.13.0.
-**Status:** In progress — 3 of 5 items completed
+**Status:** In progress — 4 of 5 items completed
 
 - [x] `RMI-AGENTTEAMSTATS-001` claims.Lint + 'sevaluation lint' for claims reports
   - Add claims.Lint() and wire 'sevaluation lint <claims.json>'. Flags any verified claim lacking a resolving URL + quotedText, and where StatisticalDetail.Value does not appear in the quote. Advisory/gating validation, separate from DetermineVerdict (non-breaking). This is the exact check that would have caught the '$3B ARR' false positive.
@@ -17,7 +17,7 @@
   - New sourceRole enum (primary | secondary-relay | secondary-analysis | self-reported) on ExternalValidation; regenerate claims.schema.json. Lint caps self-reported and secondary-analysis at needs-review unless corroborated.
 - [x] `RMI-AGENTTEAMSTATS-003` Corroboration criteria + relatedClaimIds enforcement
   - minCorroboratingSources knob in ClaimsCriteria; lint/EvaluateClaims require N corroborating sources (via relatedClaimIds) for high-stakes categories. Single reputable source -> needs-review when threshold > 1.
-- [ ] `RMI-AGENTTEAMSTATS-004` Codify staleness (asOfDate age -> needs-review)
+- [x] `RMI-AGENTTEAMSTATS-004` Codify staleness (asOfDate age -> needs-review)
   - maxClaimAge criteria knob; lint flags claims whose asOfDate exceeds the threshold and are presented as current, downgrading to needs-review (e.g. the 2022-23 Copilot study, 2023 Spotify BOM figure).
 - [ ] `RMI-AGENTTEAMSTATS-005` Fix accessedAt/validatedAt omitempty; cut v0.13.0
   - Make ExternalValidation.AccessedAt and InternalValidation.ValidatedAt *time.Time so omitempty works (retires the 0001-01-01 zero-value serialization). Tag and release v0.13.0 after CI is green.

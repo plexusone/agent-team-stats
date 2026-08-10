@@ -25,9 +25,9 @@
 ## Phase 2 — agent-team-stats: Evidence Producer Hardening
 
 **Theme:** Make the producer supply real evidence: rendered-text fetch + numeric match + source archiving, populate source-role, gather and link corroborating sources, and detect aggregators beyond a hardcoded list. Consumes structured-evaluation v0.13.0.
-**Status:** Planned — 0 of 5 items completed
+**Status:** In progress — 1 of 5 items completed
 
-- [ ] `RMI-AGENTTEAMSTATS-006` Bump to structured-evaluation v0.13.0; wire lint into CI
+- [x] `RMI-AGENTTEAMSTATS-006` Bump to structured-evaluation v0.13.0; wire lint into CI
   - go get structured-evaluation@v0.13.0 and go mod tidy. Add 'sevaluation lint' over produced ClaimsReports to CI so a verified-without-quote claim fails the build.
 - [ ] `RMI-AGENTTEAMSTATS-007` Verification worker: rendered fetch + numeric match + archive
   - Replace strings.Contains(rawHTML, excerpt) with headless-rendered text (reuse the dss-render already in the PDF pipeline); confirm the numeric value, not just a substring; populate ExternalValidation.archiveUrl with a snapshot. Treat 403/paywall/JS-only pages as can't-verify -> needs-review, never a silent pass.

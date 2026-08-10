@@ -74,6 +74,87 @@ func TestOrchestrationResponse_ToClaimsReport(t *testing.T) {
 	if claim1.Validation.External.Reliability != claims.ReliabilityHigh {
 		t.Errorf("expected reliability ReliabilityHigh, got %v", claim1.Validation.External.Reliability)
 	}
+	if claim1.Statistical == nil {
+		t.Fatal("expected Statistical detail to be set")
+	}
+	// Value round-trips through the source Statistic's float32, so compare
+	// with a tolerance rather than exact float64 equality.
+	if diff := claim1.Statistical.Value - 1.1; diff > 0.0001 || diff < -0.0001 {
+		t.Errorf("expected Statistical.Value ~1.1, got %v", claim1.Statistical.Value)
+	}
+	if claim1.Statistical.Unit != "°C" {
+		t.Errorf("expected Statistical.Unit °C, got %q", claim1.Statistical.Unit)
+	}
+}
+
+func TestOrchestrationResponse_ToClaimsReport_PrecisionAndAsOfDate(t *testing.T) {
+	asOf := time.Date(2026, 1, 26, 0, 0, 0, 0, time.UTC)
+	resp := &OrchestrationResponse{
+		Topic: "example",
+		Statistics: []Statistic{
+			{
+				Name:      "Approximate figure",
+				Value:     1000000,
+				Unit:      "users",
+				Precision: claims.PrecisionApproximate,
+				Source:    "Example",
+				SourceURL: "https://example.com",
+				Excerpt:   "1M+ users",
+				Verified:  true,
+				DateFound: time.Now(),
+				AsOfDate:  &asOf,
+			},
+		},
+	}
+
+	report := resp.ToClaimsReport()
+	if len(report.Claims) != 1 {
+		t.Fatalf("expected 1 claim, got %d", len(report.Claims))
+	}
+
+	stat := report.Claims[0].Statistical
+	if stat == nil {
+		t.Fatal("expected Statistical detail to be set")
+	}
+	if stat.Precision != claims.PrecisionApproximate {
+		t.Errorf("expected precision approximate, got %q", stat.Precision)
+	}
+	if stat.AsOfDate == nil || !stat.AsOfDate.Equal(asOf) {
+		t.Errorf("expected AsOfDate %v, got %v", asOf, stat.AsOfDate)
+	}
+}
+
+func TestParseAsOfDate(t *testing.T) {
+	t.Run("empty string returns nil, no error", func(t *testing.T) {
+		got, err := ParseAsOfDate("")
+		if err != nil {
+			t.Errorf("unexpected error: %v", err)
+		}
+		if got != nil {
+			t.Errorf("expected nil, got %v", got)
+		}
+	})
+
+	t.Run("valid date parses", func(t *testing.T) {
+		got, err := ParseAsOfDate("2026-01-26")
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+		want := time.Date(2026, 1, 26, 0, 0, 0, 0, time.UTC)
+		if got == nil || !got.Equal(want) {
+			t.Errorf("expected %v, got %v", want, got)
+		}
+	})
+
+	t.Run("malformed date returns an error, not a guess", func(t *testing.T) {
+		got, err := ParseAsOfDate("not-a-date")
+		if err == nil {
+			t.Error("expected an error for malformed date")
+		}
+		if got != nil {
+			t.Errorf("expected nil on error, got %v", got)
+		}
+	})
 }
 
 func TestOrchestrationResponse_ToClaimsReportWithFailures(t *testing.T) {
@@ -240,22 +321,27 @@ func TestFormatStatisticClaim(t *testing.T) {
 
 func TestClassifySourceType(t *testing.T) {
 	tests := []struct {
+		name     string
 		source   string
+		url      string
 		expected claims.ExternalSourceType
 	}{
-		{"WHO", claims.ExternalReputableVendor},
-		{"World Health Organization", claims.ExternalReputableVendor},
-		{"CDC", claims.ExternalReputableVendor},
-		{"NIH", claims.ExternalReputableVendor},
-		{"Random Blog", claims.ExternalCommunity},
-		{"Pew Research Center", claims.ExternalReputableVendor},
+		{"WHO by name", "WHO", "", claims.ExternalReputableVendor},
+		{"World Health Organization by name", "World Health Organization", "", claims.ExternalReputableVendor},
+		{"CDC by name", "CDC", "", claims.ExternalReputableVendor},
+		{"NIH by name", "NIH", "", claims.ExternalReputableVendor},
+		{"unrecognized source falls back to community", "Random Blog", "https://random-blog.example.com/post", claims.ExternalCommunity},
+		{"Pew Research Center by name", "Pew Research Center", "", claims.ExternalReputableVendor},
+		{"known aggregator domain, plain source label", "Cursor AI Statistics 2026", "https://www.getpanto.ai/blog/cursor-ai-statistics", claims.ExternalAggregator},
+		{"known aggregator domain, subdomain", "GitHub Copilot Statistics 2026", "https://blog.getpanto.ai/github-copilot-statistics", claims.ExternalAggregator},
+		{"aggregator match overrides an authoritative-sounding label", "WHO", "https://getpanto.ai/who-stats", claims.ExternalAggregator},
 	}
 
 	for _, tt := range tests {
-		t.Run(tt.source, func(t *testing.T) {
-			result := classifySourceType(tt.source)
+		t.Run(tt.name, func(t *testing.T) {
+			result := classifySourceType(tt.source, tt.url)
 			if result != tt.expected {
-				t.Errorf("classifySourceType(%q) = %v, expected %v", tt.source, result, tt.expected)
+				t.Errorf("classifySourceType(%q, %q) = %v, expected %v", tt.source, tt.url, result, tt.expected)
 			}
 		})
 	}

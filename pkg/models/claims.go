@@ -2,9 +2,38 @@ package models
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/plexusone/structured-evaluation/claims"
 )
+
+// knownAggregatorDomains lists third-party "stats roundup" sites that repost
+// figures without independent reporting or a traceable primary source (often
+// AI-generated SEO content). A URL on one of these domains is classified as
+// claims.ExternalAggregator regardless of the source label, which defaults to
+// claims.ReliabilityLow (auto-reject) rather than the claims.ReliabilityMedium
+// (requires-review) that an unrecognized-but-real community source gets.
+//
+// This is a starting list, not exhaustive — add a domain here whenever a
+// verification pass (case-study audits, statistic research) finds one
+// producing unverifiable or distorted numbers.
+var knownAggregatorDomains = []string{
+	"getpanto.ai",
+}
+
+// IsKnownAggregatorURL reports whether sourceURL's host matches (or is a
+// subdomain of) a known aggregator domain. Exported so callers outside this
+// package (the orchestrator's VEAL verification loop) can reject an
+// aggregator-sourced candidate before it ever reaches classifySourceType.
+func IsKnownAggregatorURL(sourceURL string) bool {
+	lower := strings.ToLower(sourceURL)
+	for _, domain := range knownAggregatorDomains {
+		if strings.Contains(lower, "//"+domain) || strings.Contains(lower, "."+domain) {
+			return true
+		}
+	}
+	return false
+}
 
 // ToClaimsReport converts OrchestrationResponse to a ClaimsReport.
 // This provides a standardized output format compatible with structured-evaluation.
@@ -26,12 +55,13 @@ func (r *OrchestrationResponse) ToClaimsReport() *claims.ClaimsReport {
 		// Set external validation from URL source
 		validation := claims.NewExternalValidation(
 			stat.SourceURL,
-			classifySourceType(stat.Source),
+			classifySourceType(stat.Source, stat.SourceURL),
 		)
 		validation.External.QuotedText = stat.Excerpt
 		validation.External.VerifiedMatch = stat.Verified
 		validation.External.Reliability = claims.ReliabilityHigh // Verified sources
 		claim.SetValidation(validation)
+		claim.SetStatistical(statisticalDetail(stat))
 
 		if stat.Verified {
 			claim.Verdict = claims.VerdictVerified
@@ -71,12 +101,13 @@ func (r *OrchestrationResponse) ToClaimsReportWithFailures(
 
 		validation := claims.NewExternalValidation(
 			stat.SourceURL,
-			classifySourceType(stat.Source),
+			classifySourceType(stat.Source, stat.SourceURL),
 		)
 		validation.External.QuotedText = stat.Excerpt
 		validation.External.VerifiedMatch = false
 		validation.External.Reliability = claims.ReliabilityLow // Failed verification
 		claim.SetValidation(validation)
+		claim.SetStatistical(statisticalDetail(*stat))
 
 		claim.Verdict = claims.VerdictRejected
 		claim.Rationale = fail.Reason
@@ -111,11 +142,12 @@ func (r *VerificationResponse) ToClaimsReport(topic string) *claims.ClaimsReport
 
 		validation := claims.NewExternalValidation(
 			stat.SourceURL,
-			classifySourceType(stat.Source),
+			classifySourceType(stat.Source, stat.SourceURL),
 		)
 		validation.External.QuotedText = stat.Excerpt
 		validation.External.VerifiedMatch = result.Verified
 		claim.SetValidation(validation)
+		claim.SetStatistical(statisticalDetail(*stat))
 
 		if result.Verified {
 			claim.Verdict = claims.VerdictVerified
@@ -142,10 +174,27 @@ func formatStatisticClaim(stat Statistic) string {
 	return fmt.Sprintf("%s: %.2f", stat.Name, stat.Value)
 }
 
-// classifySourceType maps source names to claims.ExternalSourceType.
+// statisticalDetail converts a Statistic's structured numeric fields into a
+// claims.StatisticalDetail, so the value survives conversion instead of only
+// existing inside formatStatisticClaim's formatted text.
+func statisticalDetail(stat Statistic) *claims.StatisticalDetail {
+	detail := claims.NewStatisticalDetail(float64(stat.Value), stat.Unit, stat.Precision)
+	if stat.AsOfDate != nil {
+		detail = detail.WithAsOfDate(*stat.AsOfDate)
+	}
+	return detail
+}
+
+// classifySourceType maps a source name and URL to claims.ExternalSourceType.
 // Returns ExternalReputableVendor for known authoritative sources,
-// or ExternalCommunity for general sources.
-func classifySourceType(source string) claims.ExternalSourceType {
+// ExternalAggregator for known stats-roundup/aggregator domains (checked via
+// sourceURL, since these sites don't have a consistent source-name label),
+// or ExternalCommunity for other general sources.
+func classifySourceType(source, sourceURL string) claims.ExternalSourceType {
+	if IsKnownAggregatorURL(sourceURL) {
+		return claims.ExternalAggregator
+	}
+
 	// Common authoritative government/research sources
 	switch source {
 	case "WHO", "World Health Organization":

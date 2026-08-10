@@ -266,8 +266,8 @@ github.com/plexusone/phoenix-go v0.2.1 h1:K5Uy/XHfkFmiCQkBdCmac97TlpLdLzILclRj1/
 github.com/plexusone/phoenix-go v0.2.1/go.mod h1:4eJ0Sx3AfLGAQYocmdvCSdHufil1KGOZICwV28GQGnM=
 github.com/plexusone/posture v0.3.0 h1:NsaufOi5XiTzuP2hlD8/ohp3jtLfOyGgKK4z4TsXdbY=
 github.com/plexusone/posture v0.3.0/go.mod h1:z4WsvCbzGusLzJGBFZAApp3sV0juEGb1FoB4lLre9K4=
-github.com/plexusone/structured-evaluation v0.11.0 h1:kQCpHEIaysdkVLw2C8OHfkwH+4GEHTuWftyjlIjUzIE=
-github.com/plexusone/structured-evaluation v0.11.0/go.mod h1:/EeH1LVHmGq+O35LQ/VybJNLIGqpoJlR8FqKCOt2KC4=
+github.com/plexusone/structured-evaluation v0.12.0 h1:fmnrL78ZdD7d+wt7kfkOpQhVGLjp+8XcpIKWyuVpGhY=
+github.com/plexusone/structured-evaluation v0.12.0/go.mod h1:/EeH1LVHmGq+O35LQ/VybJNLIGqpoJlR8FqKCOt2KC4=
 github.com/plexusone/vaultguard v0.3.1 h1:slAiwe8UIHL0SZ4NTtVfaQYU+ieRsiUOGAa6uTLmBAc=
 github.com/plexusone/vaultguard v0.3.1/go.mod h1:d7YpJ/MnJ5u4cFwrVknWfycgBR+oDlay/N2Xn7h0r30=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

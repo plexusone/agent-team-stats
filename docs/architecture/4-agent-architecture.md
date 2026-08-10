@@ -113,15 +113,23 @@ Response:
       "name": "Renewable energy growth",
       "value": 83,
       "unit": "%",
+      "precision": "approximate",
       "source": "iea.org",
       "source_url": "https://www.iea.org/...",
-      "excerpt": "Renewable capacity grew by 83% in 2023..."
+      "excerpt": "Renewable capacity grew by 83% in 2023...",
+      "as_of_date": "2023-12-31"
     }
   ],
   "sources_analyzed": 5,
   "timestamp": "2025-12-13T10:30:15Z"
 }
 ```
+
+`precision` (exact/approximate/estimated/range) and `as_of_date`
+(`YYYY-MM-DD`) are both optional — the LLM is instructed to omit
+`as_of_date` rather than guess when the source doesn't state one. See
+[REAL and VEAL Loops](real-veal-loops.md) for how the orchestrator
+consumes these fields during verification.
 
 ### 3. Verification Worker
 **Role**: Fact Checking
@@ -223,6 +231,21 @@ type SynthesisResponse struct {
 ```
 
 ## Implementation Status
+
+### ✅ Completed (v0.10.0)
+
+1. **REAL/VEAL Orchestration** — see [REAL and VEAL Loops](real-veal-loops.md)
+   - Eino orchestrator rewritten as a bounded REAL discovery loop composed
+     with a bounded VEAL verification loop, replacing the old linear graph
+   - `models.IsKnownAggregatorURL` rejects known stats-roundup domains
+     (e.g. `getpanto.ai`) independent of excerpt verification
+
+2. **Precision and As-Of-Date**
+   - `Statistic`/`CandidateStatistic` carry `Precision`
+     (exact/approximate/estimated/range) and `AsOfDate`, sourced from the
+     LLM and never guessed when absent
+   - Both fields round-trip into `claims.StatisticalDetail` via
+     `claim.SetStatistical(...)` — see [ClaimsReport Integration](../guides/claims-report.md)
 
 ### ✅ Completed (v0.9.0)
 

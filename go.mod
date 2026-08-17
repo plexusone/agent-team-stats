@@ -23,8 +23,8 @@ require (
 	github.com/plexusone/opik-go v0.8.0
 	github.com/plexusone/phoenix-go v0.2.1
 	github.com/plexusone/structured-evaluation v0.13.0
-	google.golang.org/adk v1.5.1
-	google.golang.org/genai v1.68.0
+	google.golang.org/adk v1.6.0
+	google.golang.org/genai v1.67.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 

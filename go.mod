@@ -11,7 +11,7 @@ exclude go.opentelemetry.io/otel/log v0.21.0
 require (
 	github.com/cloudwego/eino v0.9.15
 	github.com/go-playground/validator/v10 v10.30.3
-	github.com/grokify/mogo v0.74.7
+	github.com/grokify/mogo v0.74.8
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/modelcontextprotocol/go-sdk v1.7.0
 	github.com/plexusone/agentkit v0.7.0
@@ -161,7 +161,7 @@ require (
 	go.yaml.in/yaml/v4 v4.0.0-rc.6 // indirect
 	golang.org/x/arch v0.30.0 // indirect
 	golang.org/x/crypto v0.55.0 // indirect
-	golang.org/x/exp v0.0.0-20260813180055-c1d0aacb2297 // indirect
+	golang.org/x/exp v0.0.0-20260820142414-ca536658362e // indirect
 	golang.org/x/mod v0.40.0 // indirect
 	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect

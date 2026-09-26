@@ -9,11 +9,11 @@ go 1.26.4
 exclude go.opentelemetry.io/otel/log v0.21.0
 
 require (
-	github.com/cloudwego/eino v0.9.19
+	github.com/cloudwego/eino v0.9.20
 	github.com/go-playground/validator/v10 v10.30.4
 	github.com/grokify/mogo v0.74.9
 	github.com/jessevdk/go-flags v1.6.1
-	github.com/modelcontextprotocol/go-sdk v1.7.0
+	github.com/modelcontextprotocol/go-sdk v1.8.0
 	github.com/plexusone/agentkit v0.7.0
 	github.com/plexusone/omniagent-worker v0.1.0
 	github.com/plexusone/omnillm v0.17.0

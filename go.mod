@@ -10,7 +10,7 @@ exclude go.opentelemetry.io/otel/log v0.21.0
 
 require (
 	github.com/cloudwego/eino v0.9.20
-	github.com/go-playground/validator/v10 v10.30.4
+	github.com/go-playground/validator/v10 v10.30.5
 	github.com/grokify/mogo v0.74.9
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/modelcontextprotocol/go-sdk v1.8.0

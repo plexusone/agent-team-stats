@@ -9,9 +9,9 @@ go 1.26.4
 exclude go.opentelemetry.io/otel/log v0.21.0
 
 require (
-	github.com/cloudwego/eino v0.9.20
-	github.com/go-playground/validator/v10 v10.30.5
-	github.com/grokify/mogo v0.74.9
+	github.com/cloudwego/eino v0.9.21
+	github.com/go-playground/validator/v10 v10.30.4
+	github.com/grokify/mogo v0.75.0
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/modelcontextprotocol/go-sdk v1.8.0
 	github.com/plexusone/agentkit v0.7.0
@@ -24,7 +24,7 @@ require (
 	github.com/plexusone/phoenix-go v0.2.1
 	github.com/plexusone/structured-evaluation v0.14.0
 	google.golang.org/adk v1.8.0
-	google.golang.org/genai v1.71.0
+	google.golang.org/genai v1.72.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 

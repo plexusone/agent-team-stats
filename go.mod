@@ -22,7 +22,7 @@ require (
 	github.com/plexusone/omniskill v0.12.0
 	github.com/plexusone/opik-go v0.8.0
 	github.com/plexusone/phoenix-go v0.2.1
-	github.com/plexusone/structured-evaluation v0.14.0
+	github.com/plexusone/structured-evaluation v0.15.0
 	google.golang.org/adk v1.9.0
 	google.golang.org/genai v1.77.0
 	gopkg.in/yaml.v3 v3.0.1

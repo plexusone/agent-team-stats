@@ -19,7 +19,7 @@ require (
 	github.com/plexusone/omnillm v0.17.0
 	github.com/plexusone/omniobserve v0.12.0
 	github.com/plexusone/omniserp v0.9.0
-	github.com/plexusone/omniskill v0.12.0
+	github.com/plexusone/omniskill v0.12.1
 	github.com/plexusone/opik-go v0.8.0
 	github.com/plexusone/phoenix-go v0.2.1
 	github.com/plexusone/structured-evaluation v0.14.0
@@ -160,16 +160,16 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
 	golang.org/x/arch v0.31.0 // indirect
-	golang.org/x/crypto v0.57.0 // indirect
-	golang.org/x/exp v0.0.0-20261005173118-76772065c9b0 // indirect
-	golang.org/x/mod v0.41.0 // indirect
-	golang.org/x/net v0.59.0 // indirect
+	golang.org/x/crypto v0.58.0 // indirect
+	golang.org/x/exp v0.0.0-20261014143641-f0251eb4aa3e // indirect
+	golang.org/x/mod v0.42.0 // indirect
+	golang.org/x/net v0.61.0 // indirect
 	golang.org/x/oauth2 v0.37.0 // indirect
-	golang.org/x/sync v0.23.0 // indirect
-	golang.org/x/sys v0.48.0 // indirect
-	golang.org/x/text v0.42.0 // indirect
+	golang.org/x/sync v0.24.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/text v0.43.0 // indirect
 	golang.org/x/time v0.16.0 // indirect
-	golang.org/x/tools v0.51.0 // indirect
+	golang.org/x/tools v0.52.0 // indirect
 	google.golang.org/api v0.300.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20261005182115-fad411399dd8 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20261005182115-fad411399dd8 // indirect

@@ -171,6 +171,45 @@ The MCP server will automatically start when Claude Code launches. You can now u
 
 Claude will use the `search_statistics` tool to find and verify statistics from reputable sources.
 
+## Optional Source Checks with Parallel Search MCP
+
+Add [Parallel Search MCP](https://docs.parallel.ai/integrations/mcp/search-mcp) alongside the statistics server in Claude Code to discover primary sources and read the context around a statistic. It provides `web_search` for source discovery and `web_fetch` for page excerpts. Anonymous search uses Fast mode and is free for light use, with no Parallel account or API key required. Usage limits apply; see the linked guide for authentication options when you need higher limits.
+
+From the project directory where you use Claude Code, add the companion with local scope:
+
+```bash
+claude mcp add --transport http --scope local \
+  parallel-search https://search.parallel.ai/mcp \
+  --header "User-Agent: agent-team-stats/parallel-mcp"
+
+claude mcp get parallel-search
+```
+
+Local scope keeps this server private to you in the current project. Keep your existing `stats-agent-team` registration. Start a new Claude Code session in that directory and run `/mcp` to confirm that `parallel-search` is connected and exposes `web_search` and `web_fetch`. See [Claude Code's MCP guide](https://code.claude.com/docs/en/mcp) for server management.
+
+With the statistics server and its workers configured as above, try this prompt:
+
+```text
+Research US adult cigarette smoking prevalence using primary sources.
+1. Use parallel-search's web_search to find recent CDC source pages.
+2. Call stats-agent-team's search_statistics for the same topic with
+   min_verified_stats=3, max_candidates=20, and reputable_only=true.
+3. Use parallel-search's web_fetch to read the source URLs returned by
+   search_statistics, and the CDC pages found in step 1.
+4. Compare each figure's quoted evidence, population, units, and data year.
+   Return the source URL and exact supporting excerpt for each figure.
+   Flag unavailable evidence or discrepancies instead of filling in gaps.
+   Separate the tool's verification status from your additional source checks.
+```
+
+This is a client-side research workflow. The Go research pipeline still uses its configured Serper or SerpAPI provider and still needs its existing credentials. `search_statistics` accepts a topic, not a list of source URLs; Parallel results are not injected into the pipeline. Additional source checks do not change the tool's verification status. If a page cannot be fetched or the companion reaches its usage limit, report the missing evidence and retry later.
+
+To remove only the companion from this project:
+
+```bash
+claude mcp remove --scope local parallel-search
+```
+
 ## Example Usage
 
 ### Request
